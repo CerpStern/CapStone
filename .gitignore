@@ -1,0 +1,7 @@
+*.tmp
+
+# Word temporary
+~$*.doc*
+
+# PowerPoint temporary
+~$*.ppt*
