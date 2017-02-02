@@ -67,8 +67,6 @@ office hour
 // boilerplate
 
 ### Additional Modules ###
-Lab Instructor
-Teaching Assistant
 Course Prerequisites
 Course Requirements
 Course Activities
