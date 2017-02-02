@@ -1,0 +1,87 @@
+* means required
+
+== Basic Info ==
+// text fields, drop downs, date pickers, etc
+*CRN
+*ID
+*title
+*semester (Fall, Spring, Summer)
+*year
+*start date
+*end date
+type (Traditional, Online, Hybrid)
+course website
+
+== Meetings ==
+// contains 1+ [Meeting]
+// text fields, drop downs, date pickers, etc
+
+[Meeting]
+*day
+*time
+*building
+*room number
+
+== Instructors ==
+// contains 1+ [Instructor]
+// text fields, drop downs, date pickers, etc
+
+[Instructor]
+type (Primary, Secondary, Lab, Teaching Assistant)
+title (Mr., Mrs., Ms., Dr.)
+*first name
+middle name/initial
+*last name
+position
+department
+college
+*email
+phone
+instructor website
+office building
+office room number
+office hour
+
+== Course Description ==
+// bbcode editor field
+
+== Course Topics ==
+// bbcode editor field
+
+== Learning Outcomes ==
+// bbcode editor field
+
+== Course Schedule ==
+// bbcode editor field
+
+== Grading ==
+// bbcode editor field
+
+== Academic Honesty ==
+// boilerplate
+
+== Registration Deadlines ==
+// boilerplate
+
+== Student Accessibility ==
+// boilerplate
+
+### Additional Modules ###
+Lab Instructor
+Teaching Assistant
+Course Prerequisites
+Course Requirements
+Course Activities
+Required Materials
+Required Skills
+Assignments
+Homework
+Exams
+Extra Credit
+Tutoring
+Attendance
+Late Policy
+Other Policies
+Resources
+Class Etiquette
+Academic Sanctions
