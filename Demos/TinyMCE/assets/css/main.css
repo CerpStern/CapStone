@@ -4,5 +4,9 @@
 
 #section-input {
 	display: inline-block;
-	width: 500px;
+	width: 300px;
+}
+
+#section-save {
+	display: inline-block;
 }
