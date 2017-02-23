@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script src='./assets/js/tinymce/tinymce.min.js'></script>
+		<script>
+		tinymce.init({
+		  selector: '#editor',
+		  height: 500,
+		  menubar: false,
+		  plugins: [
+		    'code advlist autolink lists link image charmap print preview anchor',
+		    'searchreplace visualblocks code fullscreen',
+		    'insertdatetime media table contextmenu paste code'
+		  ],
+		  toolbar: 'code | undo redo | insert | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
+		  // Custom css for content inside text area:
+		  //content_css: '//www.tinymce.com/css/codepen.min.css'
+		});
+		</script>
+	</head>
+	<body>
+		<h1>Demo</h1>
+		<textarea id="editor"></textarea>
+	</body>
+</html>
