@@ -1,7 +1,11 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<script src='./assets/js/tinymce/tinymce.min.js'></script>
+		<title>TinyMCE Demo</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<script src='assets/js/tinymce/tinymce.min.js'></script>
 		<script>
 		tinymce.init({
 		  selector: '#editor',
@@ -19,9 +23,8 @@
 		</script>
 	</head>
 	<body>
-		<h1>Demo</h1>
-		<p>Section:</p>
-		<input type="text" name="section" value="Students with Disabilities">
+		<h3 id="section-header">Section:</h3>
+		<input id="section-input" type="text" name="section" value="Students with Disabilities">
 		<textarea id="editor">
 			<p>University policy 3342-3-01.3 requires that students with disabilities be provided reasonable accommodations to ensure their equal access to course content. If you have a documented disability and require accommodations, please contact the instructor at the beginning of the semester to make arrangements for necessary classroom adjustments. Please note, you must first verify your eligibility for these through the Student Accessibility Services (contact 330-672-3391 or visit <a href="http://www.kent.edu/sas">www.kent.edu/sas</a> for more information on registration procedures).</p>
 		</textarea>
