@@ -4,8 +4,8 @@ import datetime
 
 from flask import Flask, url_for, redirect, \
     render_template, session, request
-from flask.ext.sqlalchemy import SQLAlchemy
-from flask.ext.login import LoginManager, login_required, login_user, \
+from flask_sqlalchemy import SQLAlchemy
+from flask_login import LoginManager, login_required, login_user, \
     logout_user, current_user, UserMixin
 from requests_oauthlib import OAuth2Session
 from requests.exceptions import HTTPError
@@ -33,6 +33,28 @@ class User(db.Model, UserMixin):
     avatar = db.Column(db.String(200))
     tokens = db.Column(db.Text)
     created_at = db.Column(db.DateTime, default=datetime.datetime.utcnow())
+
+class Course(db.Model):
+    __tablename__ = "courses"
+    dept = db.Column(db.String, primary_key=True)
+    id = db.Column(db.Integer, primary_key=True)
+    section = db.Column(db.Integer, primary_key=True)
+    year = db.Column(db.Integer, primary_key=True)
+    semester = db.Column(db.String, primary_key=True)
+    syllabus = db.Column(db.Integer)
+
+class Syllabus(db.Model):
+    __tablename__ = "syllabi"
+    id = db.Column(db.Integer, primary_key=True)
+    basic = db.Column(db.String)
+    description = db.Column(db.String)
+    topics = db.Column(db.String)
+    outcomes = db.Column(db.String)
+    grading = db.Column(db.String)
+    schedule = db.Column(db.String)
+    honesty = db.Column(db.String)
+    deadlines = db.Column(db.String)
+    accessibility = db.Column(db.String)
 
 
 @login_manager.user_loader
