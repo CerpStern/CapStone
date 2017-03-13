@@ -1,0 +1,12 @@
+#section-header {
+	display: inline-block;
+}
+
+#section-input {
+	display: inline-block;
+	width: 300px;
+}
+
+#section-save {
+	display: inline-block;
+}

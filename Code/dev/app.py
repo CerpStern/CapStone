@@ -45,6 +45,8 @@ class Course(db.Model):
 
 class Syllabus(db.Model):
     __tablename__ = "syllabi"
+    def __str__(self):
+        return "<p>{}</p><p>{}</p><p>{}</p><p>{}</p><p>{}</p><p>{}</p><p>{}</p><p>{}</p><p>{}</p><p>{}</p>".format(self.id, self.basic, self.description, self.topics, self.outcomes, self.grading, self.schedule, self.honesty, self.deadlines, self.accessibility)
     id = db.Column(db.Integer, primary_key=True)
     basic = db.Column(db.String)
     description = db.Column(db.String)
@@ -139,3 +141,11 @@ def callback():
 def logout():
     logout_user()
     return redirect(url_for('index'))
+
+@app.route('/syllabus')
+def syllabus():
+    try:
+        syllabus = db.session.query(Syllabus).filter(Syllabus.id == request.args.get('id'))[0]
+    except IndexError:
+        syllabus = ""
+    return render_template('syllabus.html', syllabus=syllabus)
