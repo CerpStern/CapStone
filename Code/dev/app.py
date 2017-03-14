@@ -41,7 +41,7 @@ class Course(db.Model):
     section = db.Column(db.Integer, primary_key=True)
     year = db.Column(db.Integer, primary_key=True)
     semester = db.Column(db.String, primary_key=True)
-    syllabus = db.Column(db.Integer)
+    syllabus = db.Column(db.Integer, db.ForeignKey('syllabi.id'))
 
 class Syllabus(db.Model):
     __tablename__ = "syllabi"
@@ -57,6 +57,7 @@ class Syllabus(db.Model):
     honesty = db.Column(db.String)
     deadlines = db.Column(db.String)
     accessibility = db.Column(db.String)
+    course = db.relationship('Course')
 
 
 @login_manager.user_loader
