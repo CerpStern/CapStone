@@ -33,6 +33,7 @@ class User(db.Model, UserMixin):
     avatar = db.Column(db.String(200))
     tokens = db.Column(db.Text)
     created_at = db.Column(db.DateTime, default=datetime.datetime.utcnow())
+    courses = db.relationship('Course')
 
 class Course(db.Model):
     __tablename__ = "courses"
@@ -42,6 +43,7 @@ class Course(db.Model):
     year = db.Column(db.Integer, primary_key=True)
     semester = db.Column(db.String, primary_key=True)
     syllabus = db.Column(db.Integer, db.ForeignKey('syllabi.id'))
+    user = db.Column(db.Integer, db.ForeignKey('users.id'))
 
 class Syllabus(db.Model):
     __tablename__ = "syllabi"
