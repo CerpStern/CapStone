@@ -59,6 +59,7 @@ class Syllabus(db.Model):
     honesty = db.Column(db.String)
     deadlines = db.Column(db.String)
     accessibility = db.Column(db.String)
+    keywords = db.Column(db.String)
     course = db.relationship('Course')
 
 
