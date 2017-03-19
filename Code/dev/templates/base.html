@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>SMS</title>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> 
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css">
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script>
+		<script src="static/js/search.js"></script>
+	</head>
+	<body>
+		<nav class="indigo">
+			<div class="nav-wrapper container">
+				<a id="logo-container" href="#" class="brand-logo">SMS</a>
+			{%- if current_user.is_authenticated -%}
+				<ul class="right">
+					<li><a href="#">Upload</a></li>
+					<li><a href="#">{{current_user.name}}</a></li>
+					<li><a href="{{url_for('logout')}}"><img src="{{current_user.avatar}}?sz=20" width="20" height="20" alt="{{current_user.name}}">Logout</a></li>
+				</ul>
+				<form class="right" action="/search">
+					<div class="input-field">
+						<!--
+						<input autofocus type="search" class="form-control" placeholder="Search" name="q">
+						-->
+						<input id="search" list="search">
+						<datalist id="results">
+						</datalist>
+					</div>
+					<!--<button type="submit" class="btn btn-default btn-sm">Search</button>-->
+				</form>
+			</div>
+
+			{%- else -%}
+			<a href="{{url_for('login')}}" class="btn btn-primary btn-block">Login</a>
+			</div>
+			{%- endif -%}
+			</div><!-- /.navbar-collapse -->
+		</nav>
+		{% block body %}
+		{% endblock %}
+	</body>
+</html>
