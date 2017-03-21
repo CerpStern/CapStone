@@ -6,7 +6,9 @@
 <script src="static/js/edit.js"></script>
 {% endif %}
 <form method="POST" action="/save">
+	{% if owns %}
 	<button name="submitbtn">Save</button>
+	{% endif %}
 	<div id="syllabus">
 		{{ syllabus|safe }}
 	</div>
