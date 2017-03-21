@@ -112,7 +112,7 @@ def callback():
     if 'code' not in request.args and 'state' not in request.args:
         return redirect(url_for('login'))
     else:
-        google = get_google_auth(state=session['oauth_state'])
+        google = get_google_auth(state=session.get('oauth_state'))
         try:
             token = google.fetch_token(
                     Auth.TOKEN_URI,
