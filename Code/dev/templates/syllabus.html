@@ -1,4 +1,14 @@
 {% extends "base.html" %}
 {% block body %}
+<script src="static/js/tinymce/tinymce.min.js"></script>
+{% if owns %}
+<button id="edit" type="button">Edit</button>
+<script src="static/js/edit.js"></script>
+{% endif %}
+<form method="POST" action="/save">
+	<button name="submitbtn">Save</button>
+	<div id="syllabus">
 		{{ syllabus|safe }}
+	</div>
+</form>
 {% endblock %}

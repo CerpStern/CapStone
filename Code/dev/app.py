@@ -3,10 +3,10 @@ import json
 import datetime
 
 from flask import Flask, url_for, redirect, \
-    render_template, session, request
+        render_template, session, request
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, login_required, login_user, \
-    logout_user, current_user, UserMixin
+        logout_user, current_user, UserMixin
 from requests_oauthlib import OAuth2Session
 from requests.exceptions import HTTPError
 
@@ -48,7 +48,7 @@ class Course(db.Model):
 class Syllabus(db.Model):
     __tablename__ = "syllabi"
     def __str__(self):
-        return "<p>{}</p><p>{}</p><p>{}</p><p>{}</p><p>{}</p><p>{}</p><p>{}</p><p>{}</p><p>{}</p><p>{}</p>".format(self.id, self.basic, self.description, self.topics, self.outcomes, self.grading, self.schedule, self.honesty, self.deadlines, self.accessibility)
+        return '<p id="id">{}</p><p id="basic">{}</p><p id="description">{}</p><p id="topics">{}</p><p id="outcomes">{}</p><p id="grading">{}</p><p id="schedule">{}</p><p id="honesty">{}</p><p id="deadlines">{}</p><p id="accessibility">{}</p><p id="keywords">{}</p>'.format(self.id, self.basic, self.description, self.topics, self.outcomes, self.grading, self.schedule, self.honesty, self.deadlines, self.accessibility, self.keywords)
     id = db.Column(db.Integer, primary_key=True)
     basic = db.Column(db.String)
     description = db.Column(db.String)
@@ -74,14 +74,14 @@ def get_google_auth(state=None, token=None):
         return OAuth2Session(Auth.CLIENT_ID, token=token)
     if state:
         return OAuth2Session(
-            Auth.CLIENT_ID,
-            state=state,
-            redirect_uri=Auth.REDIRECT_URI)
-    oauth = OAuth2Session(
-        Auth.CLIENT_ID,
-        redirect_uri=Auth.REDIRECT_URI,
-        scope=Auth.SCOPE)
-    return oauth
+                Auth.CLIENT_ID,
+                state=state,
+                redirect_uri=Auth.REDIRECT_URI)
+        oauth = OAuth2Session(
+                Auth.CLIENT_ID,
+                redirect_uri=Auth.REDIRECT_URI,
+                scope=Auth.SCOPE)
+        return oauth
 
 
 @app.route('/')
@@ -96,7 +96,7 @@ def login():
         return redirect(url_for('index'))
     google = get_google_auth()
     auth_url, state = google.authorization_url(
-        Auth.AUTH_URI, access_type='offline')
+            Auth.AUTH_URI, access_type='offline')
     session['oauth_state'] = state
     return render_template('login.html', auth_url=auth_url)
 
@@ -115,9 +115,9 @@ def callback():
         google = get_google_auth(state=session['oauth_state'])
         try:
             token = google.fetch_token(
-                Auth.TOKEN_URI,
-                client_secret=Auth.CLIENT_SECRET,
-                authorization_response=request.url)
+                    Auth.TOKEN_URI,
+                    client_secret=Auth.CLIENT_SECRET,
+                    authorization_response=request.url)
         except HTTPError:
             return 'HTTPError occurred.'
         google = get_google_auth(token=token)
@@ -152,4 +152,28 @@ def syllabus():
         syllabus = db.session.query(Syllabus).filter(Syllabus.id == request.args.get('id'))[0]
     except IndexError:
         syllabus = ""
-    return render_template('syllabus.html', syllabus=syllabus)
+    editable = db.session.query(User,Course,Syllabus).filter(current_user.get_id() == Course.syllabus).filter(Course.user == User.id).first()
+    owns = False if editable == None else True
+    return render_template('syllabus.html', syllabus=syllabus, owns=owns)
+
+@app.route('/save', methods = ['POST'])
+def save():
+    vals = []
+    for i in range(1,12): #TODO: Better way of doing this?
+        vals.append(request.form.get('test'+str(i))[3:][:-4])
+    print(vals)
+    #TODO: Sanitize, esp wrt id
+    #db.session.query().Syllabus.update().where(Syllabus.id == int(vals[0])).values(basic=vals[1],description=vals[2],topics=vals[3],outcomes=vals[4],grading=vals[5],schedule=vals[6],honesty=vals[7],deadlines=vals[8],accessibility=vals[9],keywords=vals[10])
+    syllabus = Syllabus.query.filter_by(id=vals[0]).first()
+    syllabus.basic = vals[1] 
+    syllabus.description = vals[2]
+    syllabus.topics = vals[3]
+    syllabus.outcomes = vals[4]
+    syllabus.grading = vals[5]
+    syllabus.schedule = vals[6]
+    syllabus.honesty = vals[7]
+    syllabus.deadlines = vals[8]
+    syllabus.accessibility = vals[9] 
+    syllabus.keywords = vals[10] 
+    db.session.commit()
+    return redirect(url_for('syllabus') + '?id={}'.format(vals[0]))
