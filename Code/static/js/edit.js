@@ -11,7 +11,7 @@ function init_tinymce() {
 		toolbar: 'save code | undo redo | fontsizeselect forecolor bold italic underline | alignleft aligncenter alignright | bullist numlist outdent indent | subscript superscript | removeformat | hr charmap link image',
 	});
 }
-document.getElementById('edit').onclick = function() {
+$('#edit').onclick = function() {
 	var i = 0;
 	$('#syllabus').children().each(function () {
 		++i;
