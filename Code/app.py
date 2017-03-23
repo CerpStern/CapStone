@@ -160,11 +160,11 @@ def syllabus():
 def save():
     vals = []
     for i in range(1,12): #TODO: Better way of doing this?
-        vals.append(request.form.get('test'+str(i))[3:][:-4])
+        vals.append(request.form.get('test'+str(i)))
     print(vals)
     #TODO: Sanitize, esp wrt id
     #db.session.query().Syllabus.update().where(Syllabus.id == int(vals[0])).values(basic=vals[1],description=vals[2],topics=vals[3],outcomes=vals[4],grading=vals[5],schedule=vals[6],honesty=vals[7],deadlines=vals[8],accessibility=vals[9],keywords=vals[10])
-    syllabus = Syllabus.query.filter_by(id=vals[0]).first()
+    syllabus = Syllabus.query.filter_by(id=vals[0][3:][:-4]).first()
     syllabus.basic = vals[1] 
     syllabus.description = vals[2]
     syllabus.topics = vals[3]
@@ -176,4 +176,4 @@ def save():
     syllabus.accessibility = vals[9] 
     syllabus.keywords = vals[10] 
     db.session.commit()
-    return redirect(url_for('syllabus') + '?id={}'.format(vals[0]))
+    return redirect(url_for('syllabus') + '?id={}'.format(vals[0][3:][:-4]))
