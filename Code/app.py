@@ -48,7 +48,8 @@ class Course(db.Model):
 class Syllabus(db.Model):
     __tablename__ = "syllabi"
     def __str__(self):
-        return '<p id="id">{}</p><p id="basic">{}</p><p id="description">{}</p><p id="topics">{}</p><p id="outcomes">{}</p><p id="grading">{}</p><p id="schedule">{}</p><p id="honesty">{}</p><p id="deadlines">{}</p><p id="accessibility">{}</p><p id="keywords">{}</p>'.format(self.id, self.basic, self.description, self.topics, self.outcomes, self.grading, self.schedule, self.honesty, self.deadlines, self.accessibility, self.keywords)
+        return '<div id="id">{}</div><div id="basic">{}</div><div id="description">{}</div><div id="topics">{}</div><div id="outcomes">{}</div><div id="grading">{}</div><div id="schedule">{}</div><div id="honesty">{}</div><div id="deadlines">{}</div><div id="accessibility">{}</div><div id="keywords">{}</div>'.format(self.id, self.basic, self.description, self.topics, self.outcomes, self.grading, self.schedule, self.honesty, self.deadlines, self.accessibility, self.keywords)
+        #return '<p id="id">{}</p><p id="basic">{}</p><p id="description">{}</p><p id="topics">{}</p><p id="outcomes">{}</p><p id="grading">{}</p><p id="schedule">{}</p><p id="honesty">{}</p><p id="deadlines">{}</p><p id="accessibility">{}</p><p id="keywords">{}</p>'.format(self.id, self.basic, self.description, self.topics, self.outcomes, self.grading, self.schedule, self.honesty, self.deadlines, self.accessibility, self.keywords)
     id = db.Column(db.Integer, primary_key=True)
     basic = db.Column(db.String)
     description = db.Column(db.String)
@@ -160,11 +161,14 @@ def syllabus():
 def save():
     vals = []
     for i in range(1,12): #TODO: Better way of doing this?
-        vals.append(request.form.get('test'+str(i)))
-    print(vals)
+        if request.form.get('test'+str(i))[:3] == '<p>': # Holy shit nesting <p>s breaks everything, remove them
+            vals.append(request.form.get('test'+str(i))[3:][:-4])
+        else:
+            vals.append(request.form.get('test'+str(i)))
     #TODO: Sanitize, esp wrt id
     #db.session.query().Syllabus.update().where(Syllabus.id == int(vals[0])).values(basic=vals[1],description=vals[2],topics=vals[3],outcomes=vals[4],grading=vals[5],schedule=vals[6],honesty=vals[7],deadlines=vals[8],accessibility=vals[9],keywords=vals[10])
-    syllabus = Syllabus.query.filter_by(id=vals[0][3:][:-4]).first()
+    syllabus = Syllabus.query.filter_by(id=vals[0]).first()
+    #syllabus = Syllabus.query.filter_by(id=vals[0][3:][:-4]).first()
     syllabus.basic = vals[1] 
     syllabus.description = vals[2]
     syllabus.topics = vals[3]
@@ -176,4 +180,5 @@ def save():
     syllabus.accessibility = vals[9] 
     syllabus.keywords = vals[10] 
     db.session.commit()
-    return redirect(url_for('syllabus') + '?id={}'.format(vals[0][3:][:-4]))
+    return redirect(url_for('syllabus') + '?id={}'.format(vals[0]))
+    #return redirect(url_for('syllabus') + '?id={}'.format(vals[0][3:][:-4]))
