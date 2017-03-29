@@ -1,1 +1,10 @@
 {% extends "base.html" %}
+{% block body %}
+{% if current_user.is_authenticated %}
+{% if adm %}
+<h1>You're an admin!</h1>
+{% else %}
+<h1>You're not an admin!</h1>
+{% endif %}
+{% endif %}
+{% endblock %}

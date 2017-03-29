@@ -33,6 +33,7 @@ class User(db.Model, UserMixin):
     avatar = db.Column(db.String(200))
     tokens = db.Column(db.Text)
     created_at = db.Column(db.DateTime, default=datetime.datetime.utcnow())
+    admin = db.Column(db.Boolean, default=False)
     courses = db.relationship('Course')
 
 class Course(db.Model):
@@ -64,6 +65,10 @@ class Syllabus(db.Model):
     course = db.relationship('Course')
 
 
+def is_admin():
+    id = current_user.get_id()
+    return User.query.filter_by(id=id).first().admin
+
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
@@ -88,7 +93,8 @@ def get_google_auth(state=None, token=None):
 @app.route('/')
 @login_required
 def index():
-    return render_template('index.html')
+    adm = is_admin()
+    return render_template('index.html', adm=adm)
 
 
 @app.route('/login')
