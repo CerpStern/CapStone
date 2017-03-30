@@ -1,3 +1,6 @@
+$(document).ready(function() {
+	$('select').material_select();
+});
 var request = null;
 $(function() {
 	$("#search").keyup(function() {
@@ -27,3 +30,5 @@ $(function() {
 		}
 	});
 });
+
+
