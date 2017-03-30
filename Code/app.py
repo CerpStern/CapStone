@@ -168,8 +168,9 @@ def syllabus():
         syllabus = db.session.query(Syllabus).filter(Syllabus.id == request.args.get('id'))[0]
     except IndexError:
         syllabus = ""
-    editable = db.session.query(User,Course,Syllabus).filter(current_user.get_id() == Course.syllabus).filter(Course.user == User.id).first()
-    owns = False if editable == None else True
+    editable = db.session.query(User,Course).filter(Course.syllabus == request.args.get('id')).filter(current_user.get_id() == Course.user).count()
+    print("{} {}".format(current_user.get_id(),editable))
+    owns = False if editable == 0 else True
     return render_template('syllabus.html', syllabus=syllabus, owns=owns)
 
 @app.route('/save', methods = ['POST'])
