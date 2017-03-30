@@ -38,6 +38,8 @@ class User(db.Model, UserMixin):
 
 class Course(db.Model):
     __tablename__ = "courses"
+    def __str__(self):
+        return '{} {} {} {} {}'.format(self.dept, self.id, self.section, self.semester, self.year)
     dept = db.Column(db.String, primary_key=True)
     id = db.Column(db.Integer, primary_key=True)
     section = db.Column(db.Integer, primary_key=True)
@@ -69,6 +71,12 @@ def is_admin():
     id = current_user.get_id()
     return User.query.filter_by(id=id).first().admin
 
+def get_courses():
+    user = current_user.get_id()
+    matches = Course.query.filter_by(user=user)
+    num = Course.query.filter_by(user=user).count()
+    return matches, num
+
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
@@ -94,7 +102,8 @@ def get_google_auth(state=None, token=None):
 @login_required
 def index():
     adm = is_admin()
-    return render_template('index.html', adm=adm)
+    courses, num = get_courses()
+    return render_template('index.html', adm=adm, courses=courses, num=num)
 
 
 @app.route('/login')
@@ -188,3 +197,28 @@ def save():
     db.session.commit()
     return redirect(url_for('syllabus') + '?id={}'.format(vals[0]))
     #return redirect(url_for('syllabus') + '?id={}'.format(vals[0][3:][:-4]))
+
+@app.route('/add', methods = ['POST'])
+def add():
+    year = int(request.form.get('year'))
+    semester = request.form.get('semester')
+    department = request.form.get('department')
+    cid = int(request.form.get('cid'))
+    section = int(request.form.get('section'))
+    instructor = request.form.get('instructor')
+
+    iid = User.query.filter_by(email=instructor).first()
+    if iid == None: # Need to add instructor
+        newinst = User(email=instructor)
+        db.session.add(newinst)
+        db.session.commit()
+        iid = User.query.filter_by(email=instructor).first()
+
+    new_syllabus = Syllabus()
+    db.session.add(new_syllabus)
+    db.session.commit()
+    new_course = Course(year=year, semester=semester, dept=department, id=cid, section=section, user=iid.id, syllabus=new_syllabus.id)
+    db.session.add(new_course)
+    db.session.commit()
+
+    return redirect(url_for('index'))
