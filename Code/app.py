@@ -3,7 +3,7 @@ import json
 import datetime
 
 from flask import Flask, url_for, redirect, \
-        render_template, session, request
+        render_template, session, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, login_required, login_user, \
         logout_user, current_user, UserMixin
@@ -193,7 +193,7 @@ def save():
     syllabus.schedule = vals[6]
     syllabus.honesty = vals[7]
     syllabus.deadlines = vals[8]
-    syllabus.accessibility = vals[9] 
+    syllabus.accessibility =  vals[9] 
     syllabus.keywords = vals[10] 
     db.session.commit()
     return redirect(url_for('syllabus') + '?id={}'.format(vals[0]))
@@ -223,3 +223,22 @@ def add():
     db.session.commit()
 
     return redirect(url_for('index'))
+
+
+# if a search is done, and the autocomplete is not used / navigated to
+# this will open another page with search results, and the ability to refine the results
+
+@app.route('/search',methods = ['GET','POST'])
+def search():
+    inward_bits = request.values.get('in')
+    print(inward_bits)
+    #inward_bits=int(inward_bits)
+    #syllabus = db.session.query(Syllabus).filter(Syllabus.id == inward_bits)
+
+    return redirect(url_for('syllabus') + '?id=inward_bits')
+
+# this will return packaged data with autocompleted searches.
+@app.route('/search_results',methods=['GET'])
+def search_results():
+    # can I do that? 
+    return jsonify(db.session.query(Course)[1].syllabus)
