@@ -11,11 +11,18 @@ function init_tinymce() {
 		toolbar: 'save code | undo redo | fontsizeselect forecolor bold italic underline | alignleft aligncenter alignright | bullist numlist outdent indent | subscript superscript | removeformat | hr charmap link image',
 	});
 }
-document.getElementById('edit').onclick = function() {
+$('#edit').click(function() {
+	//$('#edit').onclick = function() {
+	console.log('clicked');
 	var i = 0;
 	$('#syllabus').children().each(function () {
-		++i;
-		this.innerHTML = '<textarea name="test' + i + '">' + this.innerHTML + '</textarea>';
+		console.log($(this));
+		let id = $(this).attr('id');
+		//console.log($(this).html);
+		if (id) {
+			++i;
+			$(this).html('<textarea name="test' + i + '">' + $(this).html() + '</textarea>');
+		}
 	});
 	init_tinymce();
-}
+});

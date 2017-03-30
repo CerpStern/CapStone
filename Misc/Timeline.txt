@@ -1,0 +1,15 @@
+== Completed ==
+create layout/UI
+database design
+oauth integration
+editor integration
+saving syllabus
+
+== To Do ==
+ability to add a course (not just through sql)
+syllabus searching
+ability to delete a course
+implement syllabus approval
+admin change user level
+implement optional syllabus sections
+responsiveness of site
