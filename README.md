@@ -2,8 +2,6 @@
 
 ## Todo:
 
----
-
 ### Code Related:
 
 #### Aestetic
@@ -24,4 +22,4 @@
 ### Course Related / Due:
 
 #### Presentations
-	* Presentation on Monday? -> Slides?
+* Presentation on Monday? -> Slides?
