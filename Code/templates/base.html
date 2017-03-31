@@ -10,6 +10,7 @@
 	<body>
 		<nav class="indigo nav-extended">
 			<div class="nav-wrapper nav-content container">
+				<br><!-- DO NOT REMOVE. Makes the navbar behave. -->
 				<a id="logo-container" href="#" class="brand-logo left">SMS</a>
 				<!-- 
 		Show user info, or login button.
@@ -17,10 +18,21 @@
 		If moved after the search stuff it gets put before it... weird design.
 				-->
 				{%- if current_user.is_authenticated -%}
-				<ul class="right">
+				<ul class="right" >
 					<!--<li><a href="#">Upload</a></li>-->
-					<li><a href="#">{{current_user.name}}</a></li>
-					<li><a href="{{url_for('logout')}}"><img src="{{current_user.avatar}}?sz=20" width="20" height="20" alt="{{current_user.name}}">Logout</a></li>
+					<li> 
+						<a class="btn btn-primary " href="#">{{current_user.name}}</a>
+					</li>
+
+					<a class="btn btn-primary " href="{{url_for('logout')}}">
+					<li>
+						<img src="{{current_user.avatar}}?sz=20" width="20"
+						height="20" style="margin-top:8px;" alt="{{current_user.name}}">
+					</li>
+					<li style="margin-left:3px;">
+						Logout
+					</li>
+						</a>
 				</ul>
 				{%- else -%}
 				<a href="{{url_for('login')}}" class="btn btn-primary btn-block">Login</a>
