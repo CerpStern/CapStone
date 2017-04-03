@@ -215,12 +215,16 @@ def add():
         db.session.commit()
         iid = User.query.filter_by(email=instructor).first()
 
-    new_syllabus = Syllabus()
-    db.session.add(new_syllabus)
-    db.session.commit()
-    new_course = Course(year=year, semester=semester, dept=department, id=cid, section=section, user=iid.id, syllabus=new_syllabus.id)
-    db.session.add(new_course)
-    db.session.commit()
+    try:
+        new_course = Course(year=year, semester=semester, dept=department, id=cid, section=section, user=iid.id, syllabus=None)
+        db.session.add(new_course)
+        db.session.commit()
+        new_syllabus = Syllabus()
+        db.session.add(new_syllabus)
+        new_course.syllabus = new_syllabus.id
+        db.session.commit()
+    except:
+        db.session.rollback()
 
     return redirect(url_for('index'))
 
