@@ -224,21 +224,22 @@ def add():
 
     return redirect(url_for('index'))
 
-
-# if a search is done, and the autocomplete is not used / navigated to
-# this will open another page with search results, and the ability to refine the results
+###  Search
+# The form for the search is in the 'base.html' template.
+# The form includes the sections:
+#    department, semester, search_text, year, and section
+#
+# For now ( testing ) I'll just be using dept, sem, and search_text 
+# To make sure it'll all work properly.
 
 @app.route('/search',methods = ['GET','POST'])
 def search():
-    inward_bits = request.values.get('in')
-    print(inward_bits)
+    # I'm leaving this here incase I have a stroke, and can't remember how to accept a form
+    #inward_bits = request.values.get('in')
+    #print(inward_bits)
     #inward_bits=int(inward_bits)
     #syllabus = db.session.query(Syllabus).filter(Syllabus.id == inward_bits)
 
-    return redirect(url_for('syllabus') + '?id=inward_bits')
 
-# this will return packaged data with autocompleted searches.
-@app.route('/search_results',methods=['GET'])
-def search_results():
-    # can I do that? 
-    return jsonify(db.session.query(Course)[1].syllabus)
+    return render_template()
+    #return redirect(url_for('syllabus') + '?id={}'.format(inward_bits))
