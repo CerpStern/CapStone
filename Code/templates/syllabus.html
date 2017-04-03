@@ -3,6 +3,7 @@
 <script src="static/js/tinymce/tinymce.min.js"></script>
 {% if owns %}
 <button id="edit" type="button">Edit</button>
+<a class="btn" href="/queue?action=add&id={{ id }}">Request Approval</a>
 <script src="static/js/edit.js"></script>
 {% endif %}
 <form method="POST" action="/save">

@@ -12,6 +12,8 @@ from requests.exceptions import HTTPError
 
 from config import config, Auth
 
+queuefile = 'queue.json'
+
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 """APP creation and configuration"""
@@ -171,7 +173,7 @@ def syllabus():
     editable = db.session.query(User,Course).filter(Course.syllabus == request.args.get('id')).filter(current_user.get_id() == Course.user).count()
     print("{} {}".format(current_user.get_id(),editable))
     owns = False if editable == 0 else True
-    return render_template('syllabus.html', syllabus=syllabus, owns=owns)
+    return render_template('syllabus.html', id=syllabus.id, syllabus=syllabus, owns=owns)
 
 @app.route('/save', methods = ['POST'])
 def save():
@@ -226,6 +228,22 @@ def add():
     except:
         db.session.rollback()
 
+    return redirect(url_for('index'))
+
+@app.route('/queue')
+def queue():
+    if request.args.get('action') == 'approve' and is_admin():
+        print('approving!')
+    elif request.args.get('action') == 'deny' and is_admin():
+        print('denying!')
+    elif request.args.get('action') == 'add':
+        with open(queuefile, 'r') as qf:
+            print('Requesting approval for syllabus {}'.format(request.args.get('id')))
+            q = set(json.load(qf))
+            print('Size is {}'.format(len(q)))
+        with open(queuefile, 'w') as qf:
+            q.add(request.args.get('id'))
+            json.dump(list(q), qf)
     return redirect(url_for('index'))
 
 ###  Search
