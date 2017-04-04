@@ -20,5 +20,3 @@
 ### Course Related / Due:
 * Thurs -> Peer Evaluations
 * Email Samba With preferred Presentation Date
-#### Presentations
-* Presentation on Monday? -> Slides?
