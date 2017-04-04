@@ -6,20 +6,19 @@
 
 #### Aestetic
 * Make admin landing page 2 column / redesign
-* Semi-Related to search -> Get the nav bar to be less 'special'
+* Edit Page 
+	* Button Positioning
+	* General Syllabus Formatting
+
 
 #### Functional
 * Search Related
-	* Algorithm Related
-		* Develop simple / naive search approach
-		* Search with category specification
-	* Instant Search Results Related
-		* Just get data list to actually display properly.
-		* get it to talk to the server
-		* get the javascript gods on our side, and poo that data somewhere useful
-
+	* Add 'Course' Text Field.
+	* Fuzzy Search for seach_text field
+	* Create a '/results' page (jinja template) to display search results.
 
 ### Course Related / Due:
-
+* Thurs -> Peer Evaluations
+* Email Samba With preferred Presentation Date
 #### Presentations
 * Presentation on Monday? -> Slides?
