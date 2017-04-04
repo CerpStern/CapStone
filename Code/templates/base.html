@@ -23,7 +23,7 @@
 				{%- if current_user.is_authenticated -%}
 				<ul class="right" >
 					<!--<li><a href="#">Upload</a></li>-->
-					<a class="btn-large" href="/">
+					<a class="btn-large indigo accent-4" href="/">
 						<li>
 							<img src="{{current_user.avatar}}?sz=40" width="40"
 							height="40" style="margin-top:7px;" alt="{{current_user.name}}">
@@ -32,13 +32,13 @@
 							{{current_user.name}}
 						</li>
 					</a>
-					<a class="btn-large" href="{{url_for('logout')}}">
+					<a class="btn-large indigo accent-4" href="{{url_for('logout')}}">
 						<li style="margin-left:3px;">Logout</li>
 					</a>
 				</ul>
 				{%- else -%}
 				<ul class="right">
-					<li><a class="btn" href="{{auth_url}}">Login With Google</a></li>
+					<li><a class="btn indigo accent-4" href="{{auth_url}}">Login With Google</a></li>
 				</ul>
 				{%- endif -%}
 
