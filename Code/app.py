@@ -246,6 +246,20 @@ def queue():
             json.dump(list(q), qf)
     return redirect(url_for('index'))
 
+def update_matches(temp_matches,matches):
+    temp = []
+    if(len(matches)==0):
+        for match in temp_matches:
+            temp.append(match.syllabus)
+        matches=temp
+    else:
+        for match in temp_matches:
+            if match.syllabus in matches:
+                temp.append(match.syllabus)
+        matches=temp
+    return matches
+
+
 ###  Search
 # The form for the search is in the 'base.html' template.
 # The form includes the sections:
@@ -256,12 +270,38 @@ def queue():
 
 @app.route('/search',methods = ['GET','POST'])
 def search():
-    # I'm leaving this here incase I have a stroke, and can't remember how to accept a form
-    #inward_bits = request.values.get('in')
-    #print(inward_bits)
-    #inward_bits=int(inward_bits)
-    #syllabus = db.session.query(Syllabus).filter(Syllabus.id == inward_bits)
+    matches = []
+    chopping_block=[]
+    semester, year, department, section, search_text = "","","","",""
+    if( request.values.get('semester') != "None"):
+        semester = request.values.get('semester')
+        temp_matches = db.session.query(Course).filter( Course.semester == semester )
+        matches = update_matches( temp_matches,matches)
 
+    if( request.values.get('year') != ""):
+        year = request.values.get('year')
+        temp_matches = db.session.query(Course).filter( Course.year == year)
+        matches = update_matches( temp_matches,matches)
 
-    return render_template()
-    #return redirect(url_for('syllabus') + '?id={}'.format(inward_bits))
+    if( request.values.get('department') != "None"):
+        department = request.values.get('department')
+        temp_matches = db.session.query(Course).filter( Course.dept == department )
+        matches = update_matches( temp_matches,matches)
+
+    if( request.values.get('section') != ""):
+        section = request.values.get('section')
+        temp_matches = db.session.query(Course).filter( Course.section == section )
+        matches = update_matches( temp_matches,matches)
+
+    if( request.values.get('search_text') != ""):
+        search_text = request.values.get('search_text')
+        temp_matches = db.session.query(Course).filter( Course.id == search_text )
+        matches = update_matches( temp_matches,matches)
+
+    for i in matches:
+        print("Matching syll #:{}".format(i))
+
+    if(len(matches)==1):
+        return redirect(url_for('syllabus')+'?id={}'.format(matches[0]))
+
+    return redirect(url_for('index'))
