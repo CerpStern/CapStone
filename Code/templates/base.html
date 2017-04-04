@@ -37,7 +37,9 @@
 					</a>
 				</ul>
 				{%- else -%}
-				<a href="{{url_for('login')}}" class="btn btn-primary btn-block">Login</a>
+				<ul class="right">
+					<li><a class="btn" href="{{auth_url}}">Login With Google</a></li>
+				</ul>
 				{%- endif -%}
 
 				<!-- 
