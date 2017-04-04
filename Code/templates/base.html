@@ -10,7 +10,7 @@
 	</head>
 	<body>
 		<nav class="indigo nav-extended">
-			<a href="/" style="float:left;"><img style="height:80px;width:130px; margin-left:50px;margin-top:15px;" src="/static/images/icon3.png"/></a>
+			<a href="/" style="float:left;"><img style="height:80px;width:130px; margin-left:25px;margin-top:24px;" src="/static/images/icon3.png"/></a>
 			<div class="nav-wrapper nav-content container">
 				<br><!-- DO NOT REMOVE. Makes the navbar behave. -->
 				<!--<a id="logo-container" href="#" class="brand-logo" style="float:left;">SMS</a>-->
@@ -23,13 +23,15 @@
 				{%- if current_user.is_authenticated -%}
 				<ul class="right" >
 					<!--<li><a href="#">Upload</a></li>-->
-					<li>
-						<a class="btn" href="/">
-						<img src="{{current_user.avatar}}?sz=20" width="20"
-						height="20" style="margin-top:10px;" alt="{{current_user.name}}">
-						{{current_user.name}}
-						</a>
-					</li>
+					<a class="btn" href="/">
+						<li>
+							<img src="{{current_user.avatar}}?sz=20" width="20"
+							height="20" style="margin-top:6px;" alt="{{current_user.name}}">
+						</li>
+						<li style="margin-left:5px;">
+							{{current_user.name}}
+						</li>
+					</a>
 					<a class="btn" href="{{url_for('logout')}}">
 						<li style="margin-left:3px;">Logout</li>
 					</a>
