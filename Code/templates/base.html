@@ -11,7 +11,7 @@
 	<body>
 		<nav class="indigo nav-extended">
 			<a href="/" style="float:left;"><img style="height:80px;width:130px; margin-left:25px;margin-top:24px;" src="/static/images/icon3.png"/></a>
-			<div class="nav-wrapper nav-content container">
+			<div class="nav-wrapper nav-content ">
 				<br><!-- DO NOT REMOVE. Makes the navbar behave. -->
 				<!--<a id="logo-container" href="#" class="brand-logo" style="float:left;">SMS</a>-->
 
@@ -23,16 +23,16 @@
 				{%- if current_user.is_authenticated -%}
 				<ul class="right" >
 					<!--<li><a href="#">Upload</a></li>-->
-					<a class="btn" href="/">
+					<a class="btn-large" href="/">
 						<li>
-							<img src="{{current_user.avatar}}?sz=20" width="20"
-							height="20" style="margin-top:6px;" alt="{{current_user.name}}">
+							<img src="{{current_user.avatar}}?sz=40" width="40"
+							height="40" style="margin-top:7px;" alt="{{current_user.name}}">
 						</li>
 						<li style="margin-left:5px;">
 							{{current_user.name}}
 						</li>
 					</a>
-					<a class="btn" href="{{url_for('logout')}}">
+					<a class="btn-large" href="{{url_for('logout')}}">
 						<li style="margin-left:3px;">Logout</li>
 					</a>
 				</ul>
@@ -43,16 +43,20 @@
 				<!-- 
 		Everything related to search
 				-->
-				<form class="right" action="/search" method="post" >
+				<form class="right" action="/search" method="post" style="margin-right:15px;">
 					<!-- Semester, Department, Year etc-->
 					<div style="display:inline-block;">
 						<select class="input-field" name="semester">
 							<option value="" disabled selected>Select Semester</option>
-							<option value="fall">Fall</option>
-							<option value="spring">Spring</option>
-							<option value="summer">Summer</option>
+							<option value="Fall">Fall</option>
+							<option value="Spring">Spring</option>
+							<option value="Summer">Summer</option>
 						</select>
 					</div>
+					<div style="display:inline-block">
+						<input name="year" class="form-control input-field"  placeholder="Year">
+					</div>
+
 					<div style="display:inline-block">
 						<select class="input-field" name="department">
 							<!--
@@ -65,7 +69,9 @@
 							<option value="3">MATH</option>
 						</select>
 					</div>
-
+					<div style="display:inline-block">
+						<input name="section" class="form-control input-field" placeholder="Section #">
+					</div>
 					<div style="display:inline-block">
 						<input autofocus type="search" id="search" name="search_text" list="results" class="form-control input-field" style="display:inline-block" placeholder="Search">
 						<!--<input id="search" list="results">-->
