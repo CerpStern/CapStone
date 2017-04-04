@@ -99,6 +99,18 @@ def get_google_auth(state=None, token=None):
                 scope=Auth.SCOPE)
     return oauth
 
+def update_matches(temp_matches,matches):
+    temp = []
+    if(len(matches)==0):
+        for match in temp_matches:
+            temp.append(match.syllabus)
+        matches=temp
+    else:
+        for match in temp_matches:
+            if match.syllabus in matches:
+                temp.append(match.syllabus)
+        matches=temp
+    return matches
 
 @app.route('/')
 @login_required
@@ -246,18 +258,6 @@ def queue():
             json.dump(list(q), qf)
     return redirect(url_for('index'))
 
-def update_matches(temp_matches,matches):
-    temp = []
-    if(len(matches)==0):
-        for match in temp_matches:
-            temp.append(match.syllabus)
-        matches=temp
-    else:
-        for match in temp_matches:
-            if match.syllabus in matches:
-                temp.append(match.syllabus)
-        matches=temp
-    return matches
 
 
 ###  Search
