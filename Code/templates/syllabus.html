@@ -1,5 +1,9 @@
 {% extends "base.html" %}
 {% block body %}
+<br>
+<br>
+<br>
+<br>
 <script src="static/js/tinymce/tinymce.min.js"></script>
 {% if owns %}
 <button class="btn indigo accent-2" id="edit" type="button">Edit</button>
@@ -8,7 +12,7 @@
 {% endif %}
 <form method="POST" action="/save">
 	{% if owns %}
-		<button class="btn indigo accent-2" name="submitbtn">Save</button>
+		<button id="save" class="btn indigo accent-2" name="submitbtn">Save</button>
 	{% endif %}
 	<div id="syllabus">
 		<input type="hidden" value="{{ syllabus.id|safe }}" name="test1">

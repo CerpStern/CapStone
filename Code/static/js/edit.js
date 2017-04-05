@@ -14,6 +14,7 @@ function init_tinymce() {
 $('#edit').click(function() {
 	//$('#edit').onclick = function() {
 	console.log('clicked');
+	$('#save').css('display', 'inline');
 	var i = 1;
 	$('#syllabus').children().each(function () {
 		console.log($(this));
