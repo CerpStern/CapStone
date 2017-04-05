@@ -11,7 +11,47 @@
 		<button class="btn indigo accent-2" name="submitbtn">Save</button>
 	{% endif %}
 	<div id="syllabus">
-		{{ syllabus|safe }}
+		<input type="hidden" value="{{ syllabus.id|safe }}" name="test1">
+		<h3>Basic Information</h3>
+		<div id="a" class="disp">
+		{{ syllabus.basic|safe }}
+		</div>
+		<h3>Course Description</h3>
+		<div id="b" class="disp">
+		{{ syllabus.description|safe }}
+		</div>
+		<h3>Course Topics</h3>
+		<div id="c" class="disp">
+		{{ syllabus.topics|safe }}
+		</div>
+		<h3>Learning Outcomes</h3>
+		<div id="d" class="disp">
+		{{ syllabus.outcomes|safe }}
+		</div>
+		<h3>Grading Policy</h3>
+		<div id="e" class="disp">
+		{{ syllabus.grading|safe }}
+		</div>
+		<h3>Course Schedule</h3>
+		<div id="f" class="disp">
+		{{ syllabus.schedule|safe }}
+		</div>
+		<h3>Academic Honesty</h3>
+		<div id="g" class="disp">
+		{{ syllabus.honesty|safe }}
+		</div>
+		<h3>Registration Deadlines</h3>
+		<div id="h" class="disp">
+		{{ syllabus.deadlines|safe }}
+		</div>
+		<h3>Accessibility Policy</h3>
+		<div id="i" class="disp">
+		{{ syllabus.accessibility|safe }}
+		</div>
+		<h3>Keywords</h3>
+		<div id="j" class="disp">
+		{{ syllabus.keywords|safe }}
+		</div>
 	</div>
 </form>
 {% endblock %}
