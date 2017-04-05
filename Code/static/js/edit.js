@@ -14,11 +14,11 @@ function init_tinymce() {
 $('#edit').click(function() {
 	//$('#edit').onclick = function() {
 	console.log('clicked');
-	var i = 0;
+	var i = 1;
 	$('#syllabus').children().each(function () {
 		console.log($(this));
 		let id = $(this).attr('id');
-		//console.log($(this).html);
+		console.log($(this).html);
 		if (id) {
 			++i;
 			$(this).html('<textarea name="test' + i + '">' + $(this).html() + '</textarea>');
