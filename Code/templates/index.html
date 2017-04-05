@@ -2,12 +2,15 @@
 {% block body %}
 {% if current_user.is_authenticated %}
 {% if adm %}
-<div id="queue">
-	{% for item in pending %}
-	{% endfor %}
+<div class="row">
+	<div id="queue" class="col s12 m12 l12 xl12">
+		<h3>Queue</h3>
+		{% for item in pending %}
+		{% endfor %}
+	</div>
 </div>
 <div class="row">
-	<div class="col s6">
+	<div class="col s12 m6 l6 xl6">
 		<h3>Add a course:</h3>
 		<form method="POST" action="/add">
 			Year:<br>
@@ -29,7 +32,7 @@
 			<input type="submit" value="submit">
 		</form>
 	</div>
-	<div class="col s6">
+	<div class="col s12 m6 l6 xl6">
 		<h3>Remove a course:</h3>
 		<form method="POST" action="/remove">
 			Year:<br>
