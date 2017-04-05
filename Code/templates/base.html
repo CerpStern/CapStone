@@ -5,7 +5,7 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> 
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css">
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script>
-		<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 		<script src="static/js/search.js"></script>
 		<link rel="stylesheet" href="/static/css/main.css">
 	</head>
@@ -13,13 +13,7 @@
 
 		<nav class="nav-extended">
 			<div class="indigo nav-wrapper">
-				<!--
-				<div class="left hide-on-small-only">
-				<a href="/" ><img src="/static/images/icon3.png" style="height:100px;width:auto;margin-top:13px;margin-left:5px;" ></a>
-				</div>
-				-->
-				<a href="" class="brand-logo"> <img src="/static/images/icon.png" style="height:64px;width:auto;" > </a>	
-
+				<a href="" class="left"> <img src="/static/images/icon.png" style="height:64px;width:auto;" > </a>	
 				<!--
 					login and user info
 				-->
@@ -46,52 +40,12 @@
 
 				<ul class="right">
 					<li>
-						<input name="search_text" class="input-field hide-on-med-and-down" type="search" placeholder="Section" >
+						<input name="search_text" class="input-field hide-on-med-and-down" type="search" placeholder="Search" >
+					</li>
+					<li>
+						<li><a class="waves-effect waves-light btn">Advanced Search</a></li>	
 					</li>
 				</ul>
-				<!--
-				<ul id="nav-mobile" class="right downerer">
-					<form action="/search" method="post">
-						<li>
-							<input autofocus  name="course" class="input-field hide-on-med-and-down" type="search" placeholder="Course" >
-						</li>
-						<li> <div class="nick-spacer"> &nbsp;</div> </li>
-
-						<li>
-							<input name="section" class="input-field hide-on-med-and-down" type="search" placeholder="Section" >
-						</li>
-						<li> <div class="nick-spacer"> &nbsp;</div> </li>
-
-						<li>
-							<input name="year" class="input-field hide-on-med-and-down" type="search" placeholder="Year" >
-						</li>
-						<li> <div class="nick-spacer"> &nbsp;</div> </li>
-
-						<li>
-							<input name="search_text" class="input-field" type="search" placeholder="Search" >
-						</li>
-						<li> <div class="nick-spacer"> &nbsp;</div> </li>
-
-						<li> <select class="downer hide-on-med-and-down" name="semester">
-							<option value="" disabled selected>Select Semester</option>
-							<option value="FALL">Fall</option>
-							<option value="SPRING">Spring</option>
-							<option value="SUMMER">Summer</option>
-						</select></li>
-						<li> <div class="nick-spacer"> &nbsp;</div> </li>
-
-						<li> <select class="downer hide-on-med-and-down" name="department">
-							<option value="" disabled selected> Select Department</option>
-							<option value="CS">CS</option>
-							<option value="CIS">CIS</option>
-							<option value="MATH">MATH</option>
-						</select></li>
-						<li> <div class="nick-spacer"> &nbsp;</div> </li>
-						<input type="submit" hidden>
-
-					</form>
-				</ul>
-				-->
 			</div>
 		</nav>
 
