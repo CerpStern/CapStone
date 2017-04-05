@@ -5,6 +5,7 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> 
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css">
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script>
+		<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 		<script src="static/js/search.js"></script>
 		<link rel="stylesheet" href="/static/css/main.css">
 	</head>
@@ -12,34 +13,44 @@
 
 		<nav class="nav-extended">
 			<div class="indigo nav-wrapper">
-				<a href="/" class="left hide-on-small-only"><img src="/static/images/icon3.png" style="height:100px;width:auto;margin-top:13px;margin-left:5px;" ></a>
-				
+				<!--
+				<div class="left hide-on-small-only">
+				<a href="/" ><img src="/static/images/icon3.png" style="height:100px;width:auto;margin-top:13px;margin-left:5px;" ></a>
+				</div>
+				-->
+				<a href="" class="brand-logo"> <img src="/static/images/icon.png" style="height:64px;width:auto;" > </a>	
+
 				<!--
 					login and user info
 				-->
 				{%- if current_user.is_authenticated -%}
 				<ul class="right downerer hide-on-small-only" style="padding-right:5px;">
-					<a class="btn-large indigo accent-2" href="/">
+					<a class="btn indigo accent-2" href="/">
 						<li>
-							<img src="{{current_user.avatar}}?sz=40" width="40"
-							height="40" style="margin-top:7px;" alt="{{current_user.name}}">
+							<img src="{{current_user.avatar}}?sz=25" width="25"
+							height="25" style="margin-top:4px;" alt="{{current_user.name}}">
 						</li>
 						<li style="margin-left:5px;">
 							{{current_user.name}}
 						</li>
 					</a>
-					<a class="btn-large indigo accent-2" href="{{url_for('logout')}}">
+					<a class="btn indigo accent-2" href="{{url_for('logout')}}">
 						<li style="margin-left:3px;">Logout</li>
 					</a>
 				</ul>
 				{%- else -%}
 				<ul class="right downerer" style="padding-right:5px;">
-					<li><a class="btn-large indigo accent-2" href="{{auth_url}}">Login With Google</a></li>
+					<li><a class="btn indigo accent-2" href="{{auth_url}}">Login With Google</a></li>
 				</ul>
 				{%- endif -%}
 
+				<ul class="right">
+					<li>
+						<input name="search_text" class="input-field hide-on-med-and-down" type="search" placeholder="Section" >
+					</li>
+				</ul>
+				<!--
 				<ul id="nav-mobile" class="right downerer">
-					<!-- Begin Search -->
 					<form action="/search" method="post">
 						<li>
 							<input autofocus  name="course" class="input-field hide-on-med-and-down" type="search" placeholder="Course" >
@@ -61,7 +72,6 @@
 						</li>
 						<li> <div class="nick-spacer"> &nbsp;</div> </li>
 
-						<!-- Semester and Dept (selects) -->
 						<li> <select class="downer hide-on-med-and-down" name="semester">
 							<option value="" disabled selected>Select Semester</option>
 							<option value="FALL">Fall</option>
@@ -80,8 +90,8 @@
 						<input type="submit" hidden>
 
 					</form>
-					<!-- End Search -->
 				</ul>
+				-->
 			</div>
 		</nav>
 
