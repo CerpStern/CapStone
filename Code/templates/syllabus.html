@@ -2,12 +2,13 @@
 {% block body %}
 <script src="static/js/tinymce/tinymce.min.js"></script>
 {% if owns %}
-<button id="edit" type="button">Edit</button>
+<button class="btn indigo accent-2" id="edit" type="button">Edit</button>
+<a class="btn indigo accent-2" href="/queue?action=add&id={{ id }}">Request Approval</a>
 <script src="static/js/edit.js"></script>
 {% endif %}
 <form method="POST" action="/save">
 	{% if owns %}
-	<button name="submitbtn">Save</button>
+		<button class="btn indigo accent-2" name="submitbtn">Save</button>
 	{% endif %}
 	<div id="syllabus">
 		{{ syllabus|safe }}

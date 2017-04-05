@@ -2,16 +2,20 @@
 {% block body %}
 {% if current_user.is_authenticated %}
 {% if adm %}
+<div id="queue">
+	{% for item in pending %}
+	{% endfor %}
+</div>
 <div>
 	<h3>Add a course:</h3>
 	<form method="POST" action="/add">
 		Year:<br>
 		<input type="text" name="year" value="2017"><br>
 		Semester:<br>
-		<select class="browser-default" name="semester">
-			<option value="spring">Spring</option>
-			<option value="summer">Summer</option>
-			<option value="fall">Fall</option>
+		<select class="input-field" name="semester">
+			<option value="Spring">Spring</option>
+			<option value="Summer">Summer</option>
+			<option value="Fall">Fall</option>
 		</select>
 		Department:<br>
 		<input type="text" name="department" value="CS"><br>
@@ -30,7 +34,7 @@
 		Year:<br>
 		<input type="text" name="year" value="2017"><br>
 		Semester:<br>
-		<select class="browser-default" name="semester">
+		<select class="input-field" name="semester">
 			<option value="spring">Spring</option>
 			<option value="summer">Summer</option>
 			<option value="fall">Fall</option>

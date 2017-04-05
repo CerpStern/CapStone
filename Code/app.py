@@ -3,7 +3,7 @@ import json
 import datetime
 
 from flask import Flask, url_for, redirect, \
-        render_template, session, request
+        render_template, session, request, jsonify
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, login_required, login_user, \
         logout_user, current_user, UserMixin
@@ -11,6 +11,8 @@ from requests_oauthlib import OAuth2Session
 from requests.exceptions import HTTPError
 
 from config import config, Auth
+
+queuefile = 'queue.json'
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
@@ -97,6 +99,18 @@ def get_google_auth(state=None, token=None):
                 scope=Auth.SCOPE)
     return oauth
 
+def update_matches(temp_matches,matches):
+    temp = []
+    if(len(matches)==0):
+        for match in temp_matches:
+            temp.append(match.syllabus)
+        matches=temp
+    else:
+        for match in temp_matches:
+            if match.syllabus in matches:
+                temp.append(match.syllabus)
+        matches=temp
+    return matches
 
 @app.route('/')
 @login_required
@@ -171,7 +185,7 @@ def syllabus():
     editable = db.session.query(User,Course).filter(Course.syllabus == request.args.get('id')).filter(current_user.get_id() == Course.user).count()
     print("{} {}".format(current_user.get_id(),editable))
     owns = False if editable == 0 else True
-    return render_template('syllabus.html', syllabus=syllabus, owns=owns)
+    return render_template('syllabus.html', id=syllabus.id, syllabus=syllabus, owns=owns)
 
 @app.route('/save', methods = ['POST'])
 def save():
@@ -193,7 +207,7 @@ def save():
     syllabus.schedule = vals[6]
     syllabus.honesty = vals[7]
     syllabus.deadlines = vals[8]
-    syllabus.accessibility = vals[9] 
+    syllabus.accessibility =  vals[9] 
     syllabus.keywords = vals[10] 
     db.session.commit()
     return redirect(url_for('syllabus') + '?id={}'.format(vals[0]))
@@ -215,11 +229,79 @@ def add():
         db.session.commit()
         iid = User.query.filter_by(email=instructor).first()
 
-    new_syllabus = Syllabus()
-    db.session.add(new_syllabus)
-    db.session.commit()
-    new_course = Course(year=year, semester=semester, dept=department, id=cid, section=section, user=iid.id, syllabus=new_syllabus.id)
-    db.session.add(new_course)
-    db.session.commit()
+    try:
+        new_course = Course(year=year, semester=semester, dept=department, id=cid, section=section, user=iid.id, syllabus=None)
+        db.session.add(new_course)
+        db.session.commit()
+        new_syllabus = Syllabus()
+        db.session.add(new_syllabus)
+        new_course.syllabus = new_syllabus.id
+        db.session.commit()
+    except:
+        db.session.rollback()
+
+    return redirect(url_for('index'))
+
+@app.route('/queue')
+def queue():
+    if request.args.get('action') == 'approve' and is_admin():
+        print('approving!')
+    elif request.args.get('action') == 'deny' and is_admin():
+        print('denying!')
+    elif request.args.get('action') == 'add':
+        with open(queuefile, 'r') as qf:
+            print('Requesting approval for syllabus {}'.format(request.args.get('id')))
+            q = set(json.load(qf))
+            print('Size is {}'.format(len(q)))
+        with open(queuefile, 'w') as qf:
+            q.add(request.args.get('id'))
+            json.dump(list(q), qf)
+    return redirect(url_for('index'))
+
+
+
+###  Search
+# The form for the search is in the 'base.html' template.
+# The form includes the sections:
+#    department, semester, search_text, year, and section
+#
+# For now ( testing ) I'll just be using dept, sem, and search_text 
+# To make sure it'll all work properly.
+
+@app.route('/search',methods = ['GET','POST'])
+def search():
+    matches = []
+    chopping_block=[]
+    semester, year, department, section, search_text = "","","","",""
+    if( request.values.get('semester') != "None"):
+        semester = request.values.get('semester')
+        temp_matches = db.session.query(Course).filter( Course.semester == semester )
+        matches = update_matches( temp_matches,matches)
+
+    if( request.values.get('year') != ""):
+        year = request.values.get('year')
+        temp_matches = db.session.query(Course).filter( Course.year == year)
+        matches = update_matches( temp_matches,matches)
+
+    if( request.values.get('department') != "None"):
+        department = request.values.get('department')
+        temp_matches = db.session.query(Course).filter( Course.dept == department )
+        matches = update_matches( temp_matches,matches)
+
+    if( request.values.get('section') != ""):
+        section = request.values.get('section')
+        temp_matches = db.session.query(Course).filter( Course.section == section )
+        matches = update_matches( temp_matches,matches)
+
+    if( request.values.get('search_text') != ""):
+        search_text = request.values.get('search_text')
+        temp_matches = db.session.query(Course).filter( Course.id == search_text )
+        matches = update_matches( temp_matches,matches)
+
+    for i in matches:
+        print("Matching syll #:{}".format(i))
+
+    if(len(matches)==1):
+        return redirect(url_for('syllabus')+'?id={}'.format(matches[0]))
 
     return redirect(url_for('index'))

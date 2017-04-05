@@ -6,34 +6,85 @@
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css">
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script>
 		<script src="static/js/search.js"></script>
+		<link rel="stylesheet" href="/static/css/main.css">
 	</head>
 	<body>
-		<nav class="indigo">
-			<div class="nav-wrapper container">
-				<a id="logo-container" href="#" class="brand-logo">SMS</a>
-			{%- if current_user.is_authenticated -%}
-				<ul class="right">
-					<!--<li><a href="#">Upload</a></li>-->
-					<li><a href="#">{{current_user.name}}</a></li>
-					<li><a href="{{url_for('logout')}}"><img src="{{current_user.avatar}}?sz=20" width="20" height="20" alt="{{current_user.name}}">Logout</a></li>
-				</ul>
-				<form class="right" action="/search">
-					<div class="input-field">
-						<!--
-						<input autofocus type="search" class="form-control" placeholder="Search" name="q">
-						<input id="search" list="search">
-						<datalist id="results">
-						</datalist>
-						-->
-					</div>
-					<!--<button type="submit" class="btn btn-default btn-sm">Search</button>-->
-				</form>
 
-			{%- else -%}
-			<a href="{{url_for('login')}}" class="btn btn-primary btn-block">Login</a>
-			{%- endif -%}
-			</div><!-- /.navbar-collapse -->
+		<nav class="nav-extended">
+			<div class="indigo nav-wrapper">
+				<a href="/" class="left hide-on-small-only"><img src="/static/images/icon3.png" style="height:100px;width:auto;margin-top:13px;margin-left:5px;" ></a>
+				
+				<!--
+					login and user info
+				-->
+				<ul class="right downerer hide-on-small-only" style="padding-right:5px;">
+					{%- if current_user.is_authenticated -%}
+					<a class="btn-large indigo accent-2" href="/">
+						<li>
+							<img src="{{current_user.avatar}}?sz=40" width="40"
+							height="40" style="margin-top:7px;" alt="{{current_user.name}}">
+						</li>
+						<li style="margin-left:5px;">
+							{{current_user.name}}
+						</li>
+					</a>
+					<a class="btn-large indigo accent-2" href="{{url_for('logout')}}">
+						<li style="margin-left:3px;">Logout</li>
+					</a>
+					</ul>
+					{%- else -%}
+					<ul class="right downerer" style="padding-right:5px;">
+						<li><a class="btn-large indigo accent-2" href="{{auth_url}}">Login With Google</a></li>
+					</ul>
+					{%- endif -%}
+
+				<ul id="nav-mobile" class="right downerer">
+					<!-- Begin Search -->
+					<form action="/search" method="post">
+						<li>
+							<input autofocus  name="course" class="input-field hide-on-med-and-down" type="search" placeholder="Course" >
+						</li>
+						<li> <div class="nick-spacer"> &nbsp;</div> </li>
+
+						<li>
+							<input name="section" class="input-field hide-on-med-and-down" type="search" placeholder="Section" >
+						</li>
+						<li> <div class="nick-spacer"> &nbsp;</div> </li>
+
+						<li>
+							<input name="year" class="input-field hide-on-med-and-down" type="search" placeholder="Year" >
+						</li>
+						<li> <div class="nick-spacer"> &nbsp;</div> </li>
+
+						<li>
+							<input name="search_text" class="input-field" type="search" placeholder="Search" >
+						</li>
+						<li> <div class="nick-spacer"> &nbsp;</div> </li>
+
+						<!-- Semester and Dept (selects) -->
+						<li> <select class="downer hide-on-med-and-down" name="semester">
+							<option value="" disabled selected>Select Semester</option>
+							<option value="Fall">Fall</option>
+							<option value="Spring">Spring</option>
+							<option value="Summer">Summer</option>
+						</select></li>
+						<li> <div class="nick-spacer"> &nbsp;</div> </li>
+
+						<li> <select class="downer hide-on-med-and-down" name="department">
+							<option value="" disabled selected> Select Department</option>
+							<option value="Fall">Fall</option>
+							<option value="Spring">Spring</option>
+							<option value="Summer">Summer</option>
+						</select></li>
+						<li> <div class="nick-spacer"> &nbsp;</div> </li>
+						<input type="submit" hidden>
+
+					</form>
+					<!-- End Search -->
+				</ul>
+			</div>
 		</nav>
+
 		{% block body %}
 		{% endblock %}
 	</body>

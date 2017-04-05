@@ -1,2 +1,6 @@
 Primary: #3F51B5
 Highlight: #7986CB
+
+Version 2 - Electric Boogaloo:
+light / Button: 304ffe
+dark  / navbar: default
