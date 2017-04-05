@@ -6,47 +6,49 @@
 	{% for item in pending %}
 	{% endfor %}
 </div>
-<div>
-	<h3>Add a course:</h3>
-	<form method="POST" action="/add">
-		Year:<br>
-		<input type="text" name="year" value="2017"><br>
-		Semester:<br>
-		<select class="input-field" name="semester">
-			<option value="Spring">Spring</option>
-			<option value="Summer">Summer</option>
-			<option value="Fall">Fall</option>
-		</select>
-		Department:<br>
-		<input type="text" name="department" value="CS"><br>
-		Course ID:<br>
-		<input type="text" name="cid" value="10001"><br>
-		Section:<br>
-		<input type="text" name="section" value="001"><br>
-		Instructor:<br>
-		<input type="email" name="instructor" value="capstone.teacher.one@gmail.com"><br>
-		<input type="submit" value="submit">
-	</form>
-</div>
-<div>
-	<h3>Remove a course:</h3>
-	<form method="POST" action="/remove">
-		Year:<br>
-		<input type="text" name="year" value="2017"><br>
-		Semester:<br>
-		<select class="input-field" name="semester">
-			<option value="spring">Spring</option>
-			<option value="summer">Summer</option>
-			<option value="fall">Fall</option>
-		</select>
-		Department:<br>
-		<input type="text" name="department" value="CS"><br>
-		Course ID:<br>
-		<input type="text" name="cid" value="10001"><br>
-		Section:<br>
-		<input type="text" name="section" value="001"><br>
-		<input type="submit" value="submit">
-	</form>
+<div class="row">
+	<div class="col s6">
+		<h3>Add a course:</h3>
+		<form method="POST" action="/add">
+			Year:<br>
+			<input type="text" name="year" value="2017"><br>
+			Semester:<br>
+			<select class="input-field" name="semester">
+				<option value="Spring">Spring</option>
+				<option value="Summer">Summer</option>
+				<option value="Fall">Fall</option>
+			</select>
+			Department:<br>
+			<input type="text" name="department" value="CS"><br>
+			Course ID:<br>
+			<input type="text" name="cid" value="10001"><br>
+			Section:<br>
+			<input type="text" name="section" value="001"><br>
+			Instructor:<br>
+			<input type="email" name="instructor" value="capstone.teacher.one@gmail.com"><br>
+			<input type="submit" value="submit">
+		</form>
+	</div>
+	<div class="col s6">
+		<h3>Remove a course:</h3>
+		<form method="POST" action="/remove">
+			Year:<br>
+			<input type="text" name="year" value="2017"><br>
+			Semester:<br>
+			<select class="input-field" name="semester">
+				<option value="spring">Spring</option>
+				<option value="summer">Summer</option>
+				<option value="fall">Fall</option>
+			</select>
+			Department:<br>
+			<input type="text" name="department" value="CS"><br>
+			Course ID:<br>
+			<input type="text" name="cid" value="10001"><br>
+			Section:<br>
+			<input type="text" name="section" value="001"><br>
+			<input type="submit" value="submit">
+		</form>
+	</div>
 </div>
 {% endif %}
 {% if num > 0 %}
