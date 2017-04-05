@@ -25,10 +25,25 @@ nav .button-collapse i {
     height: 128px;
     line-height: 64px;
 }
-nav.nav-extended {
-	height:128px;
+
+.nav .nav-extended, .nav-wrapper {
+	height:128px!important;
 	line-height:64px;
 }
+
+.nick-spacer{
+	width:5px;
+	height:1px;
+	display:inline-block;
+}
+/* sometimes selects can be a real ...*/
+.downer{
+	padding-top:9px;
+}
+.downerer{
+	padding-top:15px;
+}
+
 
 /*
 nav .brand-logo { 
