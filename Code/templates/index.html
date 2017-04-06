@@ -2,6 +2,7 @@
 {% block body %}
 
 {% if current_user.is_authenticated %}
+
 {% if adm %}
 <div class="row">
 	<div id="queue" class="col s12 m4 l4 xl4">
@@ -55,7 +56,7 @@
 	</div>
 
 </div>
-{% endif %}
+{% endif %} <!-- endif admin -->
 
 {% if num > 0 %}
 <div class="center-align">
@@ -67,6 +68,6 @@
 	</div>
 </div>
 {% endif %}
+{% endif %} <!-- endif authenticated -->
 
-{% endif %}
 {% endblock %}
