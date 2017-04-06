@@ -5,12 +5,6 @@
 
 {% if adm %}
 <div class="row">
-	<div id="queue" class="col s12 m4 l4 xl4">
-		<h5>Queue</h5>
-		{% for item in pending %}
-		{% endfor %}
-	</div>
-
 	<div class="col s12 m4 l4 xl4">
 		<h5>Add a course:</h5>
 		<form method="POST" action="/add">
@@ -53,6 +47,12 @@
 			<input type="text" name="section" value="001"><br>
 			<input class="btn indigo accent-2" type="submit" value="submit">
 		</form>
+	</div>
+
+	<div id="queue" class="col s12 m4 l4 xl4">
+		<h5>Queue</h5>
+		{% for item in pending %}
+		{% endfor %}
 	</div>
 
 </div>
