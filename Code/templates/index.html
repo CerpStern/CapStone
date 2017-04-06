@@ -58,10 +58,14 @@
 {% endif %}
 
 {% if num > 0 %}
-<h5>Your Courses:</h5>
-{% for item in courses %}
-{{ item }}<br>
-{% endfor %}
+<div>
+	<h5>Your Courses</h5>
+	<div>
+		{% for item in courses %}
+		<a href=#>{{ item }}<br></a>
+		{% endfor %}
+	</div>
+</div>
 {% endif %}
 
 {% endif %}
