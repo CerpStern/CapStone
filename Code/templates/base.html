@@ -2,6 +2,7 @@
 <html>
 	<head>
 		<title>SMS</title>
+		<link rel="shortcut icon" type="image/png" href="/static/images/tiny_icon.png"/>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> 
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css">
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script>
@@ -13,7 +14,7 @@
 
 		<nav class="nav-extended">
 			<div class="indigo nav-wrapper">
-				<a href="" class="left" style="height:64px;"> <img src="/static/images/icon.png" style="height:64px;width:auto;" > </a>	
+				<a href="/" class="left" style="height:64px;"> <img src="/static/images/icon.png" style="height:64px;width:auto;" > </a>	
 				<!--
 					login and user info
 				-->
@@ -40,16 +41,26 @@
 
 				<form action="/search" method='post'>
 				<ul class="right">
+
 						<li>
 							<input autofocus name="search_text" class="input-field hide-on-med-and-down" type="search" placeholder="Search" >
+						</li>
+						<li> <div class="nick-spacer"> &nbsp;</div> </li>
+						<li> <div class="nick-spacer"> &nbsp;</div> </li>
+						<li>
+							<a action="/search" method='post'><i class="material-icons">search</i></a>
 						</li>
 						<li>
 							<input type="submit" hidden="">
 						</li>
-						<li><a class="waves-effect waves-light btn">Advanced Search</a></li>	
+						<li>
+							<a class="waves-effect waves-light btn">
+								<i class="material-icons right">build</i>
+								Advanced Search
+							</a>
+						</li>
 				</ul>
 				</form>
-
 			</div>
 		</nav>
 
