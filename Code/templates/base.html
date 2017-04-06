@@ -20,12 +20,12 @@
 				-->
 				{%- if current_user.is_authenticated -%}
 				<ul class="right downerer" style="padding-right:5px;">
-					<a class="btn indigo accent-2" href="/">
+					<a class="btn indigo accent-2 hide-on-med-and-down" href="/">
 						<li>
-							<img src="{{current_user.avatar}}?sz=25" width="25"
-							height="25" style="margin-top:4px;" alt="{{current_user.name}}">
+							<img src="{{current_user.avatar}}?sz=29" width="29"
+							height="29" style="margin-top:4px;" alt="{{current_user.name}}">
 						</li>
-						<li style="margin-left:5px;" class="hide-on-med-and-down">
+						<li style="margin-left:5px;" >
 							{{current_user.name}}
 						</li>
 					</a>
