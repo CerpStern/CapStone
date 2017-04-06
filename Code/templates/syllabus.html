@@ -7,14 +7,12 @@
 <div>
 <form method="POST" action="/save">
 	{% if owns %}
-	
-	<br>
 
-	<button class="btn indigo accent-2" id="edit" type="button">Edit<i class="material-icons right">edit</i></button>
+	<button class="btn indigo accent-2" id="edit" type="button" style="margin-top: 10px">Edit<i class="material-icons right">edit</i></button>
 
-	<button id="save" class="btn indigo accent-2" name="submitbtn">Save<i class="material-icons right">save</i> </button>
+	<button id="save" class="btn indigo accent-2" name="submitbtn" style="margin-top: 10px">Save<i class="material-icons right">save</i> </button>
 
-	<a class="btn indigo accent-2" href="/queue?action=add&id={{ id }}"><i class="material-icons right">gavel</i>Request Approval</a>
+	<a class="btn indigo accent-2" href="/queue?action=add&id={{ id }}" style="margin-top: 10px"><i class="material-icons right">gavel</i>Request Approval</a>
 
 	{% endif %}
 
@@ -64,7 +62,7 @@
 		<div id="i" class="disp">
 		{{ syllabus.accessibility|safe }}
 		</div>
-		
+
 		<h3>Keywords</h3>
 		<div id="j" class="disp">
 		{{ syllabus.keywords|safe }}
