@@ -11,10 +11,14 @@ function init_tinymce() {
 		toolbar: 'save code | undo redo | fontsizeselect forecolor bold italic underline | alignleft aligncenter alignright | bullist numlist outdent indent | subscript superscript | removeformat | hr charmap link image',
 	});
 }
+
 $('#edit').click(function() {
 	//$('#edit').onclick = function() {
-	console.log('clicked');
+	console.log('clicked edit');
+
+	$('#edit').css('display', 'none');
 	$('#save').css('display', 'inline');
+
 	var i = 1;
 	$('#syllabus').children().each(function () {
 		console.log($(this));
@@ -26,4 +30,12 @@ $('#edit').click(function() {
 		}
 	});
 	init_tinymce();
+});
+
+$('#save').click(function() {
+	//$('#edit').onclick = function() {
+	console.log('clicked save');
+
+	$('#save').css('display', 'none');
+	$('#edit').css('display', 'inline');
 });
