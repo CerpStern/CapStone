@@ -38,14 +38,18 @@
 				</ul>
 				{%- endif -%}
 
+				<form action="/search" method='post'>
 				<ul class="right">
-					<li>
-						<input name="search_text" class="input-field hide-on-med-and-down" type="search" placeholder="Search" >
-					</li>
-					<li>
+						<li>
+							<input autofocus name="search_text" class="input-field hide-on-med-and-down" type="search" placeholder="Search" >
+						</li>
+						<li>
+							<input type="submit" hidden="">
+						</li>
 						<li><a class="waves-effect waves-light btn">Advanced Search</a></li>	
-					</li>
 				</ul>
+				</form>
+
 			</div>
 		</nav>
 
