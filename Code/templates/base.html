@@ -19,13 +19,13 @@
 					login and user info
 				-->
 				{%- if current_user.is_authenticated -%}
-				<ul class="right downerer hide-on-small-only" style="padding-right:5px;">
+				<ul class="right downerer" style="padding-right:5px;">
 					<a class="btn indigo accent-2" href="/">
 						<li>
 							<img src="{{current_user.avatar}}?sz=25" width="25"
 							height="25" style="margin-top:4px;" alt="{{current_user.name}}">
 						</li>
-						<li style="margin-left:5px;">
+						<li style="margin-left:5px;" class="hide-on-med-and-down">
 							{{current_user.name}}
 						</li>
 					</a>
@@ -43,20 +43,26 @@
 				<ul class="right">
 
 						<li>
-							<input autofocus name="search_text" class="input-field hide-on-med-and-down" type="search" placeholder="Search" >
+							<input autofocus name="search_text" class="input-field" type="search" placeholder="Search" >
 						</li>
 						<li> <div class="nick-spacer"> &nbsp;</div> </li>
 						<li> <div class="nick-spacer"> &nbsp;</div> </li>
-						<li>
+						<li class="hide-on-med-and-down">
 							<a action="/search" method='post'><i class="material-icons">search</i></a>
 						</li>
 						<li>
 							<input type="submit" hidden="">
 						</li>
-						<li>
+						<li class="hide-on-small-only">
 							<a class="waves-effect waves-light btn">
-								<i class="material-icons right">build</i>
-								Advanced Search
+								<i class="material-icons right hide-on-med-only">build</i>
+								<i class="material-icons hide-on-large-only">build</i>
+								<span class="hide-on-med-and-down">Advanced Search</span>
+							</a></li>
+
+						<li class="hide-on-med-and-up">
+							<a class="waves-effect waves-light btn" href="/adv_search">
+								<i class="material-icons">build</i>
 							</a>
 						</li>
 				</ul>
