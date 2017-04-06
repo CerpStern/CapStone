@@ -30,7 +30,8 @@
 						</li>
 					</a>
 					<a class="btn indigo accent-2" href="{{url_for('logout')}}">
-						<li style="margin-left:3px;">Logout</li>
+						<i class="material-icons hide-on-med-and-up">exit_to_app</i>
+						<li style="margin-left:3px;" class="hide-on-small-only">Logout</li>
 					</a>
 				</ul>
 				{%- else -%}
@@ -45,9 +46,9 @@
 						<li>
 							<input autofocus name="search_text" class="input-field" type="search" placeholder="Search" >
 						</li>
+						<li> <div class="nick-spacer hide-on-med-and-down"> &nbsp;</div> </li>
 						<li> <div class="nick-spacer"> &nbsp;</div> </li>
-						<li> <div class="nick-spacer"> &nbsp;</div> </li>
-						<li class="hide-on-med-and-down">
+						<li class="hide-on-small-only">
 							<a action="/search" method='post'><i class="material-icons">search</i></a>
 						</li>
 						<li>
