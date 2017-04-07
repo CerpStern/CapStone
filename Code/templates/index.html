@@ -63,7 +63,7 @@
 	<h5>Your Courses</h5>
 	<div>
 		{% for item in courses %}
-		<a href=#>{{ item }}<br></a>
+		<a href="/syllabus?id={{ item.syllabus }}">{{ item }}<br></a>
 		{% endfor %}
 	</div>
 </div>
