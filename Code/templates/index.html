@@ -7,7 +7,7 @@
 <div class="row">
 	<div class="col s12 m4 l4 xl4">
 		<h5>Add a course:</h5>
-		<form method="POST" action="/add">
+		<form id="add" method="POST" action="/add">
 			Year:<br>
 			<input type="text" name="year" value="2017"><br>
 			Semester:<br>
@@ -26,11 +26,12 @@
 			<input type="email" name="instructor" value="capstone.teacher.one@gmail.com"><br>
 			<input class="btn indigo accent-2" type="submit" value="submit">
 		</form>
+		<div id="addstate"></div>
 	</div>
 
 	<div class="col s12 m4 l4 xl4">
 		<h5>Remove a course:</h5>
-		<form method="POST" action="/remove">
+		<form id="remove" method="POST" action="/remove">
 			Year:<br>
 			<input type="text" name="year" value="2017"><br>
 			Semester:<br>
@@ -69,5 +70,5 @@
 </div>
 {% endif %}
 {% endif %} <!-- endif authenticated -->
-
+<script src="static/js/admin.js"></script>
 {% endblock %}

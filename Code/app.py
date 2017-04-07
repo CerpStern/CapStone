@@ -240,8 +240,9 @@ def add():
         db.session.commit()
     except:
         db.session.rollback()
+        return jsonify(status=2) # Arbitrarily choose 2 as fail state
 
-    return redirect(url_for('index'))
+    return jsonify(status=1) # And 1 for success
 
 @app.route('/queue')
 def queue():
