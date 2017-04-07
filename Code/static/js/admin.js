@@ -7,9 +7,9 @@ $(document).ready(function() {
 			success: function(data) {
 				console.log('Added!');
 				if (data.status == "1")
-					$('#addstate').html('<i class="material-icons">check_circle</i> Successfully Added!');
+					$('#addstate').html('<i class="material-icons green-text">check_circle</i> Successfully Added!');
 				else
-					$('#addstate').html('<i class="material-icons">error</i> Adding Syllabus Failed!');
+					$('#addstate').html('<i class="material-icons red-text">error</i> Adding Syllabus Failed!');
 			}
 		});
 		e.preventDefault()
