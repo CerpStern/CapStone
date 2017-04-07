@@ -117,7 +117,9 @@ def update_matches(temp_matches,matches):
 def index():
     adm = is_admin()
     courses, num = get_courses()
-    return render_template('index.html', adm=adm, courses=courses, num=num)
+    with open(queuefile, 'r') as qf:
+        queue = set(json.load(qf))
+    return render_template('index.html', adm=adm, courses=courses, num=num, pending=queue)
 
 
 @app.route('/login')

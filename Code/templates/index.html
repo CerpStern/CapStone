@@ -53,6 +53,7 @@
 	<div id="queue" class="col s12 m4 l4 xl4">
 		<h5>Queue</h5>
 		{% for item in pending %}
+		<a href="/syllabus?id={{ item }}">{{ item }}<br></a>
 		{% endfor %}
 	</div>
 
