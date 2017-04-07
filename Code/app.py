@@ -271,38 +271,17 @@ def queue():
 
 @app.route('/search',methods = ['GET','POST'])
 def search():
-    matches = []
-    chopping_block=[]
-    semester, year, department, section, search_text = "","","","",""
-    if( request.values.get('semester') != "None"):
-        semester = request.values.get('semester')
-        temp_matches = db.session.query(Course).filter( Course.semester == semester )
-        matches = update_matches( temp_matches,matches)
-
-    if( request.values.get('year') != ""):
-        year = request.values.get('year')
-        temp_matches = db.session.query(Course).filter( Course.year == year)
-        matches = update_matches( temp_matches,matches)
-
-    if( request.values.get('department') != "None"):
-        department = request.values.get('department')
-        temp_matches = db.session.query(Course).filter( Course.dept == department )
-        matches = update_matches( temp_matches,matches)
-
-    if( request.values.get('section') != ""):
-        section = request.values.get('section')
-        temp_matches = db.session.query(Course).filter( Course.section == section )
-        matches = update_matches( temp_matches,matches)
-
-    if( request.values.get('search_text') != ""):
-        search_text = request.values.get('search_text')
-        temp_matches = db.session.query(Course).filter( Course.id == search_text )
-        matches = update_matches( temp_matches,matches)
-
-    for i in matches:
-        print("Matching syll #:{}".format(i))
-
-    if(len(matches)==1):
-        return redirect(url_for('syllabus')+'?id={}'.format(matches[0]))
-
+    # Let's simplify this.
+    # Do a query in the appropriate table for each part of the form data.
+    # Say that there are 3 courses in our db atm.
+    # #1: 10001 section 1
+    # #2: 10001 section 2
+    # #3: 20001 section 1.
+    # Say you search for course #10001, and section 1.
+    # for '10001' syll 1 and 2 will get a point.
+    # for for '1' syll 1 and 3 will get a point.
+    # End totals:
+    #    1: 2, 2: 1, 3: 1
+    # To break the tie we can just sort by syllabus #
+    
     return redirect(url_for('index'))
