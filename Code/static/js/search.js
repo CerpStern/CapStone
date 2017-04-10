@@ -1,6 +1,11 @@
 $(document).ready(function() {
 	$('select').material_select();
+	$('#print').click(function(e) {
+		e.preventDefault();
+		window.print();
+	});
 });
+
 var request = null;
 $(function() {
 	$("#search").keyup(function() {
