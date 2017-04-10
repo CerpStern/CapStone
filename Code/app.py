@@ -66,7 +66,29 @@ class Syllabus(db.Model):
     deadlines = db.Column(db.String, default='Students have responsibility to ensure they are properly enrolled in classes. You are advised to review your official class schedule (using Student Tools in FlashLine) during the first two weeks of the semester to ensure you are properly enrolled in this class and section. Should you find an error in your class schedule, you have until cut-off date provided by the Undergraduate Office to correct the error with your advising office. If registration errors are not corrected by the cut-off date and you continue to attend and participate in classes for which you are not officially enrolled, you are advised now that you will not receive a grade at the conclusion of the semester for any class in which you are not properly registered.')
     accessibility = db.Column(db.String, default='University policy 3342-3-01.3 requires that students with disabilities be provided reasonable accommodations to ensure their equal access to course content. If you have a documented disability and require accommodations, please contact the instructor at the beginning of the semester to make arrangements for necessary classroom adjustments. Please note, you must first verify your eligibility for these through the Student Accessibility Services (contact 330-672-3391 or visit <a href="http://www.kent.edu/sas" target="_blank" rel="noopener noreferrer">www.kent.edu/sas</a> for more information on registration procedures).')
     keywords = db.Column(db.String)
+    official_id = db.Column(db.Integer, db.ForeignKey('official.id'), default=None)
+    official = db.relationship('Official', back_populates='syllabi')
     course = db.relationship('Course')
+
+
+class Official(db.Model):
+    __tablename__ = "official"
+    def __str__(self):
+        return '<div id="id">{}</div><div id="basic">{}</div><div id="description">{}</div><div id="topics">{}</div><div id="outcomes">{}</div><div id="grading">{}</div><div id="schedule">{}</div><div id="honesty">{}</div><div id="deadlines">{}</div><div id="accessibility">{}</div><div id="keywords">{}</div>'.format(self.id, self.basic, self.description, self.topics, self.outcomes, self.grading, self.schedule, self.honesty, self.deadlines, self.accessibility, self.keywords)
+        #return '<p id="id">{}</p><p id="basic">{}</p><p id="description">{}</p><p id="topics">{}</p><p id="outcomes">{}</p><p id="grading">{}</p><p id="schedule">{}</p><p id="honesty">{}</p><p id="deadlines">{}</p><p id="accessibility">{}</p><p id="keywords">{}</p>'.format(self.id, self.basic, self.description, self.topics, self.outcomes, self.grading, self.schedule, self.honesty, self.deadlines, self.accessibility, self.keywords)
+    id = db.Column(db.Integer, primary_key=True)
+    basic = db.Column(db.String)
+    description = db.Column(db.String)
+    topics = db.Column(db.String)
+    outcomes = db.Column(db.String)
+    grading = db.Column(db.String)
+    schedule = db.Column(db.String)
+    honesty = db.Column(db.String, default='Cheating means to misrepresent the source, nature, or other conditions of your academic work (e.g., tests, papers, projects, assignments) so as to get underserved credit. The use of the intellectual property of others without giving them appropriate credit is a serious academic offense. The University considers cheating and plagiarism very serious offenses and provides for sanctions up to and including dismissal from the University or revocation of a degree. The University&rsquo;s administrative policy and procedures regarding student cheating and plagiarism can be found in the <a href="https://www.kent.edu/policyreg/administrative-policy-regarding-student-cheating-and-plagiarism" target="_blank" rel="noopener noreferrer">Administrative Policy, 3-01.8</a>. By submitting any material in this (or any other class) you are certifying that it is free of plagiarism.')
+    deadlines = db.Column(db.String, default='Students have responsibility to ensure they are properly enrolled in classes. You are advised to review your official class schedule (using Student Tools in FlashLine) during the first two weeks of the semester to ensure you are properly enrolled in this class and section. Should you find an error in your class schedule, you have until cut-off date provided by the Undergraduate Office to correct the error with your advising office. If registration errors are not corrected by the cut-off date and you continue to attend and participate in classes for which you are not officially enrolled, you are advised now that you will not receive a grade at the conclusion of the semester for any class in which you are not properly registered.')
+    accessibility = db.Column(db.String, default='University policy 3342-3-01.3 requires that students with disabilities be provided reasonable accommodations to ensure their equal access to course content. If you have a documented disability and require accommodations, please contact the instructor at the beginning of the semester to make arrangements for necessary classroom adjustments. Please note, you must first verify your eligibility for these through the Student Accessibility Services (contact 330-672-3391 or visit <a href="http://www.kent.edu/sas" target="_blank" rel="noopener noreferrer">www.kent.edu/sas</a> for more information on registration procedures).')
+    keywords = db.Column(db.String)
+    visible = db.Column(db.Boolean, default=True)
+    syllabi = db.relationship('Syllabus', back_populates='official', uselist=False)
 
 
 def is_admin():
@@ -249,7 +271,37 @@ def add():
 @app.route('/queue')
 def queue():
     if request.args.get('action') == 'approve' and is_admin():
-        print('approving!')
+        id = request.args.get('id')
+        with open(queuefile, 'r') as qf:
+            q = set(json.load(qf))
+        adding = True if Syllabus.query.filter_by(id=id).first().official_id == None else False
+        tmp = Syllabus.query.filter_by(id=id).first()
+        try:
+            if adding:
+                new = Official()
+            else:
+                new = Official.query.filter_by(id=tmp.official_id).first()
+            new.basic = tmp.basic
+            new.description = tmp.description
+            new.topics = tmp.topics
+            new.outcomes = tmp.outcomes
+            new.grading = tmp.grading
+            new.schedule = tmp.schedule
+            new.honesty = tmp.honesty
+            new.deadlines = tmp.deadlines
+            new.accessibility = tmp.accessibility
+            new.keywords = tmp.keywords
+            if adding:
+                db.session.add(new)
+            db.session.commit()
+            tmp.official_id = new.id
+            db.session.commit()
+            with open(queuefile, 'w') as qf:
+                q.remove(request.args.get("id"))
+                json.dump(list(q), qf)
+        except:
+            print('Exception Thrown!')
+            db.session.rollback()
     elif request.args.get('action') == 'deny' and is_admin():
         print('denying!')
     elif request.args.get('action') == 'add':

@@ -53,7 +53,9 @@
 	<div id="queue" class="col s12 m4 l4 xl4">
 		<h5>Queue</h5>
 		{% for item in pending %}
-		<a href="/syllabus?id={{ item }}">{{ item }}<br></a>
+		<a href="/syllabus?id={{ item }}" class="btn indigo accent-2 {{ item }}">{{ item }}<br></a>
+		<a href="/queue?id={{ item }}&action=approve" class="btn indigo accent-2 approve {{ item }}">Approve<br></a>
+		<a href="/queue?id={{ item }}&action=deny" class="btn indigo accent-2 deny {{ item }}">Deny<br></a>
 		{% endfor %}
 	</div>
 
