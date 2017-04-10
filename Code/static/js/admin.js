@@ -14,6 +14,21 @@ $(document).ready(function() {
 		});
 		e.preventDefault();
 	});
+	$('#remove').submit(function(e) {
+		$.ajax({
+			url: '/remove',
+			type: 'POST',
+			data: $('#remove').serialize(),
+			success: function(data) {
+				console.log('Removing!');
+				if (data.status == "1")
+					$('#remstate').html('<i class="material-icons green-text">check_circle</i> Successfully Removed!');
+				else
+					$('#remstate').html('<i class="material-icons red-text">error</i> Removing Syllabus Failed!');
+			}
+		});
+		e.preventDefault();
+	});
 	$('.approve').click(function(e) {
 		let params = new URLSearchParams($(this).attr('href').slice(7)); // This is bad and depends on the length of the query string but works
 		console.log(params.get('id'));

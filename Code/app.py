@@ -237,6 +237,29 @@ def save():
     return redirect(url_for('syllabus') + '?id={}'.format(vals[0]))
     #return redirect(url_for('syllabus') + '?id={}'.format(vals[0][3:][:-4]))
 
+@app.route('/remove', methods = ['POST'])
+def remove():
+    year = int(request.form.get('year'))
+    semester = request.form.get('semester')
+    department = request.form.get('department')
+    cid = int(request.form.get('cid'))
+    section = int(request.form.get('section'))
+
+    crse = Course.query.filter_by(year=year, semester=semester, dept=department, id=cid, section=section).first()
+    if crse is None:
+        return jsonify(status=2)
+    try:
+        syllid = Syllabus.query.filter_by(id=crse.syllabus).first().official_id
+        off = Official.query.filter_by(id=syllid).first()
+        if off.visible is False:
+            return jsonify(status=2)
+        off.visible = False
+        db.session.commit()
+    except:
+        db.session.rollback()
+        return jsonify(status=2)
+    return jsonify(status=1)
+
 @app.route('/add', methods = ['POST'])
 def add():
     year = int(request.form.get('year'))
