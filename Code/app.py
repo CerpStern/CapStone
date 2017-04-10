@@ -268,12 +268,16 @@ def add():
 
     return jsonify(status=1) # And 1 for success
 
+##
+#  Approval queue manipulation
+#
 @app.route('/queue')
 def queue():
-    if request.args.get('action') == 'approve' and is_admin():
+    if request.args.get('action') == 'approve' and is_admin(): 
         id = request.args.get('id')
         with open(queuefile, 'r') as qf:
             q = set(json.load(qf))
+        # If the syllabus hasn't been approved yet, we add it, else we update the existing one
         adding = True if Syllabus.query.filter_by(id=id).first().official_id == None else False
         tmp = Syllabus.query.filter_by(id=id).first()
         try:
@@ -300,15 +304,18 @@ def queue():
                 q.remove(request.args.get("id"))
                 json.dump(list(q), qf)
         except:
-            print('Exception Thrown!')
             db.session.rollback()
+    # Remove the syllabus from the approval queue
     elif request.args.get('action') == 'deny' and is_admin():
-        print('denying!')
+        with open(queuefile, 'r') as qf:
+            q = set(json.load(qf))
+        with open(queuefile, 'w') as qf:
+            q.remove(request.args.get('id'))
+            json.dump(list(q), qf)
+    # Add to the queue
     elif request.args.get('action') == 'add':
         with open(queuefile, 'r') as qf:
-            print('Requesting approval for syllabus {}'.format(request.args.get('id')))
             q = set(json.load(qf))
-            print('Size is {}'.format(len(q)))
         with open(queuefile, 'w') as qf:
             q.add(request.args.get('id'))
             json.dump(list(q), qf)
