@@ -9,7 +9,7 @@
 		<h5>Add a course:</h5>
 		<form id="add" method="POST" action="/add">
 			Year:<br>
-			<input type="text" name="year" value="2017"><br>
+			<input type="text" name="year" value="2017" required><br>
 			Semester:<br>
 			<select class="input-field" name="semester">
 				<option value="Spring">Spring</option>
@@ -17,14 +17,14 @@
 				<option value="Fall">Fall</option>
 			</select>
 			Department:<br>
-			<input type="text" name="department" value="CS"><br>
+			<input type="text" name="department" value="CS" required><br>
 			Course ID:<br>
-			<input type="text" name="cid" value="10001"><br>
+			<input type="text" name="cid" value="10001" required><br>
 			Section:<br>
-			<input type="text" name="section" value="001"><br>
+			<input type="text" name="section" value="001" required><br>
 			Instructor:<br>
-			<input type="email" name="instructor" value="capstone.teacher.one@gmail.com"><br>
-			<input class="btn indigo accent-2" type="submit" value="submit">
+			<input type="email" name="instructor" value="capstone.teacher.one@gmail.com" required><br>
+			<input class="btn indigo accent-2" type="submit" value="submit" required>
 		</form>
 		<div id="addstate"></div>
 	</div>
@@ -33,7 +33,7 @@
 		<h5>Remove a course:</h5>
 		<form id="remove" method="POST" action="/remove">
 			Year:<br>
-			<input type="text" name="year" value="2017"><br>
+			<input type="text" name="year" value="2017" required><br>
 			Semester:<br>
 			<select class="input-field" name="semester">
 				<option value="Spring">Spring</option>
@@ -41,12 +41,12 @@
 				<option value="Fall">Fall</option>
 			</select>
 			Department:<br>
-			<input type="text" name="department" value="CS"><br>
+			<input type="text" name="department" value="CS" required><br>
 			Course ID:<br>
-			<input type="text" name="cid" value="10001"><br>
+			<input type="text" name="cid" value="10001" required><br>
 			Section:<br>
-			<input type="text" name="section" value="001"><br>
-			<input class="btn indigo accent-2" type="submit" value="submit">
+			<input type="text" name="section" value="001" required><br>
+			<input class="btn indigo accent-2" type="submit" value="submit" required>
 		</form>
 		<div id="remstate"></div>
 	</div>
