@@ -1,2 +1,0 @@
-make professor supply keywords to search by
-allow setting syllabus inactive instead of deleting
