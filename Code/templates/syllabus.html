@@ -8,14 +8,14 @@
 <form method="POST" action="/save">
 	{% if owns %}
 
-	<button class="btn indigo accent-2" id="edit" type="button" style="margin-top: 10px">Edit<i class="material-icons right">edit</i></button>
+	<button class="btn indigo accent-2 syll" id="edit" type="button">Edit<i class="material-icons right">edit</i></button>
 
-	<button id="save" class="btn indigo accent-2" name="submitbtn" style="margin-top: 10px">Save<i class="material-icons right">save</i> </button>
+	<button id="save" class="btn indigo accent-2 syll" name="submitbtn">Save<i class="material-icons right">save</i> </button>
 
-	<a class="btn indigo accent-2" href="/queue?action=add&id={{ id }}" style="margin-top: 10px"><i class="material-icons right">gavel</i>Request Approval</a>
+	<a class="btn indigo accent-2 syll" href="/queue?action=add&id={{ id }}"><i class="material-icons right">gavel</i>Request Approval</a>
 
 	{% endif %}
-	<button id="print" class="btn indigo accent-2">Print Syllabus</button>
+	<button type="button" id="print" class="btn indigo accent-2 syll">Print Syllabus</button>
 
 	<div id="syllabus">
 		<input type="hidden" value="{{ syllabus.id|safe }}" name="test1">
