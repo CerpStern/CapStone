@@ -253,6 +253,7 @@ def remove():
         off = Official.query.filter_by(id=syllid).first()
         if off.visible is False:
             return jsonify(status=2)
+        Syllabus.query.filter_by(id=crse.syllabus).first().official_id = None
         off.visible = False
         db.session.commit()
     except:
