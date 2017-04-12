@@ -13,18 +13,16 @@
 		* and the list for semester is pre-defined
 
 -->
-<div class="valign-wrapper container">
-		</div>
 
 
 <div class="container ">
 	<div class="row">
-
+		<form action="/search" method='post'>
 			<div class="col s12"><p>&nbsp;</p></div>
 			<!--  Centered, Full Width Search-->
-			<div class="col s12">
-				<input autofocus  name="course" class="input-field
-				hide-on-med-and-down" type="search" placeholder="Search Text Here" >
+			<div class="col s8 offset-s2">
+				<input autofocus  name="course" class="input-field"\
+				type="search" placeholder="Search Text Here" >
 			</div>
 
 			<div class="col s12"><p>&nbsp;</p></div>
@@ -32,7 +30,7 @@
 			<!-- Left Col -->
 			<div class="col s6">
 
-					<input autofocus  name="Course" class="input-field"\
+					<input name="Course" class="input-field"\
 					type="search" placeholder="Course" >
 
 					<select class="downer" name="semester">
@@ -47,10 +45,10 @@
 
 			<!-- Right Col -->
 			<div class="col s6">
-				<input autofocus  name="course" class="input-field"\
+				<input name="course" class="input-field"\
 				type="search" placeholder="Section" >
 
-				<input autofocus  name="course" class="input-field"\
+				<input name="course" class="input-field"\
 				type="search" placeholder="Year" >
 			</div>
 
@@ -65,10 +63,12 @@
 
 			<div class="col s4 offset-s5">
 				<a class="waves-effect waves-light btn-large">
-					<i class="material-icons right">search</i>
+					<i class="large material-icons right">search</i>
 					search
 				</a>
 			</div>
+			<input type="submit" hidden="">
+		</form>
 
 		</div>
 	</div>
