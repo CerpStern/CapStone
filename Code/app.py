@@ -372,4 +372,9 @@ def search():
 @app.route('/adv_search',methods = ['GET'])
 def adv_search():
 
-	return render_template('advanced.html')
+    return render_template('advanced.html')
+
+# Custom 404 handler
+@app.errorhandler(404)
+def err404(err):
+    return render_template('404.html'), 404
