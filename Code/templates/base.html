@@ -21,7 +21,26 @@
 		</a>	
 
 		{%- if current_user.is_authenticated -%}
-		<ul class="right downerer" style="padding-right:5px;">
+
+		<ul class="right downerer">
+			<!-- Large Logout Button -->
+			<li class="hide-on-small-only">
+				<a class="waves-effect waves-light btn indigo accent-2" href="{{url_for('logout')}}">
+					<i class="material-icons right hide-on-med-only">exit_to_app</i>
+					<i class="material-icons hide-on-large-only">exit_to_app</i>
+					<span class="hide-on-med-and-down">Logout</span>
+				</a>
+			</li>
+
+			<!-- Small Logout Button -->
+			<li class="hide-on-med-and-up">
+				<a class="small-button btn waves-effect waves-light indigo accent-2" href="{{url_for('logout')}}">
+					<i class="material-icons">exit_to_app</i>
+				</a>
+			</li>
+		</ul>
+
+		<ul class="right downerer">
 
 			<!-- User Button -->
 			<a class="btn indigo accent-2 hide-on-med-and-down" href="/">
@@ -33,12 +52,6 @@
 
 				<!-- User Name -->
 				<li style="margin-left:5px;" >{{current_user.name}}</li>
-			</a>
-
-			<!-- Logout Button -->
-			<a class="btn indigo accent-2" href="{{url_for('logout')}}">
-				<i class="material-icons hide-on-large-only">exit_to_app</i>
-				<li style="margin-left:3px;" class="hide-on-med-and-down">Logout</li>
 			</a>
 		</ul>
 
