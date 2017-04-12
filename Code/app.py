@@ -205,7 +205,7 @@ def syllabus():
     try:
         syllabus = db.session.query(Syllabus).filter(Syllabus.id == request.args.get('id'))[0]
     except IndexError:
-        syllabus = ""
+        return render_template('404.html'), 404
     editable = db.session.query(User,Course).filter(Course.syllabus == request.args.get('id')).filter(current_user.get_id() == Course.user).count()
     print("{} {}".format(current_user.get_id(),editable))
     owns = False if editable == 0 else True
