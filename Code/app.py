@@ -367,3 +367,8 @@ def queue():
 def search():
     
     return redirect(url_for('index'))
+
+@app.route('/adv_search',methods = ['GET'])
+def adv_search():
+
+	return render_template('advanced.html')
