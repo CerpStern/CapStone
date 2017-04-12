@@ -1,8 +1,77 @@
 {%extends "base.html"%}
 {%block body%}
 
-<!-- Gubs here. -->
+<!--
+
+      Search Text
+    Course | Section
+    Year   | Semester
+       Department(drop)
+
+	Needs:
+		* a list of departments
+		* and the list for semester is pre-defined
+
+-->
+<div class="valign-wrapper container">
+		</div>
 
 
+<div class="container ">
+	<div class="row">
+
+			<div class="col s12"><p>&nbsp;</p></div>
+			<!--  Centered, Full Width Search-->
+			<div class="col s12">
+				<input autofocus  name="course" class="input-field
+				hide-on-med-and-down" type="search" placeholder="Search Text Here" >
+			</div>
+
+			<div class="col s12"><p>&nbsp;</p></div>
+
+			<!-- Left Col -->
+			<div class="col s6">
+
+					<input autofocus  name="Course" class="input-field"\
+					type="search" placeholder="Course" >
+
+					<select class="downer" name="semester">
+					<option value="" disabled\
+						selected>Select Semester</option>
+							<option value="Fall">Fall</option>
+							<option value="Spring">Spring</option>
+							<option value="Summer">Summer</option>
+					</select>
+
+			</div>
+
+			<!-- Right Col -->
+			<div class="col s6">
+				<input autofocus  name="course" class="input-field"\
+				type="search" placeholder="Section" >
+
+				<input autofocus  name="course" class="input-field"\
+				type="search" placeholder="Year" >
+			</div>
+
+			<div class="col s12">
+				<select class="downer" name="department">
+					<option value="" disabled selected> Select Department</option>
+					<option value="CS">Fall</option>
+					<option value="CIS">Spring</option>
+					<option value="MATH">Summer</option>
+				</select>
+			</div>
+
+			<div class="col s4 offset-s5">
+				<a class="waves-effect waves-light btn-large">
+					<i class="material-icons right">search</i>
+					search
+				</a>
+			</div>
+
+		</div>
+	</div>
+</div>
 
 {%endblock%}
