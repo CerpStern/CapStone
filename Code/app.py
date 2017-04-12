@@ -347,26 +347,23 @@ def queue():
 
 
 ###  Search
-# The form for the search is in the 'base.html' template.
-# The form includes the sections:
-#    department, semester, search_text, year, and section
-#
-# For now ( testing ) I'll just be using dept, sem, and search_text 
-# To make sure it'll all work properly.
+
+# Things we need to pull
+# year, section, course, search_text, department, semester
+
+# Do a query in the appropriate table for each part of the form data.
+# Say that there are 3 courses in our db atm.
+# #1: 10001 section 1
+# #2: 10001 section 2
+# #3: 20001 section 1.
+# Say you search for course #10001, and section 1.
+# for '10001' syll 1 and 2 will get a point.
+# for for '1' syll 1 and 3 will get a point.
+# End totals:
+#    1: 2, 2: 1, 3: 1
+# To break the tie we can just sort by syllabus #
 
 @app.route('/search',methods = ['GET','POST'])
 def search():
-    # Let's simplify this.
-    # Do a query in the appropriate table for each part of the form data.
-    # Say that there are 3 courses in our db atm.
-    # #1: 10001 section 1
-    # #2: 10001 section 2
-    # #3: 20001 section 1.
-    # Say you search for course #10001, and section 1.
-    # for '10001' syll 1 and 2 will get a point.
-    # for for '1' syll 1 and 3 will get a point.
-    # End totals:
-    #    1: 2, 2: 1, 3: 1
-    # To break the tie we can just sort by syllabus #
     
     return redirect(url_for('index'))
