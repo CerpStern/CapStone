@@ -24,7 +24,7 @@
 			<input type="text" name="section" value="001" required><br>
 			Instructor:<br>
 			<input type="email" name="instructor" value="capstone.teacher.one@gmail.com" required><br>
-			<input class="btn indigo accent-2" type="submit" value="submit" required>
+			<input class="btn accent-2" type="submit" value="submit" required>
 		</form>
 		<div id="addstate"></div>
 	</div>
@@ -46,7 +46,7 @@
 			<input type="text" name="cid" value="10001" required><br>
 			Section:<br>
 			<input type="text" name="section" value="001" required><br>
-			<input class="btn indigo accent-2" type="submit" value="submit" required>
+			<input class="btn accent-2" type="submit" value="submit" required>
 		</form>
 		<div id="remstate"></div>
 	</div>
@@ -54,9 +54,9 @@
 	<div id="queue" class="col s12 m4 l4 xl4">
 		<h5>Queue</h5>
 		{% for item in pending %}
-		<a href="/syllabus?id={{ item }}" class="btn indigo accent-2 {{ item }}">{{ item }}<br></a>
-		<a href="/queue?id={{ item }}&action=approve" class="btn indigo accent-2 approve {{ item }}">Approve<br></a>
-		<a href="/queue?id={{ item }}&action=deny" class="btn indigo accent-2 deny {{ item }}">Deny<br></a>
+		<a href="/syllabus?id={{ item }}" class="btn accent-2 {{ item }}">{{ item }}<br></a>
+		<a href="/queue?id={{ item }}&action=approve" class="btn accent-2 approve {{ item }}">Approve<br></a>
+		<a href="/queue?id={{ item }}&action=deny" class="btn accent-2 deny {{ item }}">Deny<br></a>
 		<br>
 		{% endfor %}
 	</div>
