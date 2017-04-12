@@ -20,6 +20,13 @@ input.input-field {
 .syll {
 	margin-top: 10px;
 }
+
+.nick-spacer{
+	width:5px;
+	height:1px;
+	display:inline-block;
+}
+
 /*
 nav {
     height: 128px;
@@ -41,11 +48,7 @@ nav .button-collapse i {
 	line-height:64px;
 }
 */
-.nick-spacer{
-	width:5px;
-	height:1px;
-	display:inline-block;
-}
+
 /* sometimes selects can be a real ...
 .downer{
 	padding-top:9px;
@@ -54,7 +57,6 @@ nav .button-collapse i {
 	padding-top:35px;
 }
 */
-
 
 /*
 nav .brand-logo { 
