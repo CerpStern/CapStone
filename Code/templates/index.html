@@ -5,8 +5,9 @@
 
 {% if adm %}
 <div class="row">
-	<div class="col s12 m4 l4 xl4">
-		<h5>Add a course:</h5>
+	<!-- Add a course -->
+	<div class="module col s12 m4 l4 xl4">
+		<h5>Add a course</h5>
 		<form id="add" method="POST" action="/add">
 			Year:<br>
 			<input type="text" name="year" value="2017" required><br>
@@ -29,8 +30,9 @@
 		<div id="addstate"></div>
 	</div>
 
-	<div class="col s12 m4 l4 xl4">
-		<h5>Remove a course:</h5>
+	<!-- Remove a course -->
+	<div class="module col s12 m4 l4 xl4">
+		<h5>Remove a course</h5>
 		<form id="remove" method="POST" action="/remove">
 			Year:<br>
 			<input type="text" name="year" value="2017" required><br>
@@ -51,7 +53,8 @@
 		<div id="remstate"></div>
 	</div>
 
-	<div id="queue" class="col s12 m4 l4 xl4">
+	<!-- Queue -->
+	<div id="queue" class="module col s12 m4 l4 xl4">
 		<h5>Queue</h5>
 		{% for item in pending %}
 		<a href="/syllabus?id={{ item }}" class="btn accent-2 {{ item }}">{{ item }}<br></a>

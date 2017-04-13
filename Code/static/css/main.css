@@ -40,6 +40,10 @@ input.input-field {
 	padding-right:14px;
 }
 
+.module {
+	background-color: #eeeeee;
+}
+
 /*
 nav {
     height: 128px;
