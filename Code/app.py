@@ -389,3 +389,7 @@ def adv_search():
 @app.errorhandler(404)
 def err404(err):
     return render_template('404.html'), 404
+
+@app.errorhandler(500)
+def err500(err):
+    return render_template('500.html'), 500
