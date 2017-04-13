@@ -56,7 +56,7 @@ class Syllabus(db.Model):
         return '<div id="id">{}</div><div id="basic">{}</div><div id="description">{}</div><div id="topics">{}</div><div id="outcomes">{}</div><div id="grading">{}</div><div id="schedule">{}</div><div id="honesty">{}</div><div id="deadlines">{}</div><div id="accessibility">{}</div><div id="keywords">{}</div>'.format(self.id, self.basic, self.description, self.topics, self.outcomes, self.grading, self.schedule, self.honesty, self.deadlines, self.accessibility, self.keywords)
         #return '<p id="id">{}</p><p id="basic">{}</p><p id="description">{}</p><p id="topics">{}</p><p id="outcomes">{}</p><p id="grading">{}</p><p id="schedule">{}</p><p id="honesty">{}</p><p id="deadlines">{}</p><p id="accessibility">{}</p><p id="keywords">{}</p>'.format(self.id, self.basic, self.description, self.topics, self.outcomes, self.grading, self.schedule, self.honesty, self.deadlines, self.accessibility, self.keywords)
     id = db.Column(db.Integer, primary_key=True)
-    basic = db.Column(db.String)
+    basic = db.Column(db.String, default='<h1>Intro to Blah Blah Blah</h1><p>Meeting Time: XX:XX - XX:XX Day1, Day2</p><p>Meeting Place: Room XXX Foo Hall</p><p>Course Website:</p><p>Intructor Name: Bob Loblaw</p><p>Office Hours: XX:XX - XX:XXX Day1, Day2 Room XXX Building</p><p>Required Materials if any:</p><p>Prerequisites if any:</p>')
     description = db.Column(db.String)
     topics = db.Column(db.String)
     outcomes = db.Column(db.String)
