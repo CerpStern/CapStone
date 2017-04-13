@@ -134,6 +134,14 @@ def update_matches(temp_matches,matches):
         matches=temp
     return matches
 
+def get_oauth_url():
+    google = get_google_auth()
+    auth_url, state = google.authorization_url(
+            Auth.AUTH_URI, access_type='offline')
+    session['oauth_state'] = state
+    return auth_url
+
+
 @app.route('/')
 @login_required
 def index():
@@ -209,7 +217,8 @@ def syllabus():
     editable = db.session.query(User,Course).filter(Course.syllabus == request.args.get('id')).filter(current_user.get_id() == Course.user).count()
     print("{} {}".format(current_user.get_id(),editable))
     owns = False if editable == 0 else True
-    return render_template('syllabus.html', id=syllabus.id, syllabus=syllabus, owns=owns)
+    auth_url = get_oauth_url()
+    return render_template('syllabus.html', id=syllabus.id, syllabus=syllabus, owns=owns, auth_url=auth_url)
 
 @app.route('/save', methods = ['POST'])
 def save():
@@ -372,7 +381,8 @@ def search():
 @app.route('/adv_search',methods = ['GET'])
 def adv_search():
 
-    return render_template('advanced.html')
+    auth_url = get_oauth_url()
+    return render_template('advanced.html',auth_url=auth_url)
 
 # Custom 404 handler
 @app.errorhandler(404)
