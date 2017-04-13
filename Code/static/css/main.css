@@ -15,7 +15,7 @@
 	width: 70%;
 	margin: 25px auto 25px auto;
 	text-align: left;
-	background-color: #eeeeee;
+	background-color: #ffffff;
 	padding: 1em 3em 3em 3em;
 }
 
@@ -41,13 +41,17 @@ input.input-field {
 }
 
 .module {
-	background-color: #eeeeee;
+	background-color: #ffffff;
 	padding: 1.5em;
 	margin: 20px 0px 0px 0px;
 }
 
 .error-message {
 	margin-top: 15px;
+}
+
+body {
+	background-color: #e9ebee;
 }
 
 /*
