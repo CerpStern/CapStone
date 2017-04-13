@@ -7,6 +7,15 @@ $(document).ready(function() {
 });
 
 var request = null;
+$('#let_er_rip').click(function() {
+	$.ajax({
+		url:'/search',
+		type: 'POST',
+		data: $('#search_me').serialize()
+	});
+});
+
+/*
 $(function() {
 	$("#search").keyup(function() {
 		console.log("received keyup");
@@ -35,5 +44,5 @@ $(function() {
 		}
 	});
 });
-
+*/
 

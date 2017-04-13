@@ -17,7 +17,7 @@
 <div class="container ">
 	<div class="module">
 		<div class="row">
-			<form action="/search" method='post'>
+			<form action="/search" method='post' id="search_me">
 				<!--  Centered, Full Width Search-->
 				<div class="col s8 offset-s2">
 					<input autofocus  name="course" class="input-field" type="search" placeholder="Search Text Here" >
@@ -60,10 +60,12 @@
 				</div>
 
 				<div class="col s12 center-align">
-					<a class="waves-effect waves-light btn-large">
+					<input class="btn accent-2" type="submit" value="submit" required>
+					<!--
+					<a class="waves-effect waves-light btn-large" type="submit" id="let_er_rip">
 						<i class="large material-icons right">search</i>
 						search
-					</a>
+					</a>-->
 				</div>
 
 				<input type="submit" hidden="">
