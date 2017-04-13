@@ -30,17 +30,17 @@
 
 ### 2. Installing VirtualEnv with Pip
 - Open up command prompt, and type in the following command:
-    pip install virtualenv
+> pip install virtualenv
 - Once virtualenv is installed, in command prompt navigate to your user folder (where documents, pictures, etc. are)
 - Type in the following command
-    virtualenv virtualenv
+> virtualenv virtualenv
 
 ### 3. Installing Project Requirements with Pip
 - In command prompt, navigate to the project folder (where requirements.txt is)
 - Type in the following command
-    pip install -r requirements.txt
+> pip install -r requirements.txt
 
 ### 4. Running Server
 - While in the project folder, type the following command
-    python run.py
+> python run.py
 - The server is now running, and viewable at the printed address (likely https://127.0.0.1:5000/)
