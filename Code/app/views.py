@@ -27,7 +27,7 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 #login_manager.login_view = "login"
 #login_manager.session_protection = "strong"
 
-from utils import *
+from app.utils import *
 
 @app.route('/')
 @login_required
