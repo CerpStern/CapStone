@@ -308,6 +308,10 @@ def queue():
 
 @app.route('/search',methods = ['GET','POST'])
 def search():
+    semester, year, department, section, search_text = "","","","",""
+    if request.values.get('department') != "":
+        department = request.values.get('department').upper()
+    print(department)
     return redirect(url_for('index'))
 
 @app.route('/adv_search',methods = ['GET'])
