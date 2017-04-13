@@ -53,9 +53,9 @@
 				<div class="col s12">
 					<select class="downer" name="department">
 						<option value="" disabled selected> Select Department</option>
-						<option value="CS">Fall</option>
-						<option value="CIS">Spring</option>
-						<option value="MATH">Summer</option>
+						{%for dept in depts%}
+						<option value="{{dept}}"> {{dept}} </option>
+						{% endfor %}
 					</select>
 				</div>
 

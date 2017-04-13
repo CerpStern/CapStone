@@ -376,9 +376,13 @@ def search():
 
 @app.route('/adv_search',methods = ['GET'])
 def adv_search():
-    #.department.query.filter_by()first().admin
+    departments = []
+    for i in Syllabus.query.filter(Syllabus.official_id != None):
+        departments.append(Course.query.filter_by(syllabus=i.id).first().dept)
+    # unique post query
+    depts = list(set(departments))
     auth_url = get_oauth_url()
-    return render_template('advanced.html',auth_url=auth_url)
+    return render_template('advanced.html',auth_url=auth_url, depts=depts)
 
 # Custom 404 handler
 # Dude sick custom mod bro. 
