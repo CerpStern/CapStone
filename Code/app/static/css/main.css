@@ -1,3 +1,9 @@
+@media print {
+	nav, .btn {
+		display: none;
+	}
+}
+
 #save {
 	display: none;
 }
