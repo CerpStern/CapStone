@@ -376,7 +376,7 @@ def search():
 
 @app.route('/adv_search',methods = ['GET'])
 def adv_search():
-    .department.query.filter_by()first().admin
+    #.department.query.filter_by()first().admin
     auth_url = get_oauth_url()
     return render_template('advanced.html',auth_url=auth_url)
 
