@@ -27,56 +27,7 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 #login_manager.login_view = "login"
 #login_manager.session_protection = "strong"
 
-def is_admin():
-    id = current_user.get_id()
-    return User.query.filter_by(id=id).first().admin
-
-def get_courses():
-    user = current_user.get_id()
-    matches = Course.query.filter_by(user=user)
-    num = Course.query.filter_by(user=user).count()
-    return matches, num
-
-@login_manager.user_loader
-def load_user(user_id):
-    return User.query.get(int(user_id))
-""" OAuth Session creation """
-
-
-def get_google_auth(state=None, token=None):
-    if token:
-        return OAuth2Session(Auth.CLIENT_ID, token=token)
-    if state:
-        return OAuth2Session(
-            Auth.CLIENT_ID,
-                state=state,
-                redirect_uri=Auth.REDIRECT_URI)
-    oauth = OAuth2Session(
-                Auth.CLIENT_ID,
-                redirect_uri=Auth.REDIRECT_URI,
-                scope=Auth.SCOPE)
-    return oauth
-
-def update_matches(temp_matches,matches):
-    temp = []
-    if(len(matches)==0):
-        for match in temp_matches:
-            temp.append(match.syllabus)
-        matches=temp
-    else:
-        for match in temp_matches:
-            if match.syllabus in matches:
-                temp.append(match.syllabus)
-        matches=temp
-    return matches
-
-def get_oauth_url():
-    google = get_google_auth()
-    auth_url, state = google.authorization_url(
-            Auth.AUTH_URI, access_type='offline')
-    session['oauth_state'] = state
-    return auth_url
-
+from utils import *
 
 @app.route('/')
 @login_required
