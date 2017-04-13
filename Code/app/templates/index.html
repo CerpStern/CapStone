@@ -65,7 +65,7 @@
 			<a href="/syllabus?id={{ item }}" class="btn accent-2 {{ item }}">{{ item }}<br></a>
 			<a href="/queue?id={{ item }}&action=approve" class="btn accent-2 approve {{ item }}">Approve<br></a>
 			<a href="/queue?id={{ item }}&action=deny" class="btn accent-2 deny {{ item }}">Deny<br></a>
-			<br>
+			<br class="{{ item }}">
 			{% endfor %}
 		</div>
 	</div>
