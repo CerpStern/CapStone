@@ -16,7 +16,7 @@
 	margin: 25px auto 25px auto;
 	text-align: left;
 	background-color: #eeeeee;
-	padding: 1em 3em;
+	padding: 1em 3em 3em 3em;
 }
 
 #section-save {
@@ -38,6 +38,16 @@ input.input-field {
 .small-button {
 	padding-left:14px;
 	padding-right:14px;
+}
+
+.module {
+	background-color: #eeeeee;
+	padding: 1.5em;
+	margin: 20px 0px 0px 0px;
+}
+
+.error-message {
+	margin-top: 15px;
 }
 
 /*

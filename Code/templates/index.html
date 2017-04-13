@@ -5,73 +5,88 @@
 
 {% if adm %}
 <div class="row">
+	<!-- Add a course -->
 	<div class="col s12 m4 l4 xl4">
-		<h5>Add a course:</h5>
-		<form id="add" method="POST" action="/add">
-			Year:<br>
-			<input type="text" name="year" value="2017" required><br>
-			Semester:<br>
-			<select class="input-field" name="semester">
-				<option value="Spring">Spring</option>
-				<option value="Summer">Summer</option>
-				<option value="Fall">Fall</option>
-			</select>
-			Department:<br>
-			<input type="text" name="department" value="CS" required><br>
-			Course ID:<br>
-			<input type="text" name="cid" value="10001" required><br>
-			Section:<br>
-			<input type="text" name="section" value="001" required><br>
-			Instructor:<br>
-			<input type="email" name="instructor" value="capstone.teacher.one@gmail.com" required><br>
-			<input class="btn accent-2" type="submit" value="submit" required>
-		</form>
-		<div id="addstate"></div>
+		<div class="module">
+			<h5>Add a course</h5>
+			<form id="add" method="POST" action="/add">
+				Year:<br>
+				<input type="text" name="year" value="2017" required><br>
+				Semester:<br>
+				<select class="input-field" name="semester">
+					<option value="Spring">Spring</option>
+					<option value="Summer">Summer</option>
+					<option value="Fall">Fall</option>
+				</select>
+				Department:<br>
+				<input type="text" name="department" value="CS" required><br>
+				Course ID:<br>
+				<input type="text" name="cid" value="10001" required><br>
+				Section:<br>
+				<input type="text" name="section" value="001" required><br>
+				Instructor:<br>
+				<input type="email" name="instructor" value="capstone.teacher.one@gmail.com" required><br>
+				<input class="btn accent-2" type="submit" value="submit" required>
+			</form>
+			<div id="addstate" class="error-message"></div>
+		</div>
 	</div>
 
+	<!-- Remove a course -->
 	<div class="col s12 m4 l4 xl4">
-		<h5>Remove a course:</h5>
-		<form id="remove" method="POST" action="/remove">
-			Year:<br>
-			<input type="text" name="year" value="2017" required><br>
-			Semester:<br>
-			<select class="input-field" name="semester">
-				<option value="Spring">Spring</option>
-				<option value="Summer">Summer</option>
-				<option value="Fall">Fall</option>
-			</select>
-			Department:<br>
-			<input type="text" name="department" value="CS" required><br>
-			Course ID:<br>
-			<input type="text" name="cid" value="10001" required><br>
-			Section:<br>
-			<input type="text" name="section" value="001" required><br>
-			<input class="btn accent-2" type="submit" value="submit" required>
-		</form>
-		<div id="remstate"></div>
+		<div class="module">
+			<h5>Remove a course</h5>
+			<form id="remove" method="POST" action="/remove">
+				Year:<br>
+				<input type="text" name="year" value="2017" required><br>
+				Semester:<br>
+				<select class="input-field" name="semester">
+					<option value="Spring">Spring</option>
+					<option value="Summer">Summer</option>
+					<option value="Fall">Fall</option>
+				</select>
+				Department:<br>
+				<input type="text" name="department" value="CS" required><br>
+				Course ID:<br>
+				<input type="text" name="cid" value="10001" required><br>
+				Section:<br>
+				<input type="text" name="section" value="001" required><br>
+				<input class="btn accent-2" type="submit" value="submit" required>
+			</form>
+			<div id="remstate" class="error-message"></div>
+		</div>
 	</div>
 
+	<!-- Queue -->
 	<div id="queue" class="col s12 m4 l4 xl4">
-		<h5>Queue</h5>
-		{% for item in pending %}
-		<a href="/syllabus?id={{ item }}" class="btn accent-2 {{ item }}">{{ item }}<br></a>
-		<a href="/queue?id={{ item }}&action=approve" class="btn accent-2 approve {{ item }}">Approve<br></a>
-		<a href="/queue?id={{ item }}&action=deny" class="btn accent-2 deny {{ item }}">Deny<br></a>
-		<br>
-		{% endfor %}
+		<div class="module">
+			<h5>Queue</h5>
+			{% for item in pending %}
+			<a href="/syllabus?id={{ item }}" class="btn accent-2 {{ item }}">{{ item }}<br></a>
+			<a href="/queue?id={{ item }}&action=approve" class="btn accent-2 approve {{ item }}">Approve<br></a>
+			<a href="/queue?id={{ item }}&action=deny" class="btn accent-2 deny {{ item }}">Deny<br></a>
+			<br>
+			{% endfor %}
+		</div>
 	</div>
 
 </div>
 {% endif %} <!-- endif admin -->
 
 {% if num > 0 %}
-<div class="center-align">
-	<h5>Your Courses</h5>
-	<div>
-		{% for item in courses %}
-		<a href="/syllabus?id={{ item.syllabus }}">{{ item }}<br></a>
-		{% endfor %}
+<div class="row center-align">
+	<div class="col s0 m3 l4 xl4"></div>
+	<div class="col s12 m6 l4 xl4">
+		<div class="module">
+			<h5>Your Courses</h5>
+			<div>
+				{% for item in courses %}
+				<a href="/syllabus?id={{ item.syllabus }}">{{ item }}<br></a>
+				{% endfor %}
+			</div>
+		</div>
 	</div>
+	<div class="col s0 m3 l4 xl4"></div>
 </div>
 {% endif %}
 {% endif %} <!-- endif authenticated -->
