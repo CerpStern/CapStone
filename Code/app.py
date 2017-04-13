@@ -156,10 +156,7 @@ def index():
 def login():
     if current_user.is_authenticated:
         return redirect(url_for('index'))
-    google = get_google_auth()
-    auth_url, state = google.authorization_url(
-            Auth.AUTH_URI, access_type='offline')
-    session['oauth_state'] = state
+    auth_url = get_oauth_url()
     return render_template('login.html', auth_url=auth_url)
 
 
@@ -375,16 +372,16 @@ def queue():
 
 @app.route('/search',methods = ['GET','POST'])
 def search():
-    
     return redirect(url_for('index'))
 
 @app.route('/adv_search',methods = ['GET'])
 def adv_search():
-
+    .department.query.filter_by()first().admin
     auth_url = get_oauth_url()
     return render_template('advanced.html',auth_url=auth_url)
 
 # Custom 404 handler
+# Dude sick custom mod bro. 
 @app.errorhandler(404)
 def err404(err):
     return render_template('404.html'), 404
