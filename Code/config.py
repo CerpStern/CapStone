@@ -42,7 +42,7 @@ class DevConfig(Config):
 class ProdConfig(Config):
     """Production config"""
     DEBUG = False
-    SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, "prod.db")
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, "test.db")
 
 
 config = {
