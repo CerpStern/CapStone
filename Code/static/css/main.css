@@ -11,6 +11,14 @@
 	width: 300px;
 }
 
+#syllabus {
+	width: 70%;
+	margin: auto;
+	text-align: left;
+	background-color: #eeeeee;
+	padding: 1em 3em;
+}
+
 #section-save {
 	display: inline-block;
 }
