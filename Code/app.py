@@ -205,7 +205,7 @@ def syllabus():
     try:
         syllabus = db.session.query(Syllabus).filter(Syllabus.id == request.args.get('id'))[0]
     except IndexError:
-        syllabus = ""
+        return render_template('404.html'), 404
     editable = db.session.query(User,Course).filter(Course.syllabus == request.args.get('id')).filter(current_user.get_id() == Course.user).count()
     print("{} {}".format(current_user.get_id(),editable))
     owns = False if editable == 0 else True
@@ -253,6 +253,7 @@ def remove():
         off = Official.query.filter_by(id=syllid).first()
         if off.visible is False:
             return jsonify(status=2)
+        Syllabus.query.filter_by(id=crse.syllabus).first().official_id = None
         off.visible = False
         db.session.commit()
     except:
@@ -371,4 +372,9 @@ def search():
 @app.route('/adv_search',methods = ['GET'])
 def adv_search():
 
-	return render_template('advanced.html')
+    return render_template('advanced.html')
+
+# Custom 404 handler
+@app.errorhandler(404)
+def err404(err):
+    return render_template('404.html'), 404
