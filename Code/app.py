@@ -385,7 +385,7 @@ def adv_search():
     return render_template('advanced.html',auth_url=auth_url, depts=depts)
 
 # Custom 404 handler
-# Dude sick custom mod bro. 
+# Dude sick custom mod bro.
 @app.errorhandler(404)
 def err404(err):
     return render_template('404.html'), 404
