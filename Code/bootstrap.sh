@@ -2,7 +2,7 @@
 
 pip install -r requirements.txt
 
-[ -f test.db ] && rm -r test.db
+[ -f test.db ] && rm -f test.db
 
 python -c "from app import db; db.create_all()"
 sqlite3 test.db "insert into users (email) values (\"${1}\")"
