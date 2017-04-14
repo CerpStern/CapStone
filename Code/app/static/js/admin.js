@@ -29,6 +29,36 @@ $(document).ready(function() {
 		});
 		e.preventDefault();
 	});
+	$('#addadmin').submit(function(e) {
+		$.ajax({
+			url: '/addadmin',
+			type: 'POST',
+			data: $('#addadmin').serialize(),
+			success: function(data) {
+				console.log('Adding!');
+				if (data.status == "1")
+					$('#addadminstate').html('<i class="material-icons green-text">check_circle</i> Successfully Added!');
+				else
+					$('#addadminstate').html('<i class="material-icons red-text">error</i> Adding Admin Failed!');
+			}
+		});
+		e.preventDefault();
+	});
+	$('#remadmin').submit(function(e) {
+		$.ajax({
+			url: '/remadmin',
+			type: 'POST',
+			data: $('#remadmin').serialize(),
+			success: function(data) {
+				console.log('Adding!');
+				if (data.status == "1")
+					$('#remadminstate').html('<i class="material-icons green-text">check_circle</i> Successfully Removed!');
+				else
+					$('#remadminstate').html('<i class="material-icons red-text">error</i> Removing Admin Failed!');
+			}
+		});
+		e.preventDefault();
+	});
 	$('.approve').click(function(e) {
 		let params = new URLSearchParams($(this).attr('href').slice(7)); // This is bad and depends on the length of the query string but works
 		console.log(params.get('id'));

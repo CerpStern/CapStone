@@ -237,6 +237,38 @@ def queue():
             q.add(request.args.get('id'))
             json.dump(list(q), qf)
     return redirect(url_for('index'))
+    
+@app.route('/addadmin', methods=['POST'])
+def addadmin():
+    try:
+        toadd = request.form.get('addemail')
+        addee = User.query.filter_by(email=toadd).first()
+        if addee is not None:
+            addee.admin = True
+        else:
+            addee = User(email=toadd, admin=True)
+            db.session.add(addee)
+        db.session.commit()
+        return jsonify(status=1)
+    except:
+        db.session.rollback()
+        return jsonify(status=2)
+
+@app.route('/remadmin', methods=['POST'])
+def remadmin():
+    try:
+        torem = request.form.get('rememail')
+        remee = User.query.filter_by(email=torem).first()
+        if remee is not None:
+            remee.admin = False
+            db.session.commit()
+            return jsonify(status=1)
+        print('Was none')
+        return jsonify(status=2)
+    except:
+        print('exception!')
+        db.session.rollback()
+        return jsonify(status=2)
 
 
 

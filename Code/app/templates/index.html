@@ -71,6 +71,24 @@
 	</div>
 
 </div>
+<div class="row">
+	<div class="col s12 m6 l6 xl6">
+		<form id="addadmin" method="POST" action="/addadmin">
+			Add admin:<br>
+			<input type="email" name="addemail" required>
+			<input type="submit" class="btn">
+		</form>
+		<div id="addadminstate" class="error-message"></div>
+	</div>
+	<div class="col s12 m6 l6 xl6">
+		<form id="remadmin" method="POST" action="/remadmin">
+			Remove admin:<br>
+			<input type="email" name="rememail" required>
+			<input type="submit" class="btn">
+		</form>
+		<div id="remadminstate" class="error-message"></div>
+	</div>
+</div>
 {% endif %} <!-- endif admin -->
 
 {% if num > 0 %}
