@@ -1,9 +1,13 @@
 function init_tinymce() {
 	tinymce.init({
 		selector: 'textarea',
-		content_css: ['https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css'],
+		//content_css: ['https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css'],
 		height: 500,
 		menubar: false,
+		mode : "textareas",
+		force_br_newlines : false,
+		force_p_newlines : false,
+		forced_root_block : '',
 		plugins: [
 			'save code advlist autolink lists link image charmap',
 			'hr',
