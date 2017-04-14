@@ -19,7 +19,10 @@ from app.models import *
 
 def is_admin():
     id = current_user.get_id()
-    return User.query.filter_by(id=id).first().admin
+    adm = User.query.filter_by(id=id).first()
+    if adm is None:
+        return False
+    return adm.admin
 
 def get_courses():
     user = current_user.get_id()

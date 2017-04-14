@@ -101,6 +101,8 @@ def syllabus():
     editable = db.session.query(User,Course).filter(Course.syllabus == request.args.get('id')).filter(current_user.get_id() == Course.user).count()
     #print("{} {}".format(current_user.get_id(),editable))
     owns = False if editable == 0 else True
+    if current_user.get_id() is None:
+        owns = False
     auth_url = get_oauth_url()
     has_prof = True if Course.query.filter_by(syllabus=int(request.args.get('id'))).first().user is not None else False
     return render_template('syllabus.html', id=syllabus.id, syllabus=syllabus, owns=owns, auth_url=auth_url, adm=is_admin(), hasprof = has_prof)
