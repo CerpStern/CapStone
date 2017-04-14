@@ -60,7 +60,7 @@ def is_provided(to_check):
         return True
     else:
         return False
-#                WIP,        done,  done,   done,    WIP, WIP
+
 def find_matches(search_text,course,section,semester,year,department):
     # we need to know how many syllabuses we have.
     # preset point counter to that size +1
@@ -69,32 +69,35 @@ def find_matches(search_text,course,section,semester,year,department):
         syll_count = syll_count + 1
 
     # syllabus 1 at index 0, 2 at 1 etc, contents are current pointage.
-    # auto expand to size of syll_count
+    # weird way to expand to size of syll_count because python is dumb.
     point_counter = [0] * syll_count
 
-    # Just do this a few more times, in slightly different ways.
-    #if is_provided(search_text):
-    #    for match in Course.query.filter_by(semester=semester):
-    #        point_counter[match.syllabus-1] = point_counter[match.syllabus-1] + 1
+    if is_provided(search_text):
+        split = search_text.split(" ")
+        for to_test in Syllabus.query.filter(id!=0):
+            stringed = str(to_test)
+            for word in split:
+                if word in stringed:
+                    point_counter[to_test.id-1] = point_counter[to_test.id-1] + 1
 
     if is_provided(course):
         for match in Course.query.filter_by(id=course ):
-            point_counter[match.syllabus-1] = point_counter[match.syllabus-1] + 3
+            point_counter[match.syllabus-1] = point_counter[match.syllabus-1] + 4
 
     if is_provided(section):
         for match in Course.query.filter_by(section=section):
-            point_counter[match.syllabus-1] = point_counter[match.syllabus-1] + 1
+            point_counter[match.syllabus-1] = point_counter[match.syllabus-1] + 2
 
     if is_provided(semester):
         for match in Course.query.filter_by(semester=semester):
-            point_counter[match.syllabus-1] = point_counter[match.syllabus-1] + 2
+            point_counter[match.syllabus-1] = point_counter[match.syllabus-1] + 3
 
     if is_provided(year):
         for match in Course.query.filter_by(year=year):
-            point_counter[match.syllabus-1] = point_counter[match.syllabus-1] + 1
+            point_counter[match.syllabus-1] = point_counter[match.syllabus-1] + 2
 
     if is_provided(department):
         for match in Course.query.filter_by(dept=department):
-            point_counter[match.syllabus-1] = point_counter[match.syllabus-1] + 1
+            point_counter[match.syllabus-1] = point_counter[match.syllabus-1] + 2
 
     return point_counter
