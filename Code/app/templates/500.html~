@@ -2,7 +2,7 @@
 {%block body%}
 <br>
 <div class="center">
-	<img class="pintsize" src="static/images/icon.png">
+	<img class="pintsize" src="static/images/icon4.png">
 	<h1>A Wild Error Appeared!</h1>
 	<p>Sorry, the server encountered a problem.</p>
 </div>
