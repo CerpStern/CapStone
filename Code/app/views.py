@@ -99,7 +99,7 @@ def syllabus():
     except IndexError:
         return render_template('404.html'), 404
     editable = db.session.query(User,Course).filter(Course.syllabus == request.args.get('id')).filter(current_user.get_id() == Course.user).count()
-    print("{} {}".format(current_user.get_id(),editable))
+    #print("{} {}".format(current_user.get_id(),editable))
     owns = False if editable == 0 else True
     auth_url = get_oauth_url()
     return render_template('syllabus.html', id=syllabus.id, syllabus=syllabus, owns=owns, auth_url=auth_url)
@@ -284,11 +284,23 @@ def search():
     search_text = request.values.get('search_text')
     course = request.values.get('course')
 
-    test = find_matches(search_text,course,section,semester,year,department)
-    for i in range(0,len(test)):
-        print("Syllabus {} has {} point(s).".format(i+1,test[i]))
+    unsorted = find_matches(search_text,course,section,semester,year,department)
+    ordered=[]
+    for thing in unsorted:
+        print(thing)
+    big_guy=0
 
-    return redirect(url_for('index'))
+    while max(unsorted) is not 0:
+        largest = max(unsorted)
+        for x in range(0,len(unsorted)):
+            if unsorted[x] is largest:
+                ordered.append(x+1)
+                unsorted[x]=0
+
+
+    auth_url = get_oauth_url()
+    return render_template('search.html',order=ordered,auth_url=auth_url)
+    #return redirect(url_for('index'),order=ordered,auth_url=auth_url)
 
 @app.route('/adv_search',methods = ['GET'])
 def adv_search():
@@ -301,7 +313,6 @@ def adv_search():
     return render_template('advanced.html',auth_url=auth_url, depts=depts)
 
 # Custom 404 handler
-# Dude sick custom mod bro.
 @app.errorhandler(404)
 def err404(err):
     return render_template('404.html'), 404

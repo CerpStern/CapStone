@@ -67,6 +67,7 @@ def find_matches(search_text,course,section,semester,year,department):
     syll_count = 0
     for thing in Syllabus.query.filter(id!=0):
         syll_count = syll_count + 1
+
     # syllabus 1 at index 0, 2 at 1 etc, contents are current pointage.
     # auto expand to size of syll_count
     point_counter = [0] * syll_count

@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block body %}
+
+{% for item in order %}
+<a href="/syllabus?id={{item}}">
+	<p> this is a link</p>
+</a>
+{% endfor %}
+
+{% endblock %}
