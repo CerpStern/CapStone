@@ -1,9 +1,0 @@
-{%extends "base.html"%}
-{%block body%}
-<br>
-<div class="center">
-	<img class="pintsize" src="static/images/icon4.png">
-	<h1>A Wild Error Appeared!</h1>
-	<p>Sorry, that page could not be found.</p>
-</div>
-{%endblock%}
