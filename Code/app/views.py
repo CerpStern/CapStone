@@ -286,10 +286,6 @@ def search():
 
     unsorted = find_matches(search_text,course,section,semester,year,department)
     ordered=[]
-    for thing in unsorted:
-        print(thing)
-    big_guy=0
-
     while max(unsorted) is not 0:
         largest = max(unsorted)
         for x in range(0,len(unsorted)):
@@ -297,10 +293,8 @@ def search():
                 ordered.append(x+1)
                 unsorted[x]=0
 
-
     auth_url = get_oauth_url()
     return render_template('search.html',order=ordered,auth_url=auth_url)
-    #return redirect(url_for('index'),order=ordered,auth_url=auth_url)
 
 @app.route('/adv_search',methods = ['GET'])
 def adv_search():

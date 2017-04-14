@@ -79,7 +79,7 @@ def find_matches(search_text,course,section,semester,year,department):
 
     if is_provided(course):
         for match in Course.query.filter_by(id=course ):
-            point_counter[match.syllabus-1] = point_counter[match.syllabus-1] + 1
+            point_counter[match.syllabus-1] = point_counter[match.syllabus-1] + 3
 
     if is_provided(section):
         for match in Course.query.filter_by(section=section):
@@ -87,7 +87,7 @@ def find_matches(search_text,course,section,semester,year,department):
 
     if is_provided(semester):
         for match in Course.query.filter_by(semester=semester):
-            point_counter[match.syllabus-1] = point_counter[match.syllabus-1] + 1
+            point_counter[match.syllabus-1] = point_counter[match.syllabus-1] + 2
 
     if is_provided(year):
         for match in Course.query.filter_by(year=year):
@@ -96,6 +96,5 @@ def find_matches(search_text,course,section,semester,year,department):
     if is_provided(department):
         for match in Course.query.filter_by(dept=department):
             point_counter[match.syllabus-1] = point_counter[match.syllabus-1] + 1
-
 
     return point_counter
