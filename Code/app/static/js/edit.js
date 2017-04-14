@@ -46,6 +46,7 @@ $('#save').click(function() {
 });
 
 $('#remprof').click(function(e) {
+	e.preventDefault();
 	console.log('clicky');
 	let params = new URLSearchParams($(this).attr('href').slice(9));
 	console.log(params.get('id'));
@@ -67,7 +68,6 @@ $('#remprof').click(function(e) {
 			//	$('#remadminstate').html('<i class="material-icons red-text">error</i> Removing Admin Failed!');
 		}
 	});
-	e.preventDefault();
 });
 $('#setinstform').submit(function(e) {
 	e.preventDefault();
