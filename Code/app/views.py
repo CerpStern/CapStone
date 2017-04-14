@@ -102,8 +102,23 @@ def syllabus():
     #print("{} {}".format(current_user.get_id(),editable))
     owns = False if editable == 0 else True
     auth_url = get_oauth_url()
-    has_prof = True if Course.query.filter(Course.user is not None).first() is not None else False
+    has_prof = True if Course.query.filter_by(syllabus=int(request.args.get('id'))).first().user is not None else False
     return render_template('syllabus.html', id=syllabus.id, syllabus=syllabus, owns=owns, auth_url=auth_url, adm=is_admin(), hasprof = has_prof)
+
+@app.route('/remprof', methods=['POST'])
+def remprof():
+    if not is_admin():
+        return jsonify(status=2)
+    crse = Course.query.filter_by(syllabus=int(request.form.get('id'))).first()
+    if crse is None or crse.user is None:
+        return jsonify(status=2)
+    try:
+        crse.user = None
+        db.session.commit()
+    except:
+        db.session.rollback()
+        return jsonify(status=2)
+    return jsonify(status=1)
 
 @app.route('/save', methods = ['POST'])
 def save():

@@ -17,7 +17,7 @@
 				{% endif %}
 				{% if adm %}
 				{% if hasprof %}
-				<button class="btn accent-2 syll" id="remprof">Remove Instructor</button>
+				<a class="btn accent-2 syll" id="remprof" href="/remprof?id={{ id }}">Remove Instructor</a>
 				{% else %}
 				<button class="btn accent-2 syll" id="setprof">Set Instructor</button>
 				{% endif %}
@@ -80,6 +80,7 @@
 				<div id="i" class="disp">
 					{{ syllabus.accessibility|safe }}
 				</div>
+				<br>
 
 				<h5>Keywords</h5>
 				<div id="j" class="disp">

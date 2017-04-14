@@ -44,3 +44,28 @@ $('#save').click(function() {
 	$('#save').css('display', 'none');
 	$('#edit').css('display', 'inline');
 });
+
+$('#remprof').click(function(e) {
+	console.log('clicky');
+	let params = new URLSearchParams($(this).attr('href').slice(9));
+	console.log(params.get('id'));
+	let form = jQuery('<form>', {
+		'action': '/remprof'
+	}).append(jQuery('<input>', {
+		'name': 'id',
+		'value': params.get('id')
+	}));
+	$.ajax({
+		url: '/remprof',
+		type: 'POST',
+		data: form.serialize(),
+		success: function(data) {
+			console.log('Adding!');
+			if (data.status == "1")
+				$('#remadminstate').html('<i class="material-icons green-text">check_circle</i> Successfully Removed!');
+			else
+				$('#remadminstate').html('<i class="material-icons red-text">error</i> Removing Admin Failed!');
+		}
+	});
+	e.preventDefault();
+});
