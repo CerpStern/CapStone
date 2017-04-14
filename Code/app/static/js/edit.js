@@ -39,10 +39,10 @@ $('#edit').click(function() {
 
 $('#save').click(function() {
 	//$('#edit').onclick = function() {
-	console.log('clicked save');
 
 	$('#save').css('display', 'none');
 	$('#edit').css('display', 'inline');
+	$('#syllform').submit();
 });
 
 $('#remprof').click(function(e) {
@@ -61,11 +61,26 @@ $('#remprof').click(function(e) {
 		data: form.serialize(),
 		success: function(data) {
 			console.log('Adding!');
-			if (data.status == "1")
-				$('#remadminstate').html('<i class="material-icons green-text">check_circle</i> Successfully Removed!');
-			else
-				$('#remadminstate').html('<i class="material-icons red-text">error</i> Removing Admin Failed!');
+			//if (data.status == "1")
+			//	$('#remadminstate').html('<i class="material-icons green-text">check_circle</i> Successfully Removed!');
+			//else
+			//	$('#remadminstate').html('<i class="material-icons red-text">error</i> Removing Admin Failed!');
 		}
 	});
 	e.preventDefault();
+});
+$('#setinstform').submit(function(e) {
+	e.preventDefault();
+	$.ajax({
+		url: '/setprof',
+		type: 'POST',
+		data: $('#setinstform').serialize(),
+		success: function(data) {
+			console.log('Adding!');
+			//if (data.status == "1")
+			//	$('#remadminstate').html('<i class="material-icons green-text">check_circle</i> Successfully Removed!');
+			//else
+			//	$('#remadminstate').html('<i class="material-icons red-text">error</i> Removing Admin Failed!');
+		}
+	});
 });

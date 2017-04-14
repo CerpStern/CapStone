@@ -3,29 +3,32 @@
 
 <div class="center">
 	<div>
-		<form method="POST" action="/save">
 
-			<div id="syllabus-buttons">
-				<br>
+		<div id="syllabus-buttons">
+			<br>
 
-				{% if owns or adm %}
-				<button class="btn accent-2 syll" id="edit" type="button">Edit<i class="material-icons right">edit</i></button>
+			{% if owns or adm %}
+			<button class="btn accent-2 syll" id="edit" type="button">Edit<i class="material-icons right">edit</i></button>
 
-				<button id="save" class="btn accent-2 syll" name="submitbtn">Save<i class="material-icons right">save</i> </button>
+			<button id="save" class="btn accent-2 syll" name="submitbtn">Save<i class="material-icons right">save</i> </button>
 
-				<a class="btn accent-2 syll" href="/queue?action=add&id={{ id }}"><i class="material-icons right">gavel</i>Request Approval</a>
-				{% endif %}
-				{% if adm %}
-				{% if hasprof %}
-				<a class="btn accent-2 syll" id="remprof" href="/remprof?id={{ id }}">Remove Instructor</a>
-				{% else %}
-				<button class="btn accent-2 syll" id="setprof">Set Instructor</button>
-				{% endif %}
-				{% endif %}
+			<a class="btn accent-2 syll" href="/queue?action=add&id={{ id }}"><i class="material-icons right">gavel</i>Request Approval</a>
+			{% endif %}
+			{% if adm %}
+			{% if hasprof %}
+			<a class="btn accent-2 syll" id="remprof" href="/remprof?id={{ id }}">Remove Instructor</a>
+			{% else %}
+			<form method="POST" id="setinstform" action="/setprof">
+				<input type="hidden" value="{{ syllabus.id|safe }}" name="id">
+				<input type="email" name="user" value="Set Instructor" class="btn accent-2">
+			</form>
+			{% endif %}
+			{% endif %}
 
-				<button type="button" id="print" class="btn accent-2 syll">Print Syllabus<i class="material-icons right">print</i></button>
-			</div>
+			<button type="button" id="print" class="btn accent-2 syll">Print Syllabus<i class="material-icons right">print</i></button>
+		</div>
 
+		<form id="syllform" method="POST" action="/save">
 			<div id="syllabus">
 				<input type="hidden" value="{{ syllabus.id|safe }}" name="test1">
 				<!--<h5>Basic Information</h5>-->

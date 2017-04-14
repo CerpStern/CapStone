@@ -120,6 +120,26 @@ def remprof():
         return jsonify(status=2)
     return jsonify(status=1)
 
+@app.route('/setprof', methods=['POST'])
+def setprof():
+    if not is_admin():
+        return jsonify(status=2)
+    iid = User.query.filter_by(email=request.form.get('user')).first()
+    if iid is None: # Need to add instructor
+        newinst = User(email=request.form.get('user'))
+        db.session.add(newinst)
+        db.session.commit()
+    crse = Course.query.filter_by(syllabus=int(request.form.get('id'))).first()
+    if crse is None or crse.user is not None:
+        return jsonify(status=2)
+    try:
+        crse.user = request.form.get('user')
+        db.session.commit()
+    except:
+        db.session.rollback()
+        return jsonify(status=2)
+    return jsonify(status=1)
+
 @app.route('/save', methods = ['POST'])
 def save():
     vals = []
