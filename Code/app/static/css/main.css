@@ -68,6 +68,11 @@ body {
 	background-color: #e9ebee;
 }
 
+/* TODO - better workarund? */
+.row {
+	margin-bottom: 0px;
+}
+
 /*
 nav {
     height: 128px;
