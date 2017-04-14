@@ -292,9 +292,14 @@ def search():
             if unsorted[x] is largest:
                 ordered.append(x+1)
                 unsorted[x]=0
+    pairs = []
+    for item in ordered:
+        q = Course.query.filter_by(syllabus=item).first()
+        atuple = (item,q)
+        pairs.append(atuple)
 
     auth_url = get_oauth_url()
-    return render_template('search.html',order=ordered,auth_url=auth_url)
+    return render_template('search.html',tuples=pairs,auth_url=auth_url)
 
 @app.route('/adv_search',methods = ['GET'])
 def adv_search():
