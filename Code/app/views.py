@@ -245,24 +245,35 @@ def queue():
 # Things we need to pull
 # year, section, course, search_text, department, semester
 
-# Do a query in the appropriate table for each part of the form data.
-# Say that there are 3 courses in our db atm.
-# #1: 10001 section 1
-# #2: 10001 section 2
-# #3: 20001 section 1.
-# Say you search for course #10001, and section 1.
-# for '10001' syll 1 and 2 will get a point.
-# for for '1' syll 1 and 3 will get a point.
-# End totals:
-#    1: 2, 2: 1, 3: 1
-# To break the tie we can just sort by syllabus #
-
 @app.route('/search',methods = ['GET','POST'])
 def search():
-    semester, year, department, section, search_text = "","","","",""
-    if request.values.get('department') != "":
-        department = request.values.get('department').upper()
-    print(department)
+    # Pull values from request.
+    # Validation done later
+    semester = request.values.get('semester')
+    year = request.values.get('year')
+    department = request.values.get('department')
+    section = request.values.get('section')
+    search_text = request.values.get('search_text')
+    course = request.values.get('course')
+    clump = [search_text,course,section,semester,year,department]
+
+    # we need to know how many syllabuses we have.
+    # preset point counter to that size +1
+    syll_count = 0
+    for thing in Syllabus.query.filter(id!=0):
+        syll_count = syll_count + 1
+    # syllabus 1 at index 0, 2 at 1 etc, contents are current pointage.
+    # auto expand to size of syll_count
+    point_counter = [0] * syll_count
+
+    if isProvided(semester):
+        for match in Course.query.filter_by(semester=semester):
+            # no off by one errors here, no sir.
+            point_counter[match.syllabus-1] = point_counter[match.syllabus-1] + 1
+
+    for item in point_counter:
+        print(item)
+
     return redirect(url_for('index'))
 
 @app.route('/adv_search',methods = ['GET'])
