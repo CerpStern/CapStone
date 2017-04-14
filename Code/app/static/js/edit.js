@@ -1,6 +1,7 @@
 function init_tinymce() {
 	tinymce.init({
 		selector: 'textarea',
+		content_css: ['https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css'],
 		height: 500,
 		menubar: false,
 		plugins: [
