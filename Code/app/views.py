@@ -251,9 +251,11 @@ def search():
     section = request.values.get('section')
     search_text = request.values.get('search_text')
     course = request.values.get('course')
+
     test = find_matches(search_text,course,section,semester,year,department)
     for i in range(0,len(test)):
-        print("item {} has {} point(s).".format(i,test[i]))
+        print("Syllabus {} has {} point(s).".format(i+1,test[i]))
+
     return redirect(url_for('index'))
 
 @app.route('/adv_search',methods = ['GET'])
