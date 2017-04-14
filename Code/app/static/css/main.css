@@ -1,6 +1,10 @@
 @media print {
 	nav, .btn {
-		display: none;
+		display: none !important;
+	}
+	#syllabus {
+		margin: 0px !important;
+		width: 100% !important;
 	}
 }
 
