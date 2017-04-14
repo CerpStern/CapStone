@@ -15,6 +15,11 @@
 
 				<a class="btn accent-2 syll" href="/queue?action=add&id={{ id }}"><i class="material-icons right">gavel</i>Request Approval</a>
 				{% endif %}
+				{% if adm %}
+				{% if hasprof %}
+				<button class="btn accent-2 syll" id="remprof">Remove Instructor</button>
+				{% endif %}
+				{% endif %}
 
 				<button type="button" id="print" class="btn accent-2 syll">Print Syllabus<i class="material-icons right">print</i></button>
 			</div>

@@ -102,7 +102,8 @@ def syllabus():
     #print("{} {}".format(current_user.get_id(),editable))
     owns = False if editable == 0 else True
     auth_url = get_oauth_url()
-    return render_template('syllabus.html', id=syllabus.id, syllabus=syllabus, owns=owns, auth_url=auth_url, adm=is_admin())
+    has_prof = True if Course.query.filter(Course.user is not None).first() is not None else False
+    return render_template('syllabus.html', id=syllabus.id, syllabus=syllabus, owns=owns, auth_url=auth_url, adm=is_admin(), hasprof = has_prof)
 
 @app.route('/save', methods = ['POST'])
 def save():
