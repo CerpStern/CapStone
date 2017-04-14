@@ -1,10 +1,14 @@
 {% extends "base.html" %}
 {% block body %}
 
-{% for items in tuples %}
-<a href="/syllabus?id={{items[0]}}">
-	<p>{{items[1]}}</p>
-</a>
-{% endfor %}
+<div class="center">
+		<h2>Results:</h2>
+
+		{% for items in tuples %}
+		<a href="/syllabus?id={{items[0]}}">
+			<h4>{{items[1]}}</4>
+		</a>
+		{% endfor %}
+</div>
 
 {% endblock %}
