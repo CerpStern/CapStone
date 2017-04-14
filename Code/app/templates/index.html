@@ -85,6 +85,11 @@
 	<div id="queue" class="col s12 m4 l4 xl4">
 		<div class="module">
 			<h5>Queue</h5>
+
+			{% if pending|length < 1 %}
+			You have no items in your queue<br>
+			{% endif %}
+
 			{% for item in pending %}
 			<a href="/syllabus?id={{ item }}" class="btn accent-2 {{ item }}">{{ item }}<br></a>
 			<a href="/queue?id={{ item }}&action=approve" class="btn accent-2 approve {{ item }}">Approve<br></a>
