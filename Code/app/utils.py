@@ -54,4 +54,26 @@ def get_oauth_url():
     session['oauth_state'] = state
     return auth_url
 
+# quick way to see if something was actually provided.
+def is_provided(to_check):
+    if to_check is not None and to_check is not "":
+        return True
+    else:
+        return False
 
+def find_matches(search_text,course,section,semester,year,department):
+    # we need to know how many syllabuses we have.
+    # preset point counter to that size +1
+    syll_count = 0
+    for thing in Syllabus.query.filter(id!=0):
+        syll_count = syll_count + 1
+    # syllabus 1 at index 0, 2 at 1 etc, contents are current pointage.
+    # auto expand to size of syll_count
+    point_counter = [0] * syll_count
+
+    if is_provided(semester):
+        for match in Course.query.filter_by(semester=semester):
+            # no off by one errors here, no sir.
+            point_counter[match.syllabus-1] = point_counter[match.syllabus-1] + 1
+
+    return point_counter

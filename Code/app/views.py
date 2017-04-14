@@ -241,10 +241,6 @@ def queue():
 
 
 ###  Search
-
-# Things we need to pull
-# year, section, course, search_text, department, semester
-
 @app.route('/search',methods = ['GET','POST'])
 def search():
     # Pull values from request.
@@ -255,25 +251,9 @@ def search():
     section = request.values.get('section')
     search_text = request.values.get('search_text')
     course = request.values.get('course')
-    clump = [search_text,course,section,semester,year,department]
-
-    # we need to know how many syllabuses we have.
-    # preset point counter to that size +1
-    syll_count = 0
-    for thing in Syllabus.query.filter(id!=0):
-        syll_count = syll_count + 1
-    # syllabus 1 at index 0, 2 at 1 etc, contents are current pointage.
-    # auto expand to size of syll_count
-    point_counter = [0] * syll_count
-
-    if isProvided(semester):
-        for match in Course.query.filter_by(semester=semester):
-            # no off by one errors here, no sir.
-            point_counter[match.syllabus-1] = point_counter[match.syllabus-1] + 1
-
-    for item in point_counter:
-        print(item)
-
+    test = find_matches(search_text,course,section,semester,year,department)
+    for i in range(0,len(test)):
+        print("item {} has {} point(s).".format(i,test[i]))
     return redirect(url_for('index'))
 
 @app.route('/adv_search',methods = ['GET'])
