@@ -1,21 +1,23 @@
 {% extends "base.html" %}
 {% block body %}
 
-<br>
-
 <div class="center">
 	<div>
 		<form method="POST" action="/save">
 
-			{% if owns %}
-			<button class="btn accent-2 syll" id="edit" type="button">Edit<i class="material-icons right">edit</i></button>
+			<div id="syllabus-buttons">
+				<br>
 
-			<button id="save" class="btn accent-2 syll" name="submitbtn">Save<i class="material-icons right">save</i> </button>
+				{% if owns %}
+				<button class="btn accent-2 syll" id="edit" type="button">Edit<i class="material-icons right">edit</i></button>
 
-			<a class="btn accent-2 syll" href="/queue?action=add&id={{ id }}"><i class="material-icons right">gavel</i>Request Approval</a>
-			{% endif %}
+				<button id="save" class="btn accent-2 syll" name="submitbtn">Save<i class="material-icons right">save</i> </button>
 
-			<button type="button" id="print" class="btn accent-2 syll">Print Syllabus</button>
+				<a class="btn accent-2 syll" href="/queue?action=add&id={{ id }}"><i class="material-icons right">gavel</i>Request Approval</a>
+				{% endif %}
+
+				<button type="button" id="print" class="btn accent-2 syll">Print Syllabus</button>
+			</div>
 
 			<div id="syllabus">
 				<input type="hidden" value="{{ syllabus.id|safe }}" name="test1">
