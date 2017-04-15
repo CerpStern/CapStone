@@ -1,8 +1,5 @@
 @media print {
-	nav {
-		display: none !important;
-	}
-	#syllabus-buttons {
+	.hide-for-print {
 		display: none !important;
 	}
 	#syllabus {

@@ -1,9 +1,9 @@
 {% extends "base.html" %}
 {% block body %}
 
-<br>
+<br class="hide-for-print">
 
-<div id="syllabus-buttons">
+<div id="syllabus-buttons" class="hide-for-print">
 	<div class="center">
 		<div class="row">
 			<div class="col s12 m12 l12 xl12">
@@ -45,7 +45,7 @@
 </div>
 
 <div class="row">
-	<div class="col s0 m1 l2 xl2">
+	<div class="col s0 m1 l2 xl2 hide-for-print">
 	</div>
 	<div class="col s12 m10 l8 xl8">
 		<form id="syllform" method="POST" action="/save">
@@ -113,7 +113,7 @@
 			<br>
 		</form>
 	</div>
-	<div class="col s0 m1 l2 xl2">
+	<div class="col s0 m1 l2 xl2 hide-for-print">
 	</div>
 </div>
 
