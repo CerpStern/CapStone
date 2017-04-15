@@ -19,7 +19,7 @@
 		{% else %}
 		<form method="POST" id="setinstform" action="/setprof">
 			<input type="hidden" value="{{ syllabus.id|safe }}" name="id">
-			<input type="email" name="user" value="Email" style="width:400px"><br>
+			<input type="email" name="user" placeholder="Email" style="width:400px"><br>
 			<input type="submit" value="Set Instructor" class="btn accent-2">
 		</form>
 		{% endif %}
