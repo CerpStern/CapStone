@@ -7,6 +7,10 @@
 		<div class="module">
 			<h5>Search Results</h5>
 			<div>
+				{% if tuples|length < 1 %}
+				No results found<br>
+				{% endif %}
+
 				{% for items in tuples %}
 				<a href="/syllabus?id={{items[0]}}">{{items[1]}}<br></a>
 				{% endfor %}
