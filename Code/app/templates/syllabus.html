@@ -14,18 +14,20 @@
 				{% endif %}
 
 				{% if adm %}
-				{% if hasprof %}
-				<a class="btn accent-2 syll" id="remprof" href="/remprof?id={{ id }}">Remove Instructor</a>
-				{% endif %}
+				<div id="rpid">
+					{% if hasprof %}
+					<a class="btn accent-2 syll" id="remprof" href="/remprof?id={{ id }}">Remove Instructor</a>
+					{% endif %}
+				</div>
 				{% endif %}
 
 				<button type="button" id="print" class="btn accent-2 syll">Print Syllabus<i class="material-icons right">print</i></button>
 			</div>
 		</div>
 
-		{% if adm %}
-		{% if not hasprof %}
-		<div class="row">
+		<div id="apid" class="row">
+			{% if adm %}
+			{% if not hasprof %}
 			<div class="col s1 m3 l4 xl4">
 			</div>
 			<div class="col s10 m6 l4 xl4">
@@ -38,9 +40,9 @@
 			</div>
 			<div class="col s1 m3 l4 xl4">
 			</div>
+			{% endif %}
+			{% endif %}
 		</div>
-		{% endif %}
-		{% endif %}
 	</div>
 </div>
 

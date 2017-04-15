@@ -61,9 +61,9 @@ $('#remprof').click(function(e) {
 		type: 'POST',
 		data: form.serialize(),
 		success: function(data) {
-			console.log('Adding!');
-			//if (data.status == "1")
-			//	$('#remadminstate').html('<i class="material-icons green-text">check_circle</i> Successfully Removed!');
+			if (data.status == "1") {
+				location.reload();
+			}
 			//else
 			//	$('#remadminstate').html('<i class="material-icons red-text">error</i> Removing Admin Failed!');
 		}
@@ -77,7 +77,9 @@ $('#setinstform').submit(function(e) {
 		data: $('#setinstform').serialize(),
 		success: function(data) {
 			console.log('Adding!');
-			//if (data.status == "1")
+			if (data.status == "1") {
+				location.reload();
+			}
 			//	$('#remadminstate').html('<i class="material-icons green-text">check_circle</i> Successfully Removed!');
 			//else
 			//	$('#remadminstate').html('<i class="material-icons red-text">error</i> Removing Admin Failed!');
