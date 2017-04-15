@@ -44,70 +44,78 @@
 	</div>
 </div>
 
-<form id="syllform" method="POST" action="/save">
-	<div id="syllabus">
-		<input type="hidden" value="{{ syllabus.id|safe }}" name="test1">
-		<!--<h5>Basic Information</h5>-->
-		<div id="a" class="disp">
-			{{ syllabus.basic|safe }}
-		</div>
-		<br>
-
-		<h5>Course Description</h5>
-		<div id="b" class="disp">
-			{{ syllabus.description|safe }}
-		</div>
-		<br>
-
-		<h5>Course Topics</h5>
-		<div id="c" class="disp">
-			{{ syllabus.topics|safe }}
-		</div>
-		<br>
-
-		<h5>Learning Outcomes</h5>
-		<div id="d" class="disp">
-			{{ syllabus.outcomes|safe }}
-		</div>
-		<br>
-
-		<h5>Grading Policy</h5>
-		<div id="e" class="disp">
-			{{ syllabus.grading|safe }}
-		</div>
-		<br>
-
-		<h5>Course Schedule</h5>
-		<div id="f" class="disp">
-			{{ syllabus.schedule|safe }}
-		</div>
-		<br>
-
-		<h5>Academic Honesty</h5>
-		<div id="g" class="disp">
-			{{ syllabus.honesty|safe }}
-		</div>
-		<br>
-
-		<h5>Registration Deadlines</h5>
-		<div id="h" class="disp">
-			{{ syllabus.deadlines|safe }}
-		</div>
-		<br>
-
-		<h5>Accessibility Policy</h5>
-		<div id="i" class="disp">
-			{{ syllabus.accessibility|safe }}
-		</div>
-		<br>
-
-		<h5>Keywords</h5>
-		<div id="j" class="disp">
-			{{ syllabus.keywords|safe }}
-		</div>
+<div class="row">
+	<div class="col s0 m1 l2 xl2">
 	</div>
-	<br>
-</form>
+	<div class="col s12 m10 l8 xl8">
+		<form id="syllform" method="POST" action="/save">
+			<div id="syllabus">
+				<input type="hidden" value="{{ syllabus.id|safe }}" name="test1">
+				<!--<h5>Basic Information</h5>-->
+				<div id="a" class="disp">
+					{{ syllabus.basic|safe }}
+				</div>
+				<br>
+
+				<h5>Course Description</h5>
+				<div id="b" class="disp">
+					{{ syllabus.description|safe }}
+				</div>
+				<br>
+
+				<h5>Course Topics</h5>
+				<div id="c" class="disp">
+					{{ syllabus.topics|safe }}
+				</div>
+				<br>
+
+				<h5>Learning Outcomes</h5>
+				<div id="d" class="disp">
+					{{ syllabus.outcomes|safe }}
+				</div>
+				<br>
+
+				<h5>Grading Policy</h5>
+				<div id="e" class="disp">
+					{{ syllabus.grading|safe }}
+				</div>
+				<br>
+
+				<h5>Course Schedule</h5>
+				<div id="f" class="disp">
+					{{ syllabus.schedule|safe }}
+				</div>
+				<br>
+
+				<h5>Academic Honesty</h5>
+				<div id="g" class="disp">
+					{{ syllabus.honesty|safe }}
+				</div>
+				<br>
+
+				<h5>Registration Deadlines</h5>
+				<div id="h" class="disp">
+					{{ syllabus.deadlines|safe }}
+				</div>
+				<br>
+
+				<h5>Accessibility Policy</h5>
+				<div id="i" class="disp">
+					{{ syllabus.accessibility|safe }}
+				</div>
+				<br>
+
+				<h5>Keywords</h5>
+				<div id="j" class="disp">
+					{{ syllabus.keywords|safe }}
+				</div>
+			</div>
+			<br>
+		</form>
+	</div>
+	<div class="col s0 m1 l2 xl2">
+	</div>
+</div>
 
 <script src="static/js/tinymce/tinymce.min.js"></script>
 <script src="static/js/edit.js"></script>
