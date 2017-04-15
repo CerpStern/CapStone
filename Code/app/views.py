@@ -117,7 +117,8 @@ def official():
     if current_user.get_id() is None:
         owns = False
     auth_url = get_oauth_url()
-    return render_template('official.html', id=syllabus.id, syllabus=syllabus, owns=owns, auth_url=auth_url, adm=is_admin())
+    unoffid = Syllabus.query.filter_by(official_id=syllabus.id).first().id
+    return render_template('official.html', id=syllabus.id, syllabus=syllabus, owns=owns, auth_url=auth_url, adm=is_admin(), unoffid=unoffid)
 
 @app.route('/remprof', methods=['POST'])
 def remprof():
