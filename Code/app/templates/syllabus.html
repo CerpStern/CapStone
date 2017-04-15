@@ -3,27 +3,41 @@
 
 <div class="center">
 	<div id="syllabus-buttons">
-		<br>
+		<div class="row">
+			<div class="col s12 m12 l12 xl12">
+				{% if owns or adm %}
+				<button class="btn accent-2 syll" id="edit" type="button">Edit<i class="material-icons right">edit</i></button>
+				<button id="save" class="btn accent-2 syll" name="submitbtn">Save<i class="material-icons right">save</i> </button>
+				<a class="btn accent-2 syll" href="/queue?action=add&id={{ id }}"><i class="material-icons right">gavel</i>Request Approval</a>
+				{% endif %}
 
-		{% if owns or adm %}
-		<button class="btn accent-2 syll" id="edit" type="button">Edit<i class="material-icons right">edit</i></button>
-		<button id="save" class="btn accent-2 syll" name="submitbtn">Save<i class="material-icons right">save</i> </button>
-		<a class="btn accent-2 syll" href="/queue?action=add&id={{ id }}"><i class="material-icons right">gavel</i>Request Approval</a>
-		{% endif %}
+				{% if adm %}
+				{% if hasprof %}
+				<a class="btn accent-2 syll" id="remprof" href="/remprof?id={{ id }}">Remove Instructor</a>
+				{% endif %}
+				{% endif %}
 
-		<button type="button" id="print" class="btn accent-2 syll">Print Syllabus<i class="material-icons right">print</i></button>
+				<button type="button" id="print" class="btn accent-2 syll">Print Syllabus<i class="material-icons right">print</i></button>
+			</div>
 
-		{% if adm %}
-		{% if hasprof %}
-		<a class="btn accent-2 syll" id="remprof" href="/remprof?id={{ id }}">Remove Instructor</a>
-		{% else %}
-		<form method="POST" id="setinstform" action="/setprof">
-			<input type="hidden" value="{{ syllabus.id|safe }}" name="id">
-			<input type="email" name="user" placeholder="Email" style="width:400px"><br>
-			<input type="submit" value="Set Instructor" class="btn accent-2">
-		</form>
-		{% endif %}
-		{% endif %}
+			{% if adm %}
+			{% if not hasprof %}
+			<div class="col s1 m3 l4 xl4">
+			</div>
+			<div class="col s10 m6 l4 xl4">
+				<form method="POST" id="setinstform" action="/setprof">
+					<input type="hidden" value="{{ syllabus.id|safe }}" name="id">
+					<input type="email" name="user" placeholder="Email"><br>
+					<input type="submit" value="Set Instructor" class="btn accent-2">
+				</form>
+			</div>
+			<div class="col s1 m3 l4 xl4">
+			</div>
+			{% endif %}
+			{% endif %}
+
+			<br>
+		</div>
 	</div>
 
 	<form id="syllform" method="POST" action="/save">
