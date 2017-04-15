@@ -5,6 +5,8 @@
 	<div id="syllabus-buttons">
 		<div class="row">
 			<div class="col s12 m12 l12 xl12">
+				<br>
+
 				{% if owns or adm %}
 				<button class="btn accent-2 syll" id="edit" type="button">Edit<i class="material-icons right">edit</i></button>
 				<button id="save" class="btn accent-2 syll" name="submitbtn">Save<i class="material-icons right">save</i> </button>
@@ -25,6 +27,7 @@
 			<div class="col s1 m3 l4 xl4">
 			</div>
 			<div class="col s10 m6 l4 xl4">
+				<br>
 				<form method="POST" id="setinstform" action="/setprof">
 					<input type="hidden" value="{{ syllabus.id|safe }}" name="id">
 					<input type="email" name="user" placeholder="Email"><br>
