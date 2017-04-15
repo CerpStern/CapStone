@@ -1,12 +1,12 @@
 {% extends "base.html" %}
 {% block body %}
 
-<div class="center">
-	<div id="syllabus-buttons">
+<br>
+
+<div id="syllabus-buttons">
+	<div class="center">
 		<div class="row">
 			<div class="col s12 m12 l12 xl12">
-				<br>
-
 				{% if owns or adm %}
 				<button class="btn accent-2 syll" id="edit" type="button">Edit<i class="material-icons right">edit</i></button>
 				<button id="save" class="btn accent-2 syll" name="submitbtn">Save<i class="material-icons right">save</i> </button>
@@ -21,9 +21,11 @@
 
 				<button type="button" id="print" class="btn accent-2 syll">Print Syllabus<i class="material-icons right">print</i></button>
 			</div>
+		</div>
 
-			{% if adm %}
-			{% if not hasprof %}
+		{% if adm %}
+		{% if not hasprof %}
+		<div class="row">
 			<div class="col s1 m3 l4 xl4">
 			</div>
 			<div class="col s10 m6 l4 xl4">
@@ -36,78 +38,76 @@
 			</div>
 			<div class="col s1 m3 l4 xl4">
 			</div>
-			{% endif %}
-			{% endif %}
-
-			<br>
 		</div>
+		{% endif %}
+		{% endif %}
 	</div>
+</div>
 
-	<form id="syllform" method="POST" action="/save">
-		<div id="syllabus">
-			<input type="hidden" value="{{ syllabus.id|safe }}" name="test1">
-			<!--<h5>Basic Information</h5>-->
-			<div id="a" class="disp">
-				{{ syllabus.basic|safe }}
-			</div>
-			<br>
-
-			<h5>Course Description</h5>
-			<div id="b" class="disp">
-				{{ syllabus.description|safe }}
-			</div>
-			<br>
-
-			<h5>Course Topics</h5>
-			<div id="c" class="disp">
-				{{ syllabus.topics|safe }}
-			</div>
-			<br>
-
-			<h5>Learning Outcomes</h5>
-			<div id="d" class="disp">
-				{{ syllabus.outcomes|safe }}
-			</div>
-			<br>
-
-			<h5>Grading Policy</h5>
-			<div id="e" class="disp">
-				{{ syllabus.grading|safe }}
-			</div>
-			<br>
-
-			<h5>Course Schedule</h5>
-			<div id="f" class="disp">
-				{{ syllabus.schedule|safe }}
-			</div>
-			<br>
-
-			<h5>Academic Honesty</h5>
-			<div id="g" class="disp">
-				{{ syllabus.honesty|safe }}
-			</div>
-			<br>
-
-			<h5>Registration Deadlines</h5>
-			<div id="h" class="disp">
-				{{ syllabus.deadlines|safe }}
-			</div>
-			<br>
-
-			<h5>Accessibility Policy</h5>
-			<div id="i" class="disp">
-				{{ syllabus.accessibility|safe }}
-			</div>
-			<br>
-
-			<h5>Keywords</h5>
-			<div id="j" class="disp">
-				{{ syllabus.keywords|safe }}
-			</div>
+<form id="syllform" method="POST" action="/save">
+	<div id="syllabus">
+		<input type="hidden" value="{{ syllabus.id|safe }}" name="test1">
+		<!--<h5>Basic Information</h5>-->
+		<div id="a" class="disp">
+			{{ syllabus.basic|safe }}
 		</div>
 		<br>
-	</form>
-</div>
+
+		<h5>Course Description</h5>
+		<div id="b" class="disp">
+			{{ syllabus.description|safe }}
+		</div>
+		<br>
+
+		<h5>Course Topics</h5>
+		<div id="c" class="disp">
+			{{ syllabus.topics|safe }}
+		</div>
+		<br>
+
+		<h5>Learning Outcomes</h5>
+		<div id="d" class="disp">
+			{{ syllabus.outcomes|safe }}
+		</div>
+		<br>
+
+		<h5>Grading Policy</h5>
+		<div id="e" class="disp">
+			{{ syllabus.grading|safe }}
+		</div>
+		<br>
+
+		<h5>Course Schedule</h5>
+		<div id="f" class="disp">
+			{{ syllabus.schedule|safe }}
+		</div>
+		<br>
+
+		<h5>Academic Honesty</h5>
+		<div id="g" class="disp">
+			{{ syllabus.honesty|safe }}
+		</div>
+		<br>
+
+		<h5>Registration Deadlines</h5>
+		<div id="h" class="disp">
+			{{ syllabus.deadlines|safe }}
+		</div>
+		<br>
+
+		<h5>Accessibility Policy</h5>
+		<div id="i" class="disp">
+			{{ syllabus.accessibility|safe }}
+		</div>
+		<br>
+
+		<h5>Keywords</h5>
+		<div id="j" class="disp">
+			{{ syllabus.keywords|safe }}
+		</div>
+	</div>
+	<br>
+</form>
 
 <script src="static/js/tinymce/tinymce.min.js"></script>
 <script src="static/js/edit.js"></script>
