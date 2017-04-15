@@ -109,16 +109,16 @@ def syllabus():
 
 @app.route('/official')
 def official():
-    syllabus = db.session.query(Official).filter(Official.id == request.args.get('id')).first()
-    if syllabus is None:
+    thesyllabus = db.session.query(Official).filter(Official.id == request.args.get('id')).first()
+    if thesyllabus is None or thesyllabus.visible is False:
         return render_template('404.html'), 404
-    editable = db.session.query(User,Course).filter(Course.syllabus == request.args.get('id')).filter(current_user.get_id() == Course.user).count()
-    owns = False if editable == 0 else True
-    if current_user.get_id() is None:
-        owns = False
     auth_url = get_oauth_url()
-    unoffid = Syllabus.query.filter_by(official_id=syllabus.id).first().id
-    return render_template('official.html', id=syllabus.id, syllabus=syllabus, owns=owns, auth_url=auth_url, adm=is_admin(), unoffid=unoffid)
+    unoffid = Syllabus.query.filter_by(official_id=thesyllabus.id).first().id
+    owner = Course.query.filter_by(syllabus=unoffid).first().user
+    owns = False
+    if int(owner) == int(current_user.get_id()):
+        owns = True
+    return render_template('official.html', id=thesyllabus.id, syllabus=thesyllabus, owns=owns, auth_url=auth_url, adm=is_admin(), unoffid=unoffid)
 
 @app.route('/remprof', methods=['POST'])
 def remprof():
@@ -144,11 +144,12 @@ def setprof():
         newinst = User(email=request.form.get('user'))
         db.session.add(newinst)
         db.session.commit()
+    iid = User.query.filter_by(email=request.form.get('user')).first()
     crse = Course.query.filter_by(syllabus=int(request.form.get('id'))).first()
     if crse is None or crse.user is not None:
         return jsonify(status=2)
     try:
-        crse.user = request.form.get('user')
+        crse.user = iid.id
         db.session.commit()
     except:
         db.session.rollback()
@@ -345,7 +346,8 @@ def search():
                 unsorted[x]=0
     pairs = []
     for item in ordered:
-        q = Course.query.filter_by(syllabus=item).first()
+        tmp_syll = Syllabus.query.filter_by(official_id=item).first().id
+        q = Course.query.filter_by(syllabus=tmp_syll).first()
         atuple = (item,q)
         pairs.append(atuple)
 

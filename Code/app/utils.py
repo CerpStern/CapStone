@@ -68,7 +68,7 @@ def find_matches(search_text,course,section,semester,year,department):
     # we need to know how many syllabuses we have.
     # preset point counter to that size +1
     syll_count = 0
-    for thing in Syllabus.query.filter(id!=0):
+    for thing in Official.query.filter(Official.id!=0):
         syll_count = syll_count + 1
 
     # syllabus 1 at index 0, 2 at 1 etc, contents are current pointage.
@@ -77,7 +77,7 @@ def find_matches(search_text,course,section,semester,year,department):
 
     if is_provided(search_text):
         split = search_text.split(" ")
-        for to_test in Syllabus.query.filter(id!=0):
+        for to_test in Official.query.filter_by(visible=True):
             stringed = str(to_test)
             for word in split:
                 if word in stringed:
