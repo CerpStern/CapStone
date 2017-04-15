@@ -10,7 +10,7 @@
 			<h5>Add an admin</h5>
 			<form id="addadmin" method="POST" action="/addadmin">
 				Email:<br>
-				<input type="email" name="addemail" value="capstone.teacher.one@gmail.com" required>
+				<input type="email" name="addemail" placeholder="capstone.teacher.one@gmail.com" required>
 				<input type="submit" class="btn">
 			</form>
 			<div id="addadminstate" class="error-message"></div>
@@ -21,7 +21,7 @@
 			<h5>Remove an admin</h5>
 			<form id="remadmin" method="POST" action="/remadmin">
 				Email:<br>
-				<input type="email" name="rememail" value="capstone.teacher.one@gmail.com" required>
+				<input type="email" name="rememail" placeholder="capstone.teacher.one@gmail.com" required>
 				<input type="submit" class="btn">
 			</form>
 			<div id="remadminstate" class="error-message"></div>
@@ -35,7 +35,7 @@
 			<h5>Add a course</h5>
 			<form id="add" method="POST" action="/add">
 				Year:<br>
-				<input type="text" name="year" value="2017" required><br>
+				<input type="text" name="year" placeholder="2017" required><br>
 				Semester:<br>
 				<select class="input-field" name="semester">
 					<option value="Spring">Spring</option>
@@ -43,13 +43,13 @@
 					<option value="Fall">Fall</option>
 				</select>
 				Department:<br>
-				<input type="text" name="department" value="CS" required><br>
+				<input type="text" name="department" placeholder="CS" required><br>
 				Course ID:<br>
-				<input type="text" name="cid" value="10001" required><br>
+				<input type="text" name="cid" placeholder="10001" required><br>
 				Section:<br>
-				<input type="text" name="section" value="001" required><br>
+				<input type="text" name="section" placeholder="001" required><br>
 				Instructor:<br>
-				<input type="email" name="instructor" value="capstone.teacher.one@gmail.com" required><br>
+				<input type="email" name="instructor" placeholder="capstone.teacher.one@gmail.com" required><br>
 				<input class="btn accent-2" type="submit" value="submit" required>
 			</form>
 			<div id="addstate" class="error-message"></div>
@@ -62,7 +62,7 @@
 			<h5>Remove a course</h5>
 			<form id="remove" method="POST" action="/remove">
 				Year:<br>
-				<input type="text" name="year" value="2017" required><br>
+				<input type="text" name="year" placeholder="2017" required><br>
 				Semester:<br>
 				<select class="input-field" name="semester">
 					<option value="Spring">Spring</option>
@@ -70,11 +70,11 @@
 					<option value="Fall">Fall</option>
 				</select>
 				Department:<br>
-				<input type="text" name="department" value="CS" required><br>
+				<input type="text" name="department" placeholder="CS" required><br>
 				Course ID:<br>
-				<input type="text" name="cid" value="10001" required><br>
+				<input type="text" name="cid" placeholder="10001" required><br>
 				Section:<br>
-				<input type="text" name="section" value="001" required><br>
+				<input type="text" name="section" placeholder="001" required><br>
 				<input class="btn accent-2" type="submit" value="submit" required>
 			</form>
 			<div id="remstate" class="error-message"></div>
