@@ -32,6 +32,12 @@ class User(db.Model, UserMixin):
     admin = db.Column(db.Boolean, default=False)
     courses = db.relationship('Course')
 
+class Favorites(db.Model):
+    __tablename__ = "favorites"
+    id = db.Column(db.Integer,primary_key=True)
+    user = db.Column(db.Integer, db.ForeignKey('users.id'))
+    official_id = db.Column(db.Integer, db.ForeignKey('official.id'))
+
 class Course(db.Model):
     __tablename__ = "courses"
     def __str__(self):
