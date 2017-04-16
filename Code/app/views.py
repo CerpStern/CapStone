@@ -117,8 +117,9 @@ def official():
     unoffid = Syllabus.query.filter_by(official_id=thesyllabus.id).first().id
     owner = Course.query.filter_by(syllabus=unoffid).first().user
     owns = False
-    if current_user is not None and int(owner) == int(current_user.get_id()):
-        owns = True
+    if current_user.get_id() is not None:
+        if int(owner) == int(current_user.get_id()):
+            owns = True
     return render_template('official.html', id=thesyllabus.id, syllabus=thesyllabus, owns=owns, auth_url=auth_url, adm=is_admin(), unoffid=unoffid)
 
 @app.route('/remprof', methods=['POST'])
