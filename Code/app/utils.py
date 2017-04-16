@@ -85,7 +85,10 @@ def find_matches(search_text,course,section,semester,year,department):
                 if word in stringed:
                     point_counter[to_test.id-1] = point_counter[to_test.id-1] + 1
                 if word in str_keywords:
-                    point_counter[to_test.id-1] = point_counter[to_test.id-1] + 3
+                    # I was going to make the weight for this be 3.
+                    # Since we already match the whole thing, and give it one
+                    # I'm just going to give it 2.
+                    point_counter[to_test.id-1] = point_counter[to_test.id-1] + 2
 
 
     if is_provided(course):
