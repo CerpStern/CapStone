@@ -76,10 +76,11 @@ def find_matches(search_text,course,section,semester,year,department):
     point_counter = [0] * syll_count
 
     if is_provided(search_text):
-        split = search_text.split(" ")
+        # *.lower()... poo that doesn't seem to work.
+        split = search_text.lower().split(" ")
         for to_test in Official.query.filter_by(visible=True):
-            stringed = str(to_test)
-            str_keywords=str(to_test.keywords)
+            stringed = str(to_test).lower()
+            str_keywords=str(to_test.keywords).lower()
             for word in split:
                 if word in stringed:
                     point_counter[to_test.id-1] = point_counter[to_test.id-1] + 1
@@ -89,9 +90,10 @@ def find_matches(search_text,course,section,semester,year,department):
                     # I'm just going to give it 2.
                     point_counter[to_test.id-1] = point_counter[to_test.id-1] + 2
 
-
+    # None of these should require a capitalization change.
+    # Input is validated elsewhere.
     if is_provided(course):
-        for match in Course.query.filter_by(id=course ):
+        for match in Course.query.filter_by(id=course):
             point_counter[match.syllabus-1] = point_counter[match.syllabus-1] + 4
 
     if is_provided(section):
