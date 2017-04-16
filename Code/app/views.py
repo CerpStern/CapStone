@@ -110,13 +110,14 @@ def syllabus():
 @app.route('/official')
 def official():
     thesyllabus = db.session.query(Official).filter(Official.id == request.args.get('id')).first()
+    print(thesyllabus)
     if thesyllabus is None or thesyllabus.visible is False:
         return render_template('404.html'), 404
     auth_url = get_oauth_url()
     unoffid = Syllabus.query.filter_by(official_id=thesyllabus.id).first().id
     owner = Course.query.filter_by(syllabus=unoffid).first().user
     owns = False
-    if int(owner) == int(current_user.get_id()):
+    if current_user is not None and int(owner) == int(current_user.get_id()):
         owns = True
     return render_template('official.html', id=thesyllabus.id, syllabus=thesyllabus, owns=owns, auth_url=auth_url, adm=is_admin(), unoffid=unoffid)
 
