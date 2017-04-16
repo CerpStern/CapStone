@@ -80,7 +80,6 @@ def find_matches(search_text,course,section,semester,year,department):
         for to_test in Official.query.filter_by(visible=True):
             stringed = str(to_test)
             str_keywords=str(to_test.keywords)
-            print("keywords in current syll: " + str_keywords)
             for word in split:
                 if word in stringed:
                     point_counter[to_test.id-1] = point_counter[to_test.id-1] + 1
