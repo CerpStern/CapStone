@@ -11,6 +11,13 @@
 				<a class="btn accent-2 syll" href="/syllabus?id={{ unoffid }}">Unofficial Version</a>
 				{% endif %}
 				<button type="button" id="print" class="btn accent-2 syll">Print Syllabus<i class="material-icons right">print</i></button>
+				{% if logged_in %}
+				<form class="syll">
+				<input class="syll" name="fav_user" default="{{user_id}}" hidden="">
+				<input class="syll" name="fav_id" default="{{syllabus.id}}" hidden="">
+				<button type="submit" id="favorite" class="btn accent-2 syll">Add To Favorites<i class="material-icons right">star</i></button>
+				</form>
+				{% endif %}
 			</div>
 		</div>
 	</div>

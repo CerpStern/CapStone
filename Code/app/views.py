@@ -117,10 +117,14 @@ def official():
     unoffid = Syllabus.query.filter_by(official_id=thesyllabus.id).first().id
     owner = Course.query.filter_by(syllabus=unoffid).first().user
     owns = False
+    logged_in = False
+    user_id = None
     if current_user.get_id() is not None:
+        logged_in = True
+        user_id=current_user.get_id()
         if int(owner) == int(current_user.get_id()):
             owns = True
-    return render_template('official.html', id=thesyllabus.id, syllabus=thesyllabus, owns=owns, auth_url=auth_url, adm=is_admin(), unoffid=unoffid)
+    return render_template('official.html', id=thesyllabus.id, syllabus=thesyllabus, owns=owns, auth_url=auth_url, adm=is_admin(), unoffid=unoffid, logged_in=logged_in, user_id=user_id)
 
 @app.route('/remprof', methods=['POST'])
 def remprof():
