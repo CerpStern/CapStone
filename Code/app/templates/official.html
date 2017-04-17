@@ -10,17 +10,18 @@
 				<a class="btn accent-2 syll" href="/syllabus?id={{ unoffid }}">Unofficial Version</a>
 				{% endif %}
 				<button type="button" id="print" class="btn accent-2 syll">Print Syllabus<i class="material-icons right">print</i></button>
+				
 				{% if logged_in %}
 				<!-- Only include on pages that need it-->
 				<script src="static/js/search.js"></script>
-				<form class="syll" id="fav_btn" action="/favorite">
-				<input class="syll" name="fav_user" value="{{user_id}}" hidden="">
-				<input class="syll" name="fav_id" value="{{syllabus.id}}" hidden="">
-				{% if already_favorited %}
-				<button type="submit" id="favorite" class="btn accent-2 red syll">Remove From Favorites<i class="material-icons right">star</i></button>
-				{% else %}
-				<button type="submit" id="favorite" class="btn accent-2 syll">Add To Favorites<i class="material-icons right">star</i></button>
-				{% endif %}
+				<form style="display: inline-block;" id="fav_btn" action="/favorite">
+					<input name="fav_user" value="{{user_id}}" hidden="">
+					<input name="fav_id" value="{{syllabus.id}}" hidden="">
+					{% if already_favorited %}
+					<button type="submit" id="favorite" class="btn accent-2 red syll">Remove From Favorites<i class="material-icons right">star</i></button>
+					{% else %}
+					<button type="submit" id="favorite" class="btn accent-2 syll">Add To Favorites<i class="material-icons right">star</i></button>
+					{% endif %}
 				</form>
 				{% endif %}
 			</div>
