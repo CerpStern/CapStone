@@ -118,13 +118,14 @@ def syllabus():
     except IndexError:
         return render_template('404.html'), 404
     editable = db.session.query(User,Course).filter(Course.syllabus == request.args.get('id')).filter(current_user.get_id() == Course.user).count()
+    title = str(Course.query.filter_by(syllabus=syllabus.id).first())
     #print("{} {}".format(current_user.get_id(),editable))
     owns = False if editable == 0 else True
     if current_user.get_id() is None:
         owns = False
     auth_url = get_oauth_url()
     has_prof = True if Course.query.filter_by(syllabus=int(request.args.get('id'))).first().user is not None else False
-    return render_template('syllabus.html', id=syllabus.id, syllabus=syllabus, owns=owns, auth_url=auth_url, adm=is_admin(), hasprof = has_prof)
+    return render_template('syllabus.html', id=syllabus.id, syllabus=syllabus, owns=owns, auth_url=auth_url, adm=is_admin(), hasprof = has_prof, title=title)
 
 @app.route('/official')
 def official():
@@ -135,6 +136,7 @@ def official():
     auth_url = get_oauth_url()
     unoffid = Syllabus.query.filter_by(official_id=thesyllabus.id).first().id
     owner = Course.query.filter_by(syllabus=unoffid).first().user
+    title = str(Course.query.filter_by(syllabus=unoffid).first())
     owns = False
     logged_in = False
     user_id = None
@@ -148,7 +150,7 @@ def official():
 
         if int(owner) == int(current_user.get_id()):
             owns = True
-    return render_template('official.html', id=thesyllabus.id, syllabus=thesyllabus, owns=owns, auth_url=auth_url, adm=is_admin(), unoffid=unoffid, logged_in=logged_in, user_id=user_id, already_favorited=already_favorited)
+    return render_template('official.html', id=thesyllabus.id, syllabus=thesyllabus, owns=owns, auth_url=auth_url, adm=is_admin(), unoffid=unoffid, logged_in=logged_in, user_id=user_id, already_favorited=already_favorited, title=title)
 
 @app.route('/remprof', methods=['POST'])
 def remprof():
