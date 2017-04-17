@@ -44,11 +44,12 @@ def index():
     if current_user.get_id() is not None:
         favs = Favorites.query.filter_by(user=current_user.get_id())
         for item in favs:
-            tmp_syll = Syllabus.query.filter_by(official_id=item.official_id).first().id
-            q = Course.query.filter_by(syllabus=tmp_syll).first()
-            atuple = (item,q)
-            pairs.append(atuple)
-            fav_count=fav_count+1
+            if Syllabus.query.filter_by(official_id=item.official_id).first() is not None:
+                tmp_syll = Syllabus.query.filter_by(official_id=item.official_id).first().id
+                q = Course.query.filter_by(syllabus=tmp_syll).first()
+                atuple = (item,q)
+                pairs.append(atuple)
+                fav_count=fav_count+1
 
     if fav_count > 0:
         has_favs = True
