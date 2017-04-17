@@ -16,7 +16,11 @@
 				<form class="syll" id="fav_btn" action="/favorite">
 				<input class="syll" name="fav_user" value="{{user_id}}" hidden="">
 				<input class="syll" name="fav_id" value="{{syllabus.id}}" hidden="">
+				{% if already_favorited %}
+				<button type="submit" id="favorite" class="btn accent-2 red syll">Remove From Favorites<i class="material-icons right">star</i></button>
+				{% else %}
 				<button type="submit" id="favorite" class="btn accent-2 syll">Add To Favorites<i class="material-icons right">star</i></button>
+				{% endif %}
 				</form>
 				{% endif %}
 			</div>

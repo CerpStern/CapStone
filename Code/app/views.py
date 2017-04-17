@@ -119,12 +119,17 @@ def official():
     owns = False
     logged_in = False
     user_id = None
+    already_favorited = False
     if current_user.get_id() is not None:
         logged_in = True
         user_id=current_user.get_id()
+        fav_query = Favorites.query.filter_by(user=user_id,official_id=thesyllabus.id).first()
+        if fav_query is not None:
+            already_favorited=True
+
         if int(owner) == int(current_user.get_id()):
             owns = True
-    return render_template('official.html', id=thesyllabus.id, syllabus=thesyllabus, owns=owns, auth_url=auth_url, adm=is_admin(), unoffid=unoffid, logged_in=logged_in, user_id=user_id)
+    return render_template('official.html', id=thesyllabus.id, syllabus=thesyllabus, owns=owns, auth_url=auth_url, adm=is_admin(), unoffid=unoffid, logged_in=logged_in, user_id=user_id, already_favorited=already_favorited)
 
 @app.route('/remprof', methods=['POST'])
 def remprof():
@@ -386,15 +391,8 @@ def toggle_favorite():
     else:
         db.session.delete(check_me)
         db.session.commit()
-
-    check_me = Favorites.query.filter_by(user=user_id,official_id=fav_id).first()
-    if check_me is not None:
-        print("user: {}, syll: {}".format(check_me.user,check_me.official_id))
-    else:
-        print("She's dead jim")
-
-    return redirect(url_for('index'))
-
+    # Finished. redirect to the same page to have the button change.
+    return redirect(url_for('official') + '?id={}'.format(fav_id))
 
 # Custom 404 handler
 @app.errorhandler(404)
