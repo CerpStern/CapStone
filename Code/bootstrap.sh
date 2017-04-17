@@ -1,11 +1,11 @@
 #!/bin/sh
 
-function err {
+err(){
 	echo "usage: $0 admin_email@organization.whatever"
 	exit 0
 }
 
-[ $# -eq 0 ] && err && exit 0
+[ "$#" -eq 0 ] && err && exit 0
 
 pip install -r requirements.txt
 
