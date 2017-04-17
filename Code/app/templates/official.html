@@ -14,8 +14,8 @@
 				<!-- Only include on pages that need it-->
 				<script src="static/js/search.js"></script>
 				<form class="syll" id="fav_btn">
-				<input class="syll" name="fav_user" default="{{user_id}}" hidden="">
-				<input class="syll" name="fav_id" default="{{syllabus.id}}" hidden="">
+				<input class="syll" name="fav_user" value="{{user_id}}" hidden="">
+				<input class="syll" name="fav_id" value="{{syllabus.id}}" hidden="">
 				<button type="submit" id="favorite" class="btn accent-2 syll">Add To Favorites<i class="material-icons right">star</i></button>
 				</form>
 				{% endif %}
