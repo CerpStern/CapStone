@@ -221,8 +221,8 @@ def save():
             vals.append(request.form.get('test'+str(i))[3:][:-4])
         else:
             vals.append(request.form.get('test'+str(i)))
-    #TODO: Sanitize, esp wrt id
-    #db.session.query().Syllabus.update().where(Syllabus.id == int(vals[0])).values(basic=vals[1],description=vals[2],topics=vals[3],outcomes=vals[4],grading=vals[5],schedule=vals[6],honesty=vals[7],deadlines=vals[8],accessibility=vals[9],keywords=vals[10])
+    if not is_admin() or int(current_user.get_id()) != int(Course.query.filter_by(syllabus=vals[0]).first().user):
+        return redirect(url_for('syllabus') + '?id={}'.format(vals[0]))
     syllabus = Syllabus.query.filter_by(id=vals[0]).first()
     #syllabus = Syllabus.query.filter_by(id=vals[0][3:][:-4]).first()
     syllabus.basic = vals[1] 
@@ -244,6 +244,8 @@ def save():
 #
 @app.route('/remove', methods = ['POST'])
 def remove():
+    if not is_admin():
+        return jsonify(status=2)
     year = int(request.form.get('year'))
     semester = request.form.get('semester')
     department = request.form.get('department')
@@ -270,6 +272,8 @@ def remove():
 #
 @app.route('/add', methods = ['POST'])
 def add():
+    if not is_admin():
+        return jsonify(status=2)
     year = int(request.form.get('year'))
     semester = request.form.get('semester')
     department = request.form.get('department')
@@ -356,6 +360,8 @@ def queue():
 #
 @app.route('/addadmin', methods=['POST'])
 def addadmin():
+    if not is_admin():
+        return jsonify(status=2)
     try:
         toadd = request.form.get('addemail')
         addee = User.query.filter_by(email=toadd).first()
@@ -374,6 +380,8 @@ def addadmin():
 #
 @app.route('/remadmin', methods=['POST'])
 def remadmin():
+    if not is_admin():
+        return jsonify(status=2)
     try:
         torem = request.form.get('rememail')
         remee = User.query.filter_by(email=torem).first()
