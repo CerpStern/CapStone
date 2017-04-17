@@ -1,3 +1,5 @@
+
+// Initializes Parts of Materialize
 $(document).ready(function() {
 	$('select').material_select();
 	$('#print').click(function(e) {
@@ -6,6 +8,8 @@ $(document).ready(function() {
 	});
 });
 
+// Enables click to search button
+//   ( versus hitting enter )
 var request = null;
 $('#let_er_rip').click(function() {
 	$.ajax({
@@ -15,34 +19,4 @@ $('#let_er_rip').click(function() {
 	});
 });
 
-/*
-$(function() {
-	$("#search").keyup(function() {
-		console.log("received keyup");
-		var foo = this;
-		var value = $(this).val();
-		var space = value.indexOf(' ');
-		console.log(value);
-		console.log(space);
-
-		if (space != -1 && space != value.length - 1) {
-			if (request != null)
-				request.abort();
-			request = $.ajax({
-				type: "POST",
-				url: "/search",
-				data: {
-					'searchword' : value
-				},
-				dataType: "text",
-				success: function(msg) {
-					if (value == $(foo).val()) {
-						console.log(msg);
-					}
-				}
-			});
-		}
-	});
-});
-*/
 
