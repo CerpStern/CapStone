@@ -110,7 +110,7 @@ def syllabus():
 @app.route('/official')
 def official():
     thesyllabus = db.session.query(Official).filter(Official.id == request.args.get('id')).first()
-    print(thesyllabus)
+    #print(thesyllabus)
     if thesyllabus is None or thesyllabus.visible is False:
         return render_template('404.html'), 404
     auth_url = get_oauth_url()
@@ -370,6 +370,14 @@ def adv_search():
     auth_url = get_oauth_url()
     return render_template('advanced.html',auth_url=auth_url, depts=depts)
 
+
+@app.route('/favorite',methods = ['POST'])
+def add_favorite():
+    user_id=request.values.get('fav_user')
+    fav_id=request.values.get('fav_id')
+    print("user: {}, syllid: {}".format(user_id,fav_id))
+
+    return redirect(url_for('index'))
 # Custom 404 handler
 @app.errorhandler(404)
 def err404(err):

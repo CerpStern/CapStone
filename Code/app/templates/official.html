@@ -1,6 +1,5 @@
 {% extends "base.html" %}
 {% block body %}
-
 <br class="hide-for-print">
 
 <div id="syllabus-buttons" class="hide-for-print">
@@ -12,7 +11,9 @@
 				{% endif %}
 				<button type="button" id="print" class="btn accent-2 syll">Print Syllabus<i class="material-icons right">print</i></button>
 				{% if logged_in %}
-				<form class="syll">
+				<!-- Only include on pages that need it-->
+				<script src="static/js/search.js"></script>
+				<form class="syll" id="fav_btn">
 				<input class="syll" name="fav_user" default="{{user_id}}" hidden="">
 				<input class="syll" name="fav_id" default="{{syllabus.id}}" hidden="">
 				<button type="submit" id="favorite" class="btn accent-2 syll">Add To Favorites<i class="material-icons right">star</i></button>
