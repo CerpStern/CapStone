@@ -371,11 +371,19 @@ def adv_search():
     return render_template('advanced.html',auth_url=auth_url, depts=depts)
 
 
-@app.route('/favorite',methods = ['POST'])
+@app.route('/favorite',methods = ['POST','GET'])
 def add_favorite():
     user_id=request.values.get('fav_user')
     fav_id=request.values.get('fav_id')
     print("user: {}, syllid: {}".format(user_id,fav_id))
+    new_fav = Favorites(user_id,fav_id)
+    db.session.add(new_fav)
+    db.session.commit()
+
+    q1 = Favorites.query.filter_by(official_id=1).first()
+    print(q1.user)
+
+    print("we made it here without crashing I guess?")
 
     return redirect(url_for('index'))
 # Custom 404 handler
