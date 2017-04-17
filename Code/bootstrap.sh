@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 err(){
 	echo "usage: $0 admin_email@organization.whatever"
