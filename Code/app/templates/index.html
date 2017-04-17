@@ -14,14 +14,9 @@
 				{% if not has_favs %}
 				<p>You have no favorites. Add them by clicking "Favorite" on a course page.</p>
 				{% endif %}
-				<form style="display: inline-block;" id="fav_btn" action="/favorite">
-					<input name="fav_user" value="{{user_id}}" hidden="">
-					<input name="fav_id" value="{{tuples[0].official_id}}" hidden="">
-					{% for tuples in favs%}
-					<a href="/official?id={{tuples[0].official_id}}"> {{tuples[1]}} </a>
-					<button type="submit" id="favorite" class="btn accent-2 red syll">&nbsp;<i class="material-icons right">clear</i></button>
-<br>
-					{% endfor %}
+				{% for tuples in favs%}
+				<a href="/official?id={{tuples[0].official_id}}"> {{tuples[1]}} </a><br>
+				{% endfor %}
 			</div>
 		</div>
 	</div>
