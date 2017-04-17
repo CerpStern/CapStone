@@ -52,10 +52,17 @@ def index():
         if fav_count > 0:
             has_favs = True
 
+    # DEPARTMENTS THING
+    departments = []
+    for i in Syllabus.query.filter(Syllabus.official_id != None):
+        temp = Course.query.filter_by(syllabus=i.id).first().dept
+        if temp not in departments:
+            departments.append(temp)
+
     # QUEUE
     with open(queuefile, 'r') as qf:
         queue = set(json.load(qf))
-    return render_template('index.html', adm=adm, courses=courses, num=num, pending=queue, favs=pairs,has_favs=has_favs)
+    return render_template('index.html', adm=adm, courses=courses, num=num, pending=queue, favs=pairs,has_favs=has_favs,depts=departments)
 
 
 @app.route('/login')
@@ -389,9 +396,12 @@ def search():
 
 @app.route('/adv_search',methods = ['GET'])
 def adv_search():
+    # DEPARTMENTS THING
     departments = []
     for i in Syllabus.query.filter(Syllabus.official_id != None):
-        departments.append(Course.query.filter_by(syllabus=i.id).first().dept)
+        temp = Course.query.filter_by(syllabus=i.id).first().dept
+        if temp not in departments:
+            departments.append(temp)
     # unique post query
     depts = list(set(departments))
     auth_url = get_oauth_url()

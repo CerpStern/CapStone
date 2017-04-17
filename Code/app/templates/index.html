@@ -95,7 +95,13 @@
 					<option value="Fall">Fall</option>
 				</select>
 				Department:<br>
-				<input type="text" name="department" placeholder="CS" required><br>
+				<!--<input type="text" name="department" placeholder="CS" required><br>-->
+				<select class="downer" name="department">
+				<option value="" disabled selected> Select Department</option>
+				{%for dept in depts%}
+				<option value="{{dept}}"> {{dept}} </option>
+				{% endfor %}
+				</select>
 				Course ID:<br>
 				<input type="text" name="cid" placeholder="10001" required><br>
 				Section:<br>
