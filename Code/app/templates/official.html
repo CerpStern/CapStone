@@ -14,7 +14,7 @@
 				
 				{% if logged_in %}
 				<!-- Only include on pages that need it-->
-				<script src="static/js/search.js"></script>
+				<script src="static/js/favorites.js"></script>
 				<form style="display: inline-block;" id="fav_btn" action="/favorite">
 					<input name="fav_user" value="{{user_id}}" hidden="">
 					<input name="fav_id" value="{{syllabus.id}}" hidden="">
