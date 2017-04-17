@@ -245,12 +245,6 @@ def remove():
     except:
         db.session.rollback()
         return jsonify(status=2)
-
-    syllid = Syllabus.query.filter_by(id=crse.syllabus).first().official_id
-    to_remove = Favorites.query.filter_by(syllid)
-    for item in to_remove:
-        db.session.delete(item)
-    db.session.commit()
     return jsonify(status=1)
 
 @app.route('/add', methods = ['POST'])
