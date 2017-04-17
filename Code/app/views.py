@@ -34,9 +34,22 @@ from app.utils import *
 def index():
     adm = is_admin()
     courses, num = get_courses()
+
+    # FAVORITES
+    pairs = []
+    favs = None
+    if current_user.get_id() is not None:
+        favs = Favorites.query.filter_by(user=current_user.get_id())
+        for item in favs:
+            tmp_syll = Syllabus.query.filter_by(official_id=item.official_id).first().id
+            q = Course.query.filter_by(syllabus=tmp_syll).first()
+            atuple = (item,q)
+            pairs.append(atuple)
+
+    # QUEUE
     with open(queuefile, 'r') as qf:
         queue = set(json.load(qf))
-    return render_template('index.html', adm=adm, courses=courses, num=num, pending=queue)
+    return render_template('index.html', adm=adm, courses=courses, num=num, pending=queue, favs=pairs)
 
 
 @app.route('/login')
