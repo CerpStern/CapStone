@@ -13,10 +13,9 @@ from requests.exceptions import HTTPError
 from config import config, Auth
 
 queuefile = 'queue.json'
-
 basedir = os.path.abspath(os.path.dirname(__file__))
 
-"""APP creation and configuration"""
+#APP creation and configuration
 app = Flask(__name__)
 app.config.from_object(config['dev'])
 db = SQLAlchemy(app)
