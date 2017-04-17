@@ -33,8 +33,12 @@ class User(db.Model, UserMixin):
     courses = db.relationship('Course')
     favorites = db.relationship('Favorites')
 
+# ooohhh... I made that plural. doesn't make a lot of sense
 class Favorites(db.Model):
     __tablename__ = "favorites"
+    def __init__(self, user_id, oid):
+        self.user = user_id
+        self.official_id = oid
     id = db.Column(db.Integer,primary_key=True)
     user = db.Column(db.Integer, db.ForeignKey('users.id'))
     official_id = db.Column(db.Integer, db.ForeignKey('official.id'))
