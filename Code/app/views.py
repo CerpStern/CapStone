@@ -370,22 +370,32 @@ def adv_search():
     auth_url = get_oauth_url()
     return render_template('advanced.html',auth_url=auth_url, depts=depts)
 
-
+# so the goal here is to have only one instance of a user/id combo
+# we change the button in jinja depending on if it exists or not.
+# same for the create / delete logic
 @app.route('/favorite',methods = ['POST','GET'])
-def add_favorite():
+def toggle_favorite():
     user_id=request.values.get('fav_user')
     fav_id=request.values.get('fav_id')
-    print("user: {}, syllid: {}".format(user_id,fav_id))
-    new_fav = Favorites(user_id,fav_id)
-    db.session.add(new_fav)
-    db.session.commit()
 
-    q1 = Favorites.query.filter_by(official_id=1).first()
-    print(q1.user)
+    check_me = Favorites.query.filter_by(user=user_id,official_id=fav_id).first()
+    if check_me is None:
+        new_fav = Favorites(user_id,fav_id)
+        db.session.add(new_fav)
+        db.session.commit()
+    else:
+        db.session.delete(check_me)
+        db.session.commit()
 
-    print("we made it here without crashing I guess?")
+    check_me = Favorites.query.filter_by(user=user_id,official_id=fav_id).first()
+    if check_me is not None:
+        print("user: {}, syll: {}".format(check_me.user,check_me.official_id))
+    else:
+        print("She's dead jim")
 
     return redirect(url_for('index'))
+
+
 # Custom 404 handler
 @app.errorhandler(404)
 def err404(err):
