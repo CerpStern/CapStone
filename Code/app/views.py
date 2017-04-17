@@ -11,24 +11,22 @@ from requests_oauthlib import OAuth2Session
 from requests.exceptions import HTTPError
 
 from config import config, Auth
-
 from app import app
 from app import db
 from app import login_manager
 from app.models import *
 
 queuefile = 'queue.json'
-
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 """APP creation and configuration"""
-#db = SQLAlchemy(app)
-#login_manager = LoginManager(app)
-#login_manager.login_view = "login"
-#login_manager.session_protection = "strong"
+
 
 from app.utils import *
 
+##
+#  Index
+#
 @app.route('/')
 @login_required
 def index():
@@ -66,7 +64,9 @@ def index():
         queue = set(json.load(qf))
     return render_template('index.html', adm=adm, courses=courses, num=num, pending=queue, favs=pairs,has_favs=has_favs,depts=departments)
 
-
+##
+#  Login Page
+#
 @app.route('/login')
 def login():
     if current_user.is_authenticated:
@@ -74,7 +74,9 @@ def login():
     auth_url = get_oauth_url()
     return render_template('login.html', auth_url=auth_url)
 
-
+##
+#  Callback required by oauth2
+#
 @app.route('/gCallback')
 def callback():
     if current_user is not None and current_user.is_authenticated:
@@ -120,6 +122,9 @@ def logout():
     logout_user()
     return redirect(url_for('index'))
 
+##
+#  Route for unapproved sylabuses to be viewed by the instructor.
+#    Doubles as private links ( not indexed in search )
 @app.route('/syllabus')
 def syllabus():
     try:
@@ -136,6 +141,9 @@ def syllabus():
     has_prof = True if Course.query.filter_by(syllabus=int(request.args.get('id'))).first().user is not None else False
     return render_template('syllabus.html', id=syllabus.id, syllabus=syllabus, owns=owns, auth_url=auth_url, adm=is_admin(), hasprof = has_prof, title=title)
 
+##
+#  Route for official Syllabus (Searchables)
+#
 @app.route('/official')
 def official():
     thesyllabus = db.session.query(Official).filter(Official.id == request.args.get('id')).first()
@@ -161,6 +169,9 @@ def official():
             owns = True
     return render_template('official.html', id=thesyllabus.id, syllabus=thesyllabus, owns=owns, auth_url=auth_url, adm=is_admin(), unoffid=unoffid, logged_in=logged_in, user_id=user_id, already_favorited=already_favorited, title=title)
 
+##
+#  Remove Professor from course
+#
 @app.route('/remprof', methods=['POST'])
 def remprof():
     if not is_admin():
@@ -176,6 +187,9 @@ def remprof():
         return jsonify(status=2)
     return jsonify(status=1)
 
+##
+#  Assign Professor to course
+#
 @app.route('/setprof', methods=['POST'])
 def setprof():
     if not is_admin():
@@ -196,7 +210,9 @@ def setprof():
         db.session.rollback()
         return jsonify(status=2)
     return jsonify(status=1)
-
+##
+#  Save Syllabus Changes
+#
 @app.route('/save', methods = ['POST'])
 def save():
     vals = []
@@ -223,6 +239,9 @@ def save():
     return redirect(url_for('syllabus') + '?id={}'.format(vals[0]))
     #return redirect(url_for('syllabus') + '?id={}'.format(vals[0][3:][:-4]))
 
+##
+#  Remove A course
+#
 @app.route('/remove', methods = ['POST'])
 def remove():
     year = int(request.form.get('year'))
@@ -246,7 +265,9 @@ def remove():
         db.session.rollback()
         return jsonify(status=2)
     return jsonify(status=1)
-
+##
+#  Add a Course
+#
 @app.route('/add', methods = ['POST'])
 def add():
     year = int(request.form.get('year'))
@@ -330,7 +351,9 @@ def queue():
             q.add(request.args.get('id'))
             json.dump(list(q), qf)
     return redirect(url_for('index'))
-    
+##
+#  Give User Admin Privilegess
+#
 @app.route('/addadmin', methods=['POST'])
 def addadmin():
     try:
@@ -346,7 +369,9 @@ def addadmin():
     except:
         db.session.rollback()
         return jsonify(status=2)
-
+##
+#  Remove User Admin Privilegess
+#
 @app.route('/remadmin', methods=['POST'])
 def remadmin():
     try:
@@ -364,8 +389,9 @@ def remadmin():
         return jsonify(status=2)
 
 
-
-###  Search
+##
+#  Search destination, and results page.
+#
 @app.route('/search',methods = ['GET','POST'])
 def search():
     # Pull values from request.
@@ -396,6 +422,9 @@ def search():
     auth_url = get_oauth_url()
     return render_template('search.html',tuples=pairs,auth_url=auth_url)
 
+##
+#  Advanced Search Page
+#
 @app.route('/adv_search',methods = ['GET'])
 def adv_search():
     # DEPARTMENTS THING
@@ -428,11 +457,18 @@ def toggle_favorite():
     # Finished. redirect to the same page to have the button change.
     return redirect(url_for('official') + '?id={}'.format(fav_id))
 
+
+##
+#  Error Handling
+#
+
 # Custom 404 handler
 @app.errorhandler(404)
 def err404(err):
     return render_template('404.html'), 404
 
+# Custom 500 handler
+# for internal errors. replaced by debug page when debug server is running.
 @app.errorhandler(500)
 def err500(err):
     return render_template('500.html'), 500
