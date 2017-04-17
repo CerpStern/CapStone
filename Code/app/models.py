@@ -18,7 +18,7 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 
 from app import db
 
-""" DB Models """
+# DB Models
 
 
 class User(db.Model, UserMixin):
@@ -33,7 +33,6 @@ class User(db.Model, UserMixin):
     courses = db.relationship('Course')
     favorites = db.relationship('Favorites')
 
-# ooohhh... I made that plural. doesn't make a lot of sense
 class Favorites(db.Model):
     __tablename__ = "favorites"
     def __init__(self, user_id, oid):
