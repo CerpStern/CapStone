@@ -11,12 +11,12 @@ from requests_oauthlib import OAuth2Session
 from requests.exceptions import HTTPError
 
 from config import config, Auth
-
 from app import app
 from app import db
 from app import login_manager
 from app.models import *
 
+# Checks if the logged in used is an admin
 def is_admin():
     id = current_user.get_id()
     adm = User.query.filter_by(id=id).first()
@@ -24,18 +24,19 @@ def is_admin():
         return False
     return adm.admin
 
+# pull course from DB
 def get_courses():
     user = current_user.get_id()
     matches = Course.query.filter_by(user=user)
     num = Course.query.filter_by(user=user).count()
     return matches, num
 
+# Grab user info from DB
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
-""" OAuth Session creation """
 
-
+# OAuth Session creation
 def get_google_auth(state=None, token=None):
     if token:
         return OAuth2Session(Auth.CLIENT_ID, token=token)
@@ -50,6 +51,7 @@ def get_google_auth(state=None, token=None):
                 scope=Auth.SCOPE)
     return oauth
 
+# get oauth url for login button. needed on each route that uses render_template
 def get_oauth_url():
     google = get_google_auth()
     auth_url, state = google.authorization_url(
@@ -76,7 +78,6 @@ def find_matches(search_text,course,section,semester,year,department):
     point_counter = [0] * syll_count
 
     if is_provided(search_text):
-        # *.lower()... poo that doesn't seem to work.
         split = search_text.lower().split(" ")
         for to_test in Official.query.filter_by(visible=True):
             stringed = str(to_test).lower()
