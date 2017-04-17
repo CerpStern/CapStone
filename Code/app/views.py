@@ -36,8 +36,11 @@ def index():
     courses, num = get_courses()
 
     # FAVORITES
+    # well all this got dirty quick
     pairs = []
     favs = None
+    has_favs = False
+    fav_count = 0
     if current_user.get_id() is not None:
         favs = Favorites.query.filter_by(user=current_user.get_id())
         for item in favs:
@@ -45,11 +48,14 @@ def index():
             q = Course.query.filter_by(syllabus=tmp_syll).first()
             atuple = (item,q)
             pairs.append(atuple)
+            fav_count=fav_count+1
+        if fav_count > 0:
+            has_favs = True
 
     # QUEUE
     with open(queuefile, 'r') as qf:
         queue = set(json.load(qf))
-    return render_template('index.html', adm=adm, courses=courses, num=num, pending=queue, favs=pairs)
+    return render_template('index.html', adm=adm, courses=courses, num=num, pending=queue, favs=pairs,has_favs=has_favs)
 
 
 @app.route('/login')

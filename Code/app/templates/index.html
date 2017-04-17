@@ -2,18 +2,25 @@
 {% block body %}
 
 {% if current_user.is_authenticated %}
-{% if not adm %}
 
-<div class="center">
-<h3> Favorites </h3>
-{% for tuples in favs%}
-{% if tuples|length < 1 %}
-<p>You have no favorites. Add them by clicking add to favorites on a course page.</p>
-{% endif %}
-<a href="/official?id={{tuples[0].official_id}}"> {{tuples[1]}} </a>
-{% endfor %}
-{%endif %}
+<!-- Begin non-admin favorites.-->
+{% if not adm %}
+<div class="row center-align">
+	<div class="col s0 m3 l4 xl4"></div>
+	<div class="col s0 m3 l4 xl4 module">
+		<h4> Favorites </h4>
+		{% if not has_favs %}
+		<p>You have no favorites. Add them by clicking add to favorites on a course page.</p>
+		{% endif %}
+		{% for tuples in favs%}
+		<a href="/official?id={{tuples[0].official_id}}"> {{tuples[1]}} </a><br>
+		{% endfor %}
+	</div> <!-- End Favs -->
 </div>
+{% endif %}
+
+
+
 
 {% if adm %}
 <div class="row">
@@ -110,6 +117,18 @@
 			{% endfor %}
 		</div>
 	</div>
+	<!-- Favorites, does not appear if empty.-->
+	{% if has_favs %}
+	<div class="col s12 m4 l4 xl4">
+		<div class="module">
+			<h4> Favorites </h4>
+			<p>You have no favorites. Add them by clicking add to favorites on a course page.</p>
+			{% for tuples in favs%}
+			<a href="/official?id={{tuples[0].official_id}}"> {{tuples[1]}} </a><br>
+			{% endfor %}
+		</div>
+	</div> 
+	{% endif %}<!-- End Favs -->
 
 </div>
 <br>
