@@ -1,4 +1,5 @@
 import os
+import sys
 import json
 import datetime
 
@@ -175,6 +176,7 @@ def official():
 @app.route('/remprof', methods=['POST'])
 def remprof():
     if not is_admin():
+        print("User {} attempted to remove instructor privileges".format(current_user.get_id()), file=sys.stderr)
         return jsonify(status=2)
     crse = Course.query.filter_by(syllabus=int(request.form.get('id'))).first()
     if crse is None or crse.user is None:
@@ -193,6 +195,7 @@ def remprof():
 @app.route('/setprof', methods=['POST'])
 def setprof():
     if not is_admin():
+        print("User {} attempted to grant instructor privileges".format(current_user.get_id()), file=sys.stderr)
         return jsonify(status=2)
     iid = User.query.filter_by(email=request.form.get('user')).first()
     if iid is None: # Need to add instructor
@@ -222,6 +225,7 @@ def save():
         else:
             vals.append(request.form.get('test'+str(i)))
     if not is_admin() or int(current_user.get_id()) != int(Course.query.filter_by(syllabus=vals[0]).first().user):
+        print("User {} attempted to edit a syllabus".format(current_user.get_id()), file=sys.stderr)
         return redirect(url_for('syllabus') + '?id={}'.format(vals[0]))
     syllabus = Syllabus.query.filter_by(id=vals[0]).first()
     #syllabus = Syllabus.query.filter_by(id=vals[0][3:][:-4]).first()
@@ -245,6 +249,7 @@ def save():
 @app.route('/remove', methods = ['POST'])
 def remove():
     if not is_admin():
+        print("User {} attempted to add a course".format(current_user.get_id()), file=sys.stderr)
         return jsonify(status=2)
     year = int(request.form.get('year'))
     semester = request.form.get('semester')
@@ -273,6 +278,7 @@ def remove():
 @app.route('/add', methods = ['POST'])
 def add():
     if not is_admin():
+        print("User {} attempted to add a course".format(current_user.get_id()), file=sys.stderr)
         return jsonify(status=2)
     year = int(request.form.get('year'))
     semester = request.form.get('semester')
@@ -308,7 +314,9 @@ def add():
 #
 @app.route('/queue')
 def queue():
-    if request.args.get('action') == 'approve' and is_admin(): 
+    if request.args.get('action') == 'approve':
+        if not is_admin(): 
+            print("User {} attempted to approve a syllabus.".format(current_user.get_id(), file=sys.stderr))
         id = request.args.get('id')
         with open(queuefile, 'r') as qf:
             q = set(json.load(qf))
@@ -341,7 +349,9 @@ def queue():
         except:
             db.session.rollback()
     # Remove the syllabus from the approval queue
-    elif request.args.get('action') == 'deny' and is_admin():
+    elif request.args.get('action') == 'deny':
+        if not is_admin(): 
+            print("User {} attempted to deny a syllabus.".format(current_user.get_id(), file=sys.stderr))
         with open(queuefile, 'r') as qf:
             q = set(json.load(qf))
         with open(queuefile, 'w') as qf:
@@ -361,6 +371,7 @@ def queue():
 @app.route('/addadmin', methods=['POST'])
 def addadmin():
     if not is_admin():
+        print("User {} attempted to add an admin.".format(current_user.get_id(), file=sys.stderr))
         return jsonify(status=2)
     try:
         toadd = request.form.get('addemail')
@@ -381,6 +392,7 @@ def addadmin():
 @app.route('/remadmin', methods=['POST'])
 def remadmin():
     if not is_admin():
+        print("User {} attempted to remove an admin.".format(current_user.get_id(), file=sys.stderr))
         return jsonify(status=2)
     try:
         torem = request.form.get('rememail')
