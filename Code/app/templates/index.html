@@ -128,7 +128,7 @@
 		<div class="module">
 			<h5> Favorites </h5>
 			{% if not has_favs %}
-				<p>You have no favorites. Add them by clicking add to favorites on a course page.</p>
+				<p>You have no favorites. Add them by clicking "Favorite" on a course page.</p>
 			{% endif %}<!-- End Favs -->
 			{% for tuples in favs%}
 			<a href="/official?id={{tuples[0].official_id}}"> {{tuples[1]}} </a><br>
