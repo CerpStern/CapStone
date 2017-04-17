@@ -7,9 +7,10 @@
 	<div class="center">
 		<div class="row">
 			<div class="col s12 m12 l12 xl12">
+				<h5>Course Title - Draft</h5>
 				{% if owns or adm %}
 				{% if syllabus.official_id is not none %}
-				<a class="btn accent-2 syll" href="/official?id={{ syllabus.official_id }}">Official Version</a>
+				<a class="btn accent-2 syll" href="/official?id={{ syllabus.official_id }}">View Public</a>
 				{% endif %}
 				<button class="btn accent-2 syll" id="edit" type="button">Edit<i class="material-icons right">edit</i></button>
 				<button id="save" class="btn accent-2 syll" name="submitbtn">Save<i class="material-icons right">save</i> </button>
