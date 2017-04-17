@@ -31,6 +31,7 @@ class User(db.Model, UserMixin):
     created_at = db.Column(db.DateTime, default=datetime.datetime.utcnow())
     admin = db.Column(db.Boolean, default=False)
     courses = db.relationship('Course')
+    favorites = db.relationship('Favorites')
 
 class Favorites(db.Model):
     __tablename__ = "favorites"
