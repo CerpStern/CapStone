@@ -368,12 +368,13 @@ def search():
 
     unsorted = find_matches(search_text,course,section,semester,year,department)
     ordered=[]
-    while max(unsorted) is not 0:
-        largest = max(unsorted)
-        for x in range(0,len(unsorted)):
-            if unsorted[x] is largest:
-                ordered.append(x+1)
-                unsorted[x]=0
+    if len(unsorted) is not 0:
+        while max(unsorted) is not 0:
+            largest = max(unsorted)
+            for x in range(0,len(unsorted)):
+                if unsorted[x] is largest:
+                    ordered.append(x+1)
+                    unsorted[x]=0
     pairs = []
     for item in ordered:
         tmp_syll = Syllabus.query.filter_by(official_id=item).first().id
