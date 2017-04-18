@@ -38,7 +38,7 @@
     <ul class="right downerer">
         <!-- Logout Button for Large Screens -->
         <li class="hide-on-small-only">
-            <a class="waves-effect waves-light btn indigo accent-2" href="{{url_for('logout')}}">
+            <a class="btn indigo accent-2 waves-effect waves-light" href="{{url_for('logout')}}">
                 <!-- Logout Icon -->
                 <i class="material-icons right hide-on-med-only">exit_to_app</i>
                 <i class="material-icons hide-on-large-only">exit_to_app</i>
@@ -48,7 +48,7 @@
 
         <!-- Logout Button for Small Screens -->
         <li class="hide-on-med-and-up">
-            <a class="small-button btn waves-effect waves-light indigo accent-2" href="{{url_for('logout')}}">
+            <a class="btn indigo accent-2 waves-effect waves-light small-button" href="{{url_for('logout')}}">
                 <!-- Logout Icon -->
                 <i class="material-icons">exit_to_app</i>
             </a>
@@ -58,7 +58,7 @@
     <ul class="right downerer">
 
         <!-- User Button -->
-        <a class="btn indigo accent-2 hide-on-med-and-down" href="/">
+        <a class="btn indigo accent-2 waves-effect waves-light hide-on-med-and-down" href="/">
 
             <!-- User Profile Picture -->
             <li><img src="{{current_user.avatar}}?sz=29" width="29" height="29" style="margin-top:4px;" alt="{{current_user.name}}"></li>
@@ -75,7 +75,7 @@
 
         <!-- Login Button for Large Screens -->
         <li class="hide-on-small-only">
-            <a class="waves-effect waves-light btn indigo accent-2" href="{{auth_url}}">
+            <a class="btn indigo accent-2 waves-effect waves-light" href="{{auth_url}}">
                 <!-- Login Icon -->
                 <i class="material-icons right hide-on-med-only">perm_identity</i>
                 <i class="material-icons hide-on-large-only">perm_identity</i>
@@ -85,7 +85,7 @@
 
         <!-- Login Button for Small Screens -->
         <li class="hide-on-med-and-up">
-            <a class="small-button btn waves-effect waves-light indigo accent-2" href="{{auth_url}}">
+            <a class="btn indigo accent-2 waves-effect waves-light small-button" href="{{auth_url}}">
                 <!-- Login Icon -->
                 <i class="material-icons">perm_identity</i>
             </a>
@@ -106,14 +106,14 @@
 
             <!-- Search Button -->
             <li class="hide-on-small-only">
-                <input class="btn accent-2 indigo" type="submit" value="Search" required>    
+                <input class="btn indigo accent-2" type="submit" value="Search" required>    
             </li>
 
             <li><input type="submit" hidden=""></li>
 
             <!-- Advanced Search Button for Large Screens -->
             <li class="hide-on-small-only">
-                <a class="waves-effect waves-light btn indigo accent-2" href="/adv_search">
+                <a class="btn indigo accent-2 waves-effect waves-light" href="/adv_search">
                     <!-- Advanced Search Icon -->
                     <i class="material-icons right hide-on-med-only">build</i>
                     <i class="material-icons hide-on-large-only">build</i>
@@ -123,7 +123,7 @@
 
             <!-- Advanced Search Button for Small Screens -->
             <li class="hide-on-med-and-up">
-                <a class="small-button btn waves-effect waves-light indigo accent-2" href="/adv_search" style="margin-left:5px;margin-right:5px;">
+                <a class="btn indigo accent-2 waves-effect waves-light small-button" href="/adv_search" style="margin-left:5px;margin-right:5px;">
                     <!-- Advanced Search Icon -->
                     <i class="material-icons">build</i>
                 </a>
