@@ -1,3 +1,4 @@
+/* Make syllabus page printer friendly */
 @media print {
 	.hide-for-print {
 		display: none !important;
@@ -9,32 +10,15 @@
 	}
 }
 
-#save {
-	display: none;
+/* Grey Background */
+body {
+	background-color: #e9ebee;
 }
 
-#section-header {
-	display: inline-block;
-}
-
-#section-input {
-	display: inline-block;
-	width: 300px;
-}
-
-#syllabus {
-	margin: 25px 0px 25px 0px;
-	text-align: left;
-	background-color: #ffffff;
-	padding: 1em 3em 3em 3em;
-}
-
-#section-save {
-	display: inline-block;
-}
 input.input-field {
 	margin: 0;
 }
+
 .syll {
 	margin-top: 10px;
 }
@@ -60,11 +44,31 @@ input.input-field {
 	margin-top: 15px;
 }
 
-body {
-	background-color: #e9ebee;
-}
-
 /* TODO - better workaround? */
 .row {
 	margin-bottom: 0px;
+}
+
+#save {
+	display: none;
+}
+
+#section-header {
+	display: inline-block;
+}
+
+#section-input {
+	display: inline-block;
+	width: 300px;
+}
+
+#syllabus {
+	margin: 25px 0px 25px 0px;
+	text-align: left;
+	background-color: #ffffff;
+	padding: 1em 3em 3em 3em;
+}
+
+#section-save {
+	display: inline-block;
 }
