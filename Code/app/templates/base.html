@@ -29,8 +29,8 @@
 			<img src="/static/images/icon.png" style="height:100%;width:auto;" >
 		</a>	
 
+		<!-- Begin - User is Authenticated/Logged In -->
 		{%- if current_user.is_authenticated -%}
-
 		<ul class="right downerer">
 			<!-- Logout Button for Large Screens -->
 			<li class="hide-on-small-only">
@@ -65,7 +65,9 @@
 				<li style="margin-left:5px;" >{{current_user.name}}</li>
 			</a>
 		</ul>
+		<!-- End - User is Authenticated/Logged In -->
 
+		<!-- Begin - User is Not Logged In -->
 		{%- else -%}
 		<ul class="right downerer">
 
@@ -88,6 +90,7 @@
 			</li>
 		</ul>
 		{%- endif -%}
+		<!-- End - User is Not Logged In -->
 
 		<!-- Search Form -->
 		<form action="/search" method='post'>
