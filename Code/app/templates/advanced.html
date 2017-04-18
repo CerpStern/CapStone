@@ -2,63 +2,63 @@
 {%block body%}
 
 <div class="container ">
-	<div class="module">
-		<div class="row">
-			<h5 class="center-align">Advanced Search</h5>
-			<form action="/search" method='post' id="search_me">
-				<!--  Centered, Full Width Search-->
-				<div class="col s8 offset-s2">
-					<input autofocus  name="search_text" class="input-field" type="search" placeholder="Search text" >
-				</div>
-
-				<div class="col s12"><p>&nbsp;</p></div>
-
-				<!-- Left Col -->
-				<div class="col s6">
-
-						<input name="course" class="input-field"\
-						type="search" placeholder="Course" >
-
-						<select class="downer" name="semester">
-							<option value="" disabled selected>Select Semester</option>
-							<option value="Fall">Fall</option>
-							<option value="Spring">Spring</option>
-							<option value="Summer">Summer</option>
-						</select>
-
-				</div>
-
-				<!-- Right Col -->
-				<div class="col s6">
-					<input name="section" class="input-field"\
-					type="search" placeholder="Section" >
-
-					<input name="year" class="input-field"\
-					type="search" placeholder="Year" >
-				</div>
-
-				<div class="col s12">
-					<select class="downer" name="department">
-						<option value="" disabled selected> Select Department</option>
-						{%for dept in depts%}
-						<option value="{{dept}}"> {{dept}} </option>
-						{% endfor %}
-					</select>
-				</div>
-
-				<div class="col s12 center-align">
-					<input class="btn accent-2" type="submit" value="Search" required>
-					<!--
-					<a class="waves-effect waves-light btn-large" type="submit" id="let_er_rip">
-						<i class="large material-icons right">search</i>
-						search
-					</a>-->
-				</div>
-
-				<input type="submit" hidden="">
-			</form>
+<div class="module">
+<div class="row">
+	<h5 class="center-align">Advanced Search</h5>
+	<form action="/search" method='post' id="search_me">
+		<!--  Centered, Full Width Search-->
+		<div class="col s8 offset-s2">
+			<input autofocus  name="search_text" class="input-field" type="search" placeholder="Search text" >
 		</div>
-	</div>
+
+		<div class="col s12"><p>&nbsp;</p></div>
+
+		<!-- Left Col -->
+		<div class="col s6">
+
+				<input name="course" class="input-field"\
+				type="search" placeholder="Course" >
+
+				<select class="downer" name="semester">
+					<option value="" disabled selected>Select Semester</option>
+					<option value="Fall">Fall</option>
+					<option value="Spring">Spring</option>
+					<option value="Summer">Summer</option>
+				</select>
+
+		</div>
+
+		<!-- Right Col -->
+		<div class="col s6">
+			<input name="section" class="input-field"\
+			type="search" placeholder="Section" >
+
+			<input name="year" class="input-field"\
+			type="search" placeholder="Year" >
+		</div>
+
+		<div class="col s12">
+			<select class="downer" name="department">
+				<option value="" disabled selected> Select Department</option>
+				{%for dept in depts%}
+				<option value="{{dept}}"> {{dept}} </option>
+				{% endfor %}
+			</select>
+		</div>
+
+		<div class="col s12 center-align">
+			<input class="btn accent-2" type="submit" value="Search" required>
+			<!--
+			<a class="waves-effect waves-light btn-large" type="submit" id="let_er_rip">
+				<i class="large material-icons right">search</i>
+				search
+			</a>-->
+		</div>
+
+		<input type="submit" hidden="">
+	</form>
+</div>
+</div>
 </div>
 
 {%endblock%}
