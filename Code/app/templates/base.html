@@ -2,134 +2,134 @@
 <html>
 
 <head>
-	<title>SMS</title>
-	<!-- Make viewport responsive -->
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SMS</title>
+    <!-- Make viewport responsive -->
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-	<!-- Favicon -->
-	<link rel="shortcut icon" type="image/png" href="/static/images/tiny_icon.png"/>
-	<!-- Materialize CSS -->
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css">
-	<!-- Material Design Icons -->
-	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	<!-- Main CSS File -->
-	<link rel="stylesheet" href="/static/css/main.css">
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/png" href="/static/images/tiny_icon.png"/>
+    <!-- Materialize CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css">
+    <!-- Material Design Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Main CSS File -->
+    <link rel="stylesheet" href="/static/css/main.css">
 
-	<!-- JQuery -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> 
-	<!-- Materialize JS -->
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script>
-	<!-- Search JS -->
-	<script src="static/js/search.js"></script>
+    <!-- JQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script> 
+    <!-- Materialize JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script>
+    <!-- Search JS -->
+    <script src="static/js/search.js"></script>
 </head>
 
 <body>
 <!-- Navbar -->
 <nav class="nav-extended hide-for-print" style="height:64px;">
 <div class="indigo nav-wrapper" style="height:64px;">
-	
-	<!-- Main Logo Icon -->
-	<a href="/" class="left hide-on-small-only" style="height:50px;margin-top:7px;margin-left:7px;" >
-		<img src="/static/images/icon.png" style="height:100%;width:auto;" >
-	</a>	
+    
+    <!-- Main Logo Icon -->
+    <a href="/" class="left hide-on-small-only" style="height:50px;margin-top:7px;margin-left:7px;" >
+        <img src="/static/images/icon.png" style="height:100%;width:auto;" >
+    </a>    
 
-	<!-- Begin - User is AuthenticWated/Logged In -->
-	{%- if current_user.is_authenticated -%}
-	<ul class="right downerer">
-		<!-- Logout Button for Large Screens -->
-		<li class="hide-on-small-only">
-			<a class="waves-effect waves-light btn indigo accent-2" href="{{url_for('logout')}}">
-				<!-- Logout Icon -->
-				<i class="material-icons right hide-on-med-only">exit_to_app</i>
-				<i class="material-icons hide-on-large-only">exit_to_app</i>
-				<span class="hide-on-med-and-down">Logout</span>
-			</a>
-		</li>
+    <!-- Begin - User is AuthenticWated/Logged In -->
+    {%- if current_user.is_authenticated -%}
+    <ul class="right downerer">
+        <!-- Logout Button for Large Screens -->
+        <li class="hide-on-small-only">
+            <a class="waves-effect waves-light btn indigo accent-2" href="{{url_for('logout')}}">
+                <!-- Logout Icon -->
+                <i class="material-icons right hide-on-med-only">exit_to_app</i>
+                <i class="material-icons hide-on-large-only">exit_to_app</i>
+                <span class="hide-on-med-and-down">Logout</span>
+            </a>
+        </li>
 
-		<!-- Logout Button for Small Screens -->
-		<li class="hide-on-med-and-up">
-			<a class="small-button btn waves-effect waves-light indigo accent-2" href="{{url_for('logout')}}">
-				<!-- Logout Icon -->
-				<i class="material-icons">exit_to_app</i>
-			</a>
-		</li>
-	</ul>
+        <!-- Logout Button for Small Screens -->
+        <li class="hide-on-med-and-up">
+            <a class="small-button btn waves-effect waves-light indigo accent-2" href="{{url_for('logout')}}">
+                <!-- Logout Icon -->
+                <i class="material-icons">exit_to_app</i>
+            </a>
+        </li>
+    </ul>
 
-	<ul class="right downerer">
+    <ul class="right downerer">
 
-		<!-- User Button -->
-		<a class="btn indigo accent-2 hide-on-med-and-down" href="/">
+        <!-- User Button -->
+        <a class="btn indigo accent-2 hide-on-med-and-down" href="/">
 
-			<!-- User Profile Picture -->
-			<li><img src="{{current_user.avatar}}?sz=29" width="29" height="29" style="margin-top:4px;" alt="{{current_user.name}}"></li>
+            <!-- User Profile Picture -->
+            <li><img src="{{current_user.avatar}}?sz=29" width="29" height="29" style="margin-top:4px;" alt="{{current_user.name}}"></li>
 
-			<!-- User Name -->
-			<li style="margin-left:5px;" >{{current_user.name}}</li>
-		</a>
-	</ul>
-	<!-- End - User is Authenticated/Logged In -->
+            <!-- User Name -->
+            <li style="margin-left:5px;" >{{current_user.name}}</li>
+        </a>
+    </ul>
+    <!-- End - User is Authenticated/Logged In -->
 
-	<!-- Begin - User is Not Logged In -->
-	{%- else -%}
-	<ul class="right downerer">
+    <!-- Begin - User is Not Logged In -->
+    {%- else -%}
+    <ul class="right downerer">
 
-		<!-- Login Button for Large Screens -->
-		<li class="hide-on-small-only">
-			<a class="waves-effect waves-light btn indigo accent-2" href="{{auth_url}}">
-				<!-- Login Icon -->
-				<i class="material-icons right hide-on-med-only">perm_identity</i>
-				<i class="material-icons hide-on-large-only">perm_identity</i>
-				<span class="hide-on-med-and-down">Login with Google</span>
-			</a>
-		</li>
+        <!-- Login Button for Large Screens -->
+        <li class="hide-on-small-only">
+            <a class="waves-effect waves-light btn indigo accent-2" href="{{auth_url}}">
+                <!-- Login Icon -->
+                <i class="material-icons right hide-on-med-only">perm_identity</i>
+                <i class="material-icons hide-on-large-only">perm_identity</i>
+                <span class="hide-on-med-and-down">Login with Google</span>
+            </a>
+        </li>
 
-		<!-- Login Button for Small Screens -->
-		<li class="hide-on-med-and-up">
-			<a class="small-button btn waves-effect waves-light indigo accent-2" href="{{auth_url}}">
-				<!-- Login Icon -->
-				<i class="material-icons">perm_identity</i>
-			</a>
-		</li>
-	</ul>
-	{%- endif -%}
-	<!-- End - User is Not Logged In -->
+        <!-- Login Button for Small Screens -->
+        <li class="hide-on-med-and-up">
+            <a class="small-button btn waves-effect waves-light indigo accent-2" href="{{auth_url}}">
+                <!-- Login Icon -->
+                <i class="material-icons">perm_identity</i>
+            </a>
+        </li>
+    </ul>
+    {%- endif -%}
+    <!-- End - User is Not Logged In -->
 
-	<!-- Search Form -->
-	<form action="/search" method='post'>
-		<ul class="right">
-			<!-- Search Text -->
-			<li><input autofocus name="search_text" class="input-field" type="search" placeholder="Search"></li>
-			
-			<!-- Spacers -->
-			<li><div class="nick-spacer hide-on-med-and-down"> &nbsp;</div></li>
-			<li><div class="nick-spacer"> &nbsp;</div></li>
-			
-			<!-- Search Button -->
-			<li class="hide-on-small-only">
-				<input class="btn accent-2 indigo" type="submit" value="Search" required>	
-			</li>
-			
-			<li><input type="submit" hidden=""></li>
-			
-			<!-- Advanced Search Button for Large Screens -->
-			<li class="hide-on-small-only">
-				<a class="waves-effect waves-light btn indigo accent-2" href="/adv_search">
-					<!-- Advanced Search Icon -->
-					<i class="material-icons right hide-on-med-only">build</i>
-					<i class="material-icons hide-on-large-only">build</i>
-					<span class="hide-on-med-and-down">Advanced Search</span>
-				</a>
-			</li>
+    <!-- Search Form -->
+    <form action="/search" method='post'>
+        <ul class="right">
+            <!-- Search Text -->
+            <li><input autofocus name="search_text" class="input-field" type="search" placeholder="Search"></li>
+            
+            <!-- Spacers -->
+            <li><div class="nick-spacer hide-on-med-and-down"> &nbsp;</div></li>
+            <li><div class="nick-spacer"> &nbsp;</div></li>
 
-			<!-- Advanced Search Button for Small Screens -->
-			<li class="hide-on-med-and-up">
-				<a class="small-button btn waves-effect waves-light indigo accent-2" href="/adv_search" style="margin-left:5px;margin-right:5px;">
-					<!-- Advanced Search Icon -->
-					<i class="material-icons">build</i>
-				</a>
-			</li>
-		</ul>
-	</form>
+            <!-- Search Button -->
+            <li class="hide-on-small-only">
+                <input class="btn accent-2 indigo" type="submit" value="Search" required>    
+            </li>
+
+            <li><input type="submit" hidden=""></li>
+
+            <!-- Advanced Search Button for Large Screens -->
+            <li class="hide-on-small-only">
+                <a class="waves-effect waves-light btn indigo accent-2" href="/adv_search">
+                    <!-- Advanced Search Icon -->
+                    <i class="material-icons right hide-on-med-only">build</i>
+                    <i class="material-icons hide-on-large-only">build</i>
+                    <span class="hide-on-med-and-down">Advanced Search</span>
+                </a>
+            </li>
+
+            <!-- Advanced Search Button for Small Screens -->
+            <li class="hide-on-med-and-up">
+                <a class="small-button btn waves-effect waves-light indigo accent-2" href="/adv_search" style="margin-left:5px;margin-right:5px;">
+                    <!-- Advanced Search Icon -->
+                    <i class="material-icons">build</i>
+                </a>
+            </li>
+        </ul>
+    </form>
 </div>
 </nav>
 
