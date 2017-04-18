@@ -1,4 +1,5 @@
 import os
+import sys
 import json
 import datetime
 
@@ -15,6 +16,12 @@ from app import app
 from app import db
 from app import login_manager
 from app.models import *
+
+# Logging class
+class Logger:
+    @staticmethod
+    def log(message):
+        print(message, file=sys.stderr)
 
 # Checks if the logged in used is an admin
 def is_admin():
