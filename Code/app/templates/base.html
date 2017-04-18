@@ -32,7 +32,7 @@
 		{%- if current_user.is_authenticated -%}
 
 		<ul class="right downerer">
-			<!-- Large Logout Button -->
+			<!-- Logout Button for Large Screens -->
 			<li class="hide-on-small-only">
 				<a class="waves-effect waves-light btn indigo accent-2" href="{{url_for('logout')}}">
 					<i class="material-icons right hide-on-med-only">exit_to_app</i>
@@ -41,7 +41,7 @@
 				</a>
 			</li>
 
-			<!-- Small Logout Button -->
+			<!-- Logout Button for Small Screens -->
 			<li class="hide-on-med-and-up">
 				<a class="small-button btn waves-effect waves-light indigo accent-2" href="{{url_for('logout')}}">
 					<i class="material-icons">exit_to_app</i>
@@ -67,7 +67,7 @@
 		{%- else -%}
 		<ul class="right downerer">
 
-			<!-- Large Login Button -->
+			<!-- Login Button for Large Screens -->
 			<li class="hide-on-small-only">
 				<a class="waves-effect waves-light btn indigo accent-2" href="{{auth_url}}">
 					<i class="material-icons right hide-on-med-only">perm_identity</i>
@@ -76,7 +76,7 @@
 				</a>
 			</li>
 
-			<!-- Small Login Button -->
+			<!-- Login Button for Small Screens -->
 			<li class="hide-on-med-and-up">
 				<a class="small-button btn waves-effect waves-light indigo accent-2" href="{{auth_url}}">
 					<i class="material-icons">perm_identity</i>
@@ -105,7 +105,7 @@
 					<input type="submit" hidden="">
 				</li>
 				
-				<!-- Large Advanced Search Button -->
+				<!-- Advanced Search Button for Large Screens -->
 				<li class="hide-on-small-only">
 					<a class="waves-effect waves-light btn indigo accent-2" href="/adv_search">
 						<i class="material-icons right hide-on-med-only">build</i>
@@ -114,7 +114,7 @@
 					</a>
 				</li>
 
-				<!-- Small Advanced Search Button -->
+				<!-- Advanced Search Button for Small Screens -->
 				<li class="hide-on-med-and-up">
 					<a class="small-button btn waves-effect waves-light indigo accent-2" href="/adv_search" style="margin-left:5px;margin-right:5px;">
 						<i class="material-icons">build</i>
