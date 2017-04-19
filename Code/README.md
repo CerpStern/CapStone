@@ -58,3 +58,7 @@
 	python run.py
 
 The server will be running on https://localhost:5000
+
+### Usage notes:
+- When an administrator adds a course, it is not immediately removable: only courses with approved syllabi are available, and they are only marked inactive
+- To change the new course template, edit the template in config.py
