@@ -1,7 +1,9 @@
+from __future__ import print_function
 import os
 import sys
 import json
 import datetime
+import operator
 
 from flask import Flask, url_for, redirect, \
         render_template, session, request, jsonify
@@ -22,6 +24,7 @@ class Logger:
     @staticmethod
     def log(message):
         print(message, file=sys.stderr)
+
 
 # Checks if the logged in used is an admin
 def is_admin():
@@ -73,51 +76,134 @@ def is_provided(to_check):
     else:
         return False
 
-def find_matches(search_text,course,section,semester,year,department):
-    # we need to know how many syllabuses we have.
-    # preset point counter to that size +1
-    syll_count = 0
-    for thing in Official.query.filter(Official.id!=0):
-        syll_count = syll_count + 1
+class search_obj:
+    def __init__(self, sid, oid, course_string, contents, keywords):
+        # ids to match against
+        self.oid=oid
+        self.sid=sid
+        # Keep a split version and an assigned version around
+        self.split_course = course_string.split(" ")
+        self.dept = self.split_course[0]
+        self.course = self.split_course[1]
+        self.section = self.split_course[2]
+        self.semester = self.split_course[3]
+        self.year = self.split_course[4]
+        self.contents=contents
+        self.keywords=keywords
+        # default to 0
+        self.points=0
+    # Print all the things!! 
+    def guts(self):
+        print("SID: " + str(self.sid) + " OID: " + str(self.oid) + ", Course_string: " + self.course_string)
 
-    # syllabus 1 at index 0, 2 at 1 etc, contents are current pointage.
-    # weird way to expand to size of syll_count because python is dumb.
-    point_counter = [0] * syll_count
+    def get_points(self):
+        return self.points
 
-    if is_provided(search_text):
-        split = search_text.lower().split(" ")
-        for to_test in Official.query.filter_by(visible=True):
-            stringed = str(to_test).lower()
-            str_keywords=str(to_test.keywords).lower()
-            for word in split:
-                if word in stringed:
-                    point_counter[to_test.id-1] = point_counter[to_test.id-1] + 1
-                if word in str_keywords:
-                    # I was going to make the weight for this be 3.
-                    # Since we already match the whole thing, and give it one
-                    # I'm just going to give it 2.
-                    point_counter[to_test.id-1] = point_counter[to_test.id-1] + 2
+    # First we need to make search functions for each section.
+    # We assume that the input has been validated before it reaches this point.
+    def match_course(self, course_in):
+        if str(self.course)== course_in:
+            self.points = self.points + 4
+            return True
+        else:
+            return False
+    def match_semester(self, semester_in):
+            if self.semester == semester_in:
+                self.points = self.points + 3
+                return True
+            else:
+                return False
+    def match_year(self, year_in):
+        if str(self.year) == year_in:
+            self.points = self.points + 2
+            return True
+        else:
+            return False
+    def match_dept(self, dept_in):
+        if self.dept == dept_in:
+            self.points = self.points + 2
+            return True
+        else:
+            return False
+    def match_section(self, section_in):
+        # The conversion magic does not enjoy receiving an invalid number as a string
+        # just fail if that's the case. it's cool. not your thing, I get it.
+        try:
+            section_in=str(int(section_in))
+            if str(self.section) == section_in:
+                self.points = self.points + 2
+                return True
+            else:
+                return False
+        except:
+            return False
 
-    # None of these should require a capitalization change.
-    # Input is validated elsewhere.
-    if is_provided(course):
-        for match in Course.query.filter_by(id=course):
-            point_counter[match.syllabus-1] = point_counter[match.syllabus-1] + 4
+    # do not split before!!
+    def match_search_text(self, search_text):
+        split = search_text.split(" ")
+        for s in split:
+            if not self.match_course(s):
+                self.match_course(s.lower())
 
-    if is_provided(section):
-        for match in Course.query.filter_by(section=section):
-            point_counter[match.syllabus-1] = point_counter[match.syllabus-1] + 2
+            if not self.match_year(s):
+                self.match_year(s.lower())
 
-    if is_provided(semester):
-        for match in Course.query.filter_by(semester=semester):
-            point_counter[match.syllabus-1] = point_counter[match.syllabus-1] + 3
+            if not self.match_dept(s):
+                self.match_dept(s.lower())
 
-    if is_provided(year):
-        for match in Course.query.filter_by(year=year):
-            point_counter[match.syllabus-1] = point_counter[match.syllabus-1] + 2
+            if not self.match_section(s):
+                self.match_section(s.lower())
 
-    if is_provided(department):
-        for match in Course.query.filter_by(dept=department):
-            point_counter[match.syllabus-1] = point_counter[match.syllabus-1] + 2
+            if not self.match_semester(s):
+                self.match_semester(s.lower())
 
-    return point_counter
+            temp_points = 0
+            if self.keywords != None:
+                if len(self.keywords) > 1:
+                    if search_text in self.keywords:
+                        self.points = self.points + 3
+                else:
+                    for search_text in self.keywords.split(" "):
+                        self.points = self.points + 3
+            if s in self.contents:
+                self.points = self.points + 2
+            elif s.lower() in self.contents:
+                self.points = self.points + 2
+
+
+
+def find_matches(search_text,course_in,section,semester,year,department):
+    # Cache Queries
+    courses = Course.query.all()
+    # Limits search space to visible sylls only
+    officials = Official.query.filter_by(visible=True)
+    sylls = Syllabus.query.all()
+    # Array of search_obj's
+    searchable = []
+
+    # Compile info into easy to manage objects
+    for c in courses:
+        # grab oid and contents of relevant syllabus
+        tmp_oid = [x.official_id for x in sylls if x.id is c.syllabus][0]
+        contents = [x for x in sylls if x.id is c.syllabus][0]
+        keywords=contents.keywords
+        contents = str(contents).lower()
+        searchable.append(search_obj(c.syllabus,tmp_oid,str(c),contents,keywords))
+
+    for course in searchable:
+        if is_provided(search_text):
+            course.match_search_text(search_text)
+        if is_provided(course_in):
+            course.match_course(course_in)
+        if is_provided(year):
+            course.match_year(year)
+        if is_provided(department):
+            course.match_dept(department)
+        if is_provided(section):
+            course.match_section(section)
+        if is_provided(semester):
+            match_semester(semester)
+
+    searchable.sort(reverse=True,key=operator.attrgetter('points'))
+
+    return searchable
