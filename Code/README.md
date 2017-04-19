@@ -70,6 +70,7 @@ The server will be running on https://localhost:5000
 - Navigate to https://console.developers.google.com/apis/
 - Click Credentials in the left sidebar
 - Click Create Credentials -> OAuth Client ID
+- Choose Web Application
 - Follow on screen instructions until the Client ID, and Secret is displayed.
 - Change values of respective variables in config.py
 	- Note: There are two instances of client Secret in the config file
