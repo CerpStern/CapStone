@@ -81,6 +81,7 @@ class search_obj:
         # ids to match against
         self.oid=oid
         self.sid=sid
+        self.c_title=course_string
         # Keep a split version and an assigned version around
         self.split_course = course_string.split(" ")
         self.dept = self.split_course[0]
@@ -205,5 +206,4 @@ def find_matches(search_text,course_in,section,semester,year,department):
             match_semester(semester)
 
     searchable.sort(reverse=True,key=operator.attrgetter('points'))
-
     return searchable

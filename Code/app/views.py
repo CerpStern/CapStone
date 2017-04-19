@@ -442,24 +442,9 @@ def search():
     search_text = request.values.get('search_text')
     course = request.values.get('course')
 
-    unsorted = find_matches(search_text,course,section,semester,year,department)
-    ordered=[]
-    if len(unsorted) is not 0:
-        while max(unsorted) is not 0:
-            largest = max(unsorted)
-            for x in range(0,len(unsorted)):
-                if unsorted[x] is largest:
-                    ordered.append(x+1)
-                    unsorted[x]=0
-    pairs = []
-    for item in ordered:
-        tmp_syll = Syllabus.query.filter_by(official_id=item).first().id
-        q = Course.query.filter_by(syllabus=tmp_syll).first()
-        atuple = (item,q)
-        pairs.append(atuple)
-
+    sorted_results = find_matches(search_text,course,section,semester,year,department)
     auth_url = get_oauth_url()
-    return render_template('search.html',tuples=pairs,auth_url=auth_url)
+    return render_template('search.html',results=sorted_results,auth_url=auth_url)
 
 ##
 #  Advanced Search Page
