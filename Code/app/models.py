@@ -69,6 +69,7 @@ class Syllabus(db.Model):
     deadlines = db.Column(db.String, default=Template.deadlines)
     accessibility = db.Column(db.String, default=Template.accessibility)
     keywords = db.Column(db.String)
+    status = db.Column(db.String, default='Not yet submitted')
     official_id = db.Column(db.Integer, db.ForeignKey('official.id'), default=None)
     official = db.relationship('Official', back_populates='syllabi')
     course = db.relationship('Course')

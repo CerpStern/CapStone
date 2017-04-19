@@ -1,35 +1,10 @@
-# Cerpstern!
-
-## Todo:
-
-### Code Related:
-
-#### OH SHIT stuff:
-* Search algorithm, and results page
-* Input validation / DB homogeneity
-
- Aestetic
-* Make admin landing page 2 column / redesign
-* Edit Page 
-	* Button Positioning
-	* General Syllabus Formatting
-
-
-Functional
-* Search Related
-	* Add 'Course' Text Field.
-	* Fuzzy Search for seach_text field
-	* Create a '/results' page (jinja template) to display search results.
-
-### Course Related / Due:
-* Thurs -> Peer Evaluations
-* Email Samba With preferred Presentation Date
+# Syllabus Management System
 
 ## Setup for Windows
 
 ### 1. Installing Python (includes Pip)
 - Go to https://www.python.org/downloads/
-- Download and install the newest version of Python 3
+- Download and install the newest version of Python 2 and 3
 - While installing, make sure to check box for adding python to the system PATH
 
 ### 2. Installing VirtualEnv with Pip
@@ -81,3 +56,5 @@ Functional
 
 ### 4. Run the server
 	python run.py
+
+The server will be running on https://localhost:5000

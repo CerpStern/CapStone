@@ -1,3 +1,4 @@
+from __future__ import print_function
 import os
 import sys
 import json
@@ -117,6 +118,9 @@ def callback():
         return 'Could not fetch your information.'
 
 
+##
+#  Force a user to login
+#
 @app.route('/logout')
 @login_required
 def logout():
@@ -224,7 +228,7 @@ def save():
             vals.append(request.form.get('test'+str(i))[3:][:-4])
         else:
             vals.append(request.form.get('test'+str(i)))
-    if not is_admin() or int(current_user.get_id()) != int(Course.query.filter_by(syllabus=vals[0]).first().user):
+    if not is_admin() and int(current_user.get_id()) != int(Course.query.filter_by(syllabus=vals[0]).first().user):
         Logger.log("User {} attempted to edit a syllabus".format(current_user.get_id()))
         return redirect(url_for('syllabus') + '?id={}'.format(vals[0]))
     syllabus = Syllabus.query.filter_by(id=vals[0]).first()
@@ -338,6 +342,7 @@ def queue():
             new.deadlines = tmp.deadlines
             new.accessibility = tmp.accessibility
             new.keywords = tmp.keywords
+            tmp.status = 'Approved'
             if adding:
                 db.session.add(new)
             db.session.commit()
@@ -357,6 +362,13 @@ def queue():
         with open(queuefile, 'w') as qf:
             q.remove(request.args.get('id'))
             json.dump(list(q), qf)
+        tmp = Syllabus.query.filter_by(id=request.args.get('id')).first()
+        if tmp is not None:
+            try:
+                tmp.status = 'Denied, please contact the administrators'
+                db.session.commit()
+            except:
+                db.session.rollback()
     # Add to the queue
     elif request.args.get('action') == 'add':
         with open(queuefile, 'r') as qf:
@@ -364,6 +376,13 @@ def queue():
         with open(queuefile, 'w') as qf:
             q.add(request.args.get('id'))
             json.dump(list(q), qf)
+        tmp = Syllabus.query.filter_by(id=request.args.get('id')).first()
+        if tmp is not None:
+            try:
+                tmp.status = 'Pending'
+                db.session.commit()
+            except:
+                db.session.rollback()
     return redirect(url_for('index'))
 ##
 #  Give User Admin Privilegess
@@ -423,24 +442,9 @@ def search():
     search_text = request.values.get('search_text')
     course = request.values.get('course')
 
-    unsorted = find_matches(search_text,course,section,semester,year,department)
-    ordered=[]
-    if len(unsorted) is not 0:
-        while max(unsorted) is not 0:
-            largest = max(unsorted)
-            for x in range(0,len(unsorted)):
-                if unsorted[x] is largest:
-                    ordered.append(x+1)
-                    unsorted[x]=0
-    pairs = []
-    for item in ordered:
-        tmp_syll = Syllabus.query.filter_by(official_id=item).first().id
-        q = Course.query.filter_by(syllabus=tmp_syll).first()
-        atuple = (item,q)
-        pairs.append(atuple)
-
+    sorted_results = find_matches(search_text,course,section,semester,year,department)
     auth_url = get_oauth_url()
-    return render_template('search.html',tuples=pairs,auth_url=auth_url)
+    return render_template('search.html',results=sorted_results,auth_url=auth_url)
 
 ##
 #  Advanced Search Page
