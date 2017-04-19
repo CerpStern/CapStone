@@ -208,7 +208,7 @@ def find_matches(search_text,course_in,section,semester,year,department):
     searchable.sort(reverse=True,key=operator.attrgetter('points'))
     return_me = []
     for s in searchable:
-        if s.get_points() != 0:
+        if s.get_points() != 0 and s.oid!=None:
             return_me.append(s)
 
     return return_me
