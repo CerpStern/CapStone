@@ -62,3 +62,4 @@ The server will be running on https://localhost:5000
 ### Usage notes:
 - When an administrator adds a course, it is not immediately removable: only courses with approved syllabi are available, and they are only marked inactive
 - To change the new course template, edit the template in config.py
+- If you want to change the Client ID or Secret for example to set up OAuth with a different email it can be found in the config.py file in the Auth class under CLIENT_ID, and CLIENT_SECRET.
