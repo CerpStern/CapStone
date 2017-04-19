@@ -225,7 +225,7 @@ def save():
             vals.append(request.form.get('test'+str(i))[3:][:-4])
         else:
             vals.append(request.form.get('test'+str(i)))
-    if not is_admin() or int(current_user.get_id()) != int(Course.query.filter_by(syllabus=vals[0]).first().user):
+    if not is_admin() and int(current_user.get_id()) != int(Course.query.filter_by(syllabus=vals[0]).first().user):
         Logger.log("User {} attempted to edit a syllabus".format(current_user.get_id()))
         return redirect(url_for('syllabus') + '?id={}'.format(vals[0]))
     syllabus = Syllabus.query.filter_by(id=vals[0]).first()
