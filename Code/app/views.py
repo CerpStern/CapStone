@@ -118,6 +118,9 @@ def callback():
         return 'Could not fetch your information.'
 
 
+##
+#  Force a user to login
+#
 @app.route('/logout')
 @login_required
 def logout():
