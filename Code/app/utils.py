@@ -210,5 +210,6 @@ def find_matches(search_text,course_in,section,semester,year,department):
     for s in searchable:
         if s.get_points() != 0 and s.oid!=None:
             return_me.append(s)
+    print('hello')
 
     return return_me
