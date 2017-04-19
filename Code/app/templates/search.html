@@ -7,12 +7,12 @@
 		<div class="module">
 			<h5>Search Results</h5>
 			<div>
-				{% if tuples|length < 1 %}
+				{% if results|length < 1 %}
 				No results found<br>
 				{% endif %}
 
-				{% for items in tuples %}
-				<a href="/official?id={{items[0]}}">{{items[1]}}<br></a>
+				{% for items in results %}
+				<a href="/official?id={{items.oid}}">{{items.c_title}}<br></a>
 				{% endfor %}
 			</div>
 		</div>
