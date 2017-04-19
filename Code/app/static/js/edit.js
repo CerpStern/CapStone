@@ -1,3 +1,4 @@
+// Does what it says on the tin, initializes the editor
 function init_tinymce() {
 	tinymce.init({
 		selector: 'textarea',
@@ -17,8 +18,8 @@ function init_tinymce() {
 	});
 }
 
+// Insert the editors
 $('#edit').click(function() {
-	//$('#edit').onclick = function() {
 	console.log('clicked edit');
 
 	$('#edit').css('display', 'none');
@@ -37,19 +38,21 @@ $('#edit').click(function() {
 	init_tinymce();
 });
 
+// Save the syllabus
 $('#save').click(function() {
-	//$('#edit').onclick = function() {
 
 	$('#save').css('display', 'none');
 	$('#edit').css('display', 'inline');
 	$('#syllform').submit();
 });
 
+// Asynchronously remove professor from a course
 $('#remprof').click(function(e) {
 	e.preventDefault();
 	console.log('clicky');
 	let params = new URLSearchParams($(this).attr('href').slice(9));
 	console.log(params.get('id'));
+	// Create a form
 	let form = jQuery('<form>', {
 		'action': '/remprof'
 	}).append(jQuery('<input>', {
@@ -64,11 +67,10 @@ $('#remprof').click(function(e) {
 			if (data.status == "1") {
 				location.reload();
 			}
-			//else
-			//	$('#remadminstate').html('<i class="material-icons red-text">error</i> Removing Admin Failed!');
 		}
 	});
 });
+// Asynchronously set a professor for a course
 $('#setinstform').submit(function(e) {
 	e.preventDefault();
 	$.ajax({
@@ -80,9 +82,6 @@ $('#setinstform').submit(function(e) {
 			if (data.status == "1") {
 				location.reload();
 			}
-			//	$('#remadminstate').html('<i class="material-icons green-text">check_circle</i> Successfully Removed!');
-			//else
-			//	$('#remadminstate').html('<i class="material-icons red-text">error</i> Removing Admin Failed!');
 		}
 	});
 });
