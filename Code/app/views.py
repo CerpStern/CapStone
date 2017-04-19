@@ -339,6 +339,7 @@ def queue():
             new.deadlines = tmp.deadlines
             new.accessibility = tmp.accessibility
             new.keywords = tmp.keywords
+            tmp.status = 'Approved'
             if adding:
                 db.session.add(new)
             db.session.commit()
@@ -358,6 +359,13 @@ def queue():
         with open(queuefile, 'w') as qf:
             q.remove(request.args.get('id'))
             json.dump(list(q), qf)
+        tmp = Syllabus.query.filter_by(id=request.args.get('id')).first()
+        if tmp is not None:
+            try:
+                tmp.status = 'Denied, please contact the administrators'
+                db.session.commit()
+            except:
+                db.session.rollback()
     # Add to the queue
     elif request.args.get('action') == 'add':
         with open(queuefile, 'r') as qf:
@@ -365,6 +373,13 @@ def queue():
         with open(queuefile, 'w') as qf:
             q.add(request.args.get('id'))
             json.dump(list(q), qf)
+        tmp = Syllabus.query.filter_by(id=request.args.get('id')).first()
+        if tmp is not None:
+            try:
+                tmp.status = 'Pending'
+                db.session.commit()
+            except:
+                db.session.rollback()
     return redirect(url_for('index'))
 ##
 #  Give User Admin Privilegess

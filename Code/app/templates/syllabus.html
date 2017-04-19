@@ -9,6 +9,8 @@
 			<div class="col s12 m12 l12 xl12">
 				<h5>{{title}} - Draft</h5>
 				{% if owns or adm %}
+				<h3>Current Status:</h3>
+				<br>{{ syllabus.status }}<br>
 				{% if syllabus.official_id is not none %}
 				<a class="btn accent-2 syll" href="/official?id={{ syllabus.official_id }}">View Public</a>
 				{% endif %}
