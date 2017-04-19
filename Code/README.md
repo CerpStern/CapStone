@@ -63,3 +63,13 @@ The server will be running on https://localhost:5000
 - When an administrator adds a course, it is not immediately removable: only courses with approved syllabi are available, and they are only marked inactive
 - To change the new course template, edit the template in config.py
 - If you want to change the Client ID or Secret for example to set up OAuth with a different email it can be found in the config.py file in the Auth class under CLIENT_ID, and CLIENT_SECRET.
+- If you want to see the settings that we already have set up, log into google as "capstone.ad.one@gmail.com", with the password "capstone". And navigate to credentials in the sidebar.
+
+### Creating OAuth:
+- First create a gmail account.
+- Navigate to https://console.developers.google.com/apis/
+- Click Credentials in the left sidebar
+- Click Create Credentials -> OAuth Client ID
+- Follow on screen instructions until the Client ID, and Secret is displayed.
+- Change values of respective variables in config.py
+	- Note: There are two instances of client Secret in the config file
