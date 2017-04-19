@@ -28,7 +28,7 @@
 
 ### 1. Install all dependencies
 
-    yum install python-devel python-virtualenv libffi-devel gcc openssl-devel
+    yum install python-devel python-virtualenv libffi-devel gcc openssl-devel sqlite
 
 ### 2. Setup a virtual environment
     virtualenv /path/to/venv
@@ -45,7 +45,7 @@
 
 ### 1. Install all dependencies
 
-    apt install python3-dev python3-venv libffi-dev gcc libssl-dev
+    apt install python3-dev python3-venv libffi-dev gcc libssl-dev sqlite3
 
 ### 2. Setup a virtual environment
     python3 -m venv /path/to/venv
