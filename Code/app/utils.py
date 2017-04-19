@@ -206,4 +206,7 @@ def find_matches(search_text,course_in,section,semester,year,department):
             match_semester(semester)
 
     searchable.sort(reverse=True,key=operator.attrgetter('points'))
+    for s in searchable:
+        if s.get_points() == 0:
+            searchable.remove(s)
     return searchable
