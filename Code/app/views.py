@@ -223,8 +223,8 @@ def setprof():
 @app.route('/save', methods = ['POST'])
 def save():
     vals = []
-    for i in range(1,12): #TODO: Better way of doing this?
-        if request.form.get('test'+str(i))[:3] == '<p>': # Holy shit nesting <p>s breaks everything, remove them
+    for i in range(1,12):
+        if request.form.get('test'+str(i))[:3] == '<p>':
             vals.append(request.form.get('test'+str(i))[3:][:-4])
         else:
             vals.append(request.form.get('test'+str(i)))
@@ -232,7 +232,6 @@ def save():
         Logger.log("User {} attempted to edit a syllabus".format(current_user.get_id()))
         return redirect(url_for('syllabus') + '?id={}'.format(vals[0]))
     syllabus = Syllabus.query.filter_by(id=vals[0]).first()
-    #syllabus = Syllabus.query.filter_by(id=vals[0][3:][:-4]).first()
     syllabus.basic = vals[1] 
     syllabus.description = vals[2]
     syllabus.topics = vals[3]
