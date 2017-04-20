@@ -17,9 +17,9 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 
 class Auth:
     """Google Project Credentials"""
-    CLIENT_ID = ('540302985059-6dvoru1qqq9av9ut9a9nr508od4hidq9'
+    CLIENT_ID = ('486646633132-nc0hlcn0vt7khirhmhkh518d84omqjea'
                  '.apps.googleusercontent.com')
-    CLIENT_SECRET = 'Ar7Xo1D_wjTfvR9z3G0A1VsE'
+    CLIENT_SECRET = 'NNKF51kaBY-5RIMpOW1S2bjd'
     REDIRECT_URI = 'https://localhost:5000/gCallback'
     AUTH_URI = 'https://accounts.google.com/o/oauth2/auth'
     TOKEN_URI = 'https://accounts.google.com/o/oauth2/token'
@@ -29,8 +29,8 @@ class Auth:
 
 class Config:
     """Base config"""
-    APP_NAME = "Test Google Login"
-    SECRET_KEY = "Ar7Xo1D_wjTfvR9z3G0A1VsE"
+    APP_NAME = "SMS"
+    SECRET_KEY = "NNKF51kaBY-5RIMpOW1S2bjd"
 
 
 class DevConfig(Config):

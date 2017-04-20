@@ -17,7 +17,7 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 
 #APP creation and configuration
 app = Flask(__name__)
-app.config.from_object(config['dev'])
+app.config.from_object(config['prod'])
 db = SQLAlchemy(app)
 login_manager = LoginManager(app)
 login_manager.login_view = "login"
