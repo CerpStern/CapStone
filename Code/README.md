@@ -65,6 +65,7 @@ The server will be running on https://localhost:5000
 - If you want to change the Client ID or Secret for example to set up OAuth with a different email it can be found in the config.py file in the Auth class under CLIENT_ID, and CLIENT_SECRET.
 - If you want to see the settings that we already have set up, log into google as "capstone.ad.one@gmail.com", with the password "capstone". And navigate to credentials in the sidebar.
 - When on a Unix-like operating system, the supplied bootstrap.sh script can be used after activating the virtual environment to start with a clean database
+- To use your own ssl keys, overwrite ssl.cert with you certificate file and ssl.key with your private key
 
 ### Creating OAuth:
 - First create a gmail account.
