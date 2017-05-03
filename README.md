@@ -1,30 +1,3 @@
-# Cerpstern!
-
-## Todo:
-
-### Code Related:
-
-#### OH SHIT stuff:
-* Search algorithm, and results page
-* Input validation / DB homogeneity
-
- Aestetic
-* Make admin landing page 2 column / redesign
-* Edit Page 
-	* Button Positioning
-	* General Syllabus Formatting
-
-
-Functional
-* Search Related
-	* Add 'Course' Text Field.
-	* Fuzzy Search for seach_text field
-	* Create a '/results' page (jinja template) to display search results.
-
-### Course Related / Due:
-* Thurs -> Peer Evaluations
-* Email Samba With preferred Presentation Date
-
 ## Setup for Windows
 
 ### 1. Installing Python (includes Pip)
